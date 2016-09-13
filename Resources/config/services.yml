@@ -1,0 +1,12 @@
+services:
+    okto_media.episode_import_listener:
+        class: Okto\MediaBundle\Event\EpisodeImportListener
+        arguments: [ "@bprs_jobservice" ]
+        tags:
+            - { name: kernel.event_listener, event: oktolab_media.imported_episode_metadata, method: onEpisodeMetadataImport }
+
+    okto_media.series_import_listener:
+        class: Okto\MediaBundle\Event\SeriesImportListener
+        arguments: [ "@bprs_jobservice" ]
+        tags:
+            - { name: kernel.event_listener, event: oktolab_media.imported_series_metadata, method: onSeriesMetadataImport }

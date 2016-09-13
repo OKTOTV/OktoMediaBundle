@@ -1,0 +1,25 @@
+{
+    "name": "okto/media-bundle",
+    "type": "symfony-bundle",
+    "description": "OKTO TVs implementation of the OKTOLAB MediaBundle",
+    "keywords": ["media", "restful"],
+    "homepage": "https://github.com/OKTOTV/OktolabMediaBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robin Schmidt",
+            "email": "rs@okto.tv",
+            "role": "Developer"
+        }
+    ],
+
+    "autoload": {
+        "psr-0": { "Okto\\MediaBundle": "" }
+    },
+
+    "target-dir": "Okto/MediaBundle",
+
+    "require": {
+        "oktolab/media-bundle": "dev-master"
+    }
+}
