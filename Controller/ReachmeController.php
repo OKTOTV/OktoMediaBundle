@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Series;
-use MediaBundle\Entity\Reachme;
-use MediaBundle\Form\ReachmeType;
+use Okto\MediaBundle\Entity\Series;
+use Okto\MediaBundle\Entity\Reachme;
+use Okto\MediaBundle\Form\ReachmeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**

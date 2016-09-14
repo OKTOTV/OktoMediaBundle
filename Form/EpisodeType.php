@@ -5,8 +5,13 @@ namespace Okto\MediaBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use AppBundle\Form\TagType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Okto\MediaBundle\Form\TagType;
+use Bprs\AssetBundle\Form\Type\AssetType;
 
 class EpisodeType extends AbstractType
 {
@@ -21,7 +26,7 @@ class EpisodeType extends AbstractType
                 ['label' => 'oktolab_media.name_label']
             )
 
-            ->add('description', 'textarea',
+            ->add('description', TextareaType::class,
                 [
                     'label' => 'oktolab_media.description_label',
                     'attr' => [
@@ -31,11 +36,11 @@ class EpisodeType extends AbstractType
                 ]
             )
 
-            ->add('isActive', 'checkbox',
+            ->add('isActive', CheckboxType::class,
                 ['label' => 'oktolab_media.isActive_label']
             )
 
-            ->add('onlineStart', 'datetime',
+            ->add('onlineStart', DateTimeType::class,
                 [
                     'widget' => 'single_text',
                     'html5' => false,
@@ -45,7 +50,7 @@ class EpisodeType extends AbstractType
                 ]
             )
 
-            ->add('onlineEnd', 'datetime',
+            ->add('onlineEnd', DateTimeType::class,
                 [
                     'widget' => 'single_text',
                     'html5' => false,
@@ -60,21 +65,18 @@ class EpisodeType extends AbstractType
                 ['label' => 'oktolab_media.uniqID_label']
             )
 
-            ->add('posterframe', 'asset',
+            ->add('posterframe', AssetType::class,
                 ['label' => 'oktolab_media.posterframe_label']
             )
 
-            ->add('video', 'asset', ['label' => 'oktolab_media.video_label'])
+            ->add('video', AssetType::class, ['label' => 'oktolab_media.video_label'])
 
-            ->add('series', 'entity', ['class' => 'MediaBundle:Series', 'choice_label' => 'name'])
+            ->add('series', EntityType::class, ['class' => 'OktoMediaBundle:Series', 'choice_label' => 'name'])
 
             ->add('tags', TagType::class)
         ;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -82,10 +84,7 @@ class EpisodeType extends AbstractType
         ));
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'oktolab_mediabundle_episode';
     }

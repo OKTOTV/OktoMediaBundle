@@ -10,3 +10,20 @@ services:
         arguments: [ "@bprs_jobservice" ]
         tags:
             - { name: kernel.event_listener, event: oktolab_media.imported_series_metadata, method: onSeriesMetadataImport }
+
+    oktothek_tag.type:
+        class: Okto\MediaBundle\Form\TagType
+        arguments: [ "@oktothek_tag.repository" ]
+        tags:
+            - { name: form.type, alias: tag }
+
+    oktothek_tag_collection.type:
+        class: Okto\MediaBundle\Form\TagCollectionType
+        arguments: [ "@oktothek_tag.repository" ]
+        tags:
+            - { name: form.type, alias: tag }
+
+    oktothek_tag.repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: [ "@doctrine.orm.entity_manager", getRepository ]
+        arguments:  [ "Okto\MediaBundle\Entity\Tag" ]

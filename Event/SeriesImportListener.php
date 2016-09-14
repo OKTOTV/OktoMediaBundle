@@ -5,7 +5,7 @@ namespace Okto\MediaBundle\Event;
 use Oktolab\MediaBundle\Event\ImportedSeriesMetadataEvent;
 use Oktolab\MediaBundle\Event\ImportedSeriesPosterframeEvent;
 
-class EpisodeImportListener {
+class SeriesImportListener {
 
     private $job_service;
 

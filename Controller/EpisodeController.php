@@ -8,10 +8,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use MediaBundle\Entity\Episode;
-use MediaBundle\Form\EpisodeType;
+use Okto\MediaBundle\Entity\Episode;
+use Okto\MediaBundle\Form\EpisodeType;
 use MediaBundle\Form\PublishEpisodeType;
 use AppBundle\Entity\Notification;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Episode controller.
@@ -30,8 +31,8 @@ class EpisodeController extends BaseController
     public function editAction(Request $request, $episode)
     {
         $form = $this->createForm(new EpisodeType(), $episode);
-        $form->add('submit', 'submit', ['label' => 'oktolab_media.edit_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
-        $form->add('delete', 'submit', ['label' => 'oktolab_media.delete_episode_button', 'attr' => ['class' => 'btn btn-danger']]);
+        $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.edit_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
+        $form->add('delete', SubmitType::class, ['label' => 'oktolab_media.delete_episode_button', 'attr' => ['class' => 'btn btn-danger']]);
 
         if ($request->getMethod() == "POST") { //sends form
             $form->handleRequest($request);
@@ -64,8 +65,8 @@ class EpisodeController extends BaseController
     public function newAction(Request $request)
     {
         $episode = new Episode();
-        $form = $this->createForm(new EpisodeType(), $episode);
-        $form->add('submit', 'submit', ['label' => 'oktolab_media.create_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
+        $form = $this->createForm(EpisodeType::class, $episode);
+        $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.create_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
 
         if ($request->getMethod() == "POST") { //sends form
             $form->handleRequest($request);

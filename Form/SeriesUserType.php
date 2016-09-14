@@ -6,9 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use MediaBundle\Form\UserType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use MediaBundle\Form\DataTransformer\UserTransformer;
+
+use Okto\MediaBundle\Form\DataTransformer\UserTransformer;
+use Okto\MediaBundle\Form\UserType;
 
 class SeriesUserType extends AbstractType
 {
@@ -38,16 +39,6 @@ class SeriesUserType extends AbstractType
         $UserTransformer = new UserTransformer($this->repo);
 
         $builder->get('users')->addModelTransformer($UserTransformer);
-            // ->add('users', UserType::class, [
-            //         'entry_type'    => UserType::class,
-            //         'allow_add'     => true,
-            //         'allow_delete'  => true,
-            //         'attr'          => [
-            //             'placeholder' => 'search usernames',
-            //             'url'         => 'oktolab_series_user_by_username'
-            //         ]
-            //     ]
-            // );
     }
 
     /**
@@ -65,7 +56,7 @@ class SeriesUserType extends AbstractType
      */
     public function getName()
     {
-        return 'mediabundle_series_user';
+        return 'okto_mediabundle_series_user';
     }
 }
 

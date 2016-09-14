@@ -5,9 +5,9 @@ namespace Okto\MediaBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use MediaBundle\Entity\Reachme;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Okto\MediaBundle\Entity\Reachme;
 
 class ReachmeType extends AbstractType
 {
@@ -25,7 +25,6 @@ class ReachmeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('series', 'entity', ['class' => 'MediaBundle:Series', 'choice_label' => 'name'])
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     Reachme::TYPE_MAIL    => $this->trans->transchoice('reachme_type_transchoice', Reachme::TYPE_MAIL),
@@ -45,7 +44,7 @@ class ReachmeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MediaBundle\Entity\Reachme'
+            'data_class' => 'Okto\MediaBundle\Entity\Reachme'
         ));
     }
 
@@ -54,6 +53,6 @@ class ReachmeType extends AbstractType
      */
     public function getName()
     {
-        return 'flux2_mediabundle_reachme';
+        return 'okto_mediabundle_reachme';
     }
 }

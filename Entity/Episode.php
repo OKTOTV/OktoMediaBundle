@@ -11,7 +11,6 @@ use Oktolab\MediaBundle\Entity\Episode as BaseEpisode;
  * @JMS\AccessType("public_method")
  * @JMS\ExclusionPolicy("all")
  * @ORM\MappedSuperclass()
- * @ORM\Entity(repositoryClass="Okto\MediaBundle\Entity\Repository\EpisodeRepository")
  */
 class Episode extends BaseEpisode
 {
@@ -24,7 +23,7 @@ class Episode extends BaseEpisode
     /**
     * @JMS\Expose
     * @JMS\Groups({"okto"})
-    * @ORM\ManyToOne(targetEntity="Series", inversedBy="episodes", cascade={"persist"})
+    * @ORM\ManyToOne(targetEntity="Oktolab\MediaBundle\Entity\SeriesInterface", inversedBy="episodes", cascade={"persist"})
     */
     protected $series;
 
@@ -66,45 +65,6 @@ class Episode extends BaseEpisode
             return $this->series->getName();
         }
         return "";
-    }
-
-    /**
-     * Add tags
-     *
-     * @param \AppBundle\Entity\Tag $tags
-     * @return Episode
-     */
-    public function addTag(\AppBundle\Entity\Tag $tags)
-    {
-        $this->tags[] = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Remove tags
-     *
-     * @param \AppBundle\Entity\Tag $tags
-     */
-    public function removeTag(\AppBundle\Entity\Tag $tags)
-    {
-        $this->tags->removeElement($tags);
-    }
-
-    /**
-     * Get tags
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-        return $this;
     }
 
     public function getPosterframe($fallback = false)

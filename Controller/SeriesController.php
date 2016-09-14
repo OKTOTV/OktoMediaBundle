@@ -21,7 +21,7 @@ class SeriesController extends BaseController
 {
     /**
      * Finds and displays a Series entity.
-     * @ParamConverter("series", class="MediaBundle:Series")
+     * @ParamConverter("series", class="OktoMediaBundle:Series")
      * @Route("/show/{series}", name="oktolab_series_show")
      * @Method("GET")
      * @Template()
@@ -33,7 +33,7 @@ class SeriesController extends BaseController
 
     /**
      * Finds and displays a Series entity.
-     * @ParamConverter("series", class="MediaBundle:Series")
+     * @ParamConverter("series", class="OktoMediaBundle:Series")
      * @Route("/{series/paginate/{series}/{page}", name="media_episode_paginator", requirements={"page": "\d+"}, defaults={"page":1})
      * @Method("GET")
      * @Template()

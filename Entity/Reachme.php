@@ -3,7 +3,6 @@
 namespace Okto\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use MediaBundle\Entity\Series;
 
 /**
  * Reachme
@@ -110,7 +109,7 @@ class Reachme
      * @param \MediaBundle\Entity\Series $series
      * @return Reachme
      */
-    public function setSeries(Series $series = null)
+    public function setSeries($series = null)
     {
         $this->series = $series;
 

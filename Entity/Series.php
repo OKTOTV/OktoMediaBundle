@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Oktolab\MediaBundle\Entity\Series as BaseSeries;
 use Doctrine\Common\Collections\ArrayCollection;
 use Okto\MediaBundle\Entity\Reachme;
+use Oktolab\MediaBundle\Entity\Playlist;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -25,7 +26,7 @@ class Series extends BaseSeries
     * @JMS\Expose
     * @JMS\Groups({"oktolab","okto"})
     * @JMS\Type("array<Okto\MediaBundle\Entity\Episode>")
-    * @ORM\OneToMany(targetEntity="Okto\MediaBundle\Entity\Episode", mappedBy="series", cascade="remove")
+    * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\EpisodeInterface", mappedBy="series", cascade="remove")
     * @ORM\OrderBy({"onlineStart" = "DESC"})
     */
     protected $episodes;
@@ -51,7 +52,7 @@ class Series extends BaseSeries
     protected $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="Okto\MediaBundle\Entity\Playlist", mappedBy="series")
+     * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\PlaylistInterface", mappedBy="series")
      */
     protected $playlists;
 
@@ -210,7 +211,7 @@ class Series extends BaseSeries
      * @param \MediaBundle\Entity\Playlist $playlists
      * @return Series
      */
-    public function addPlaylist(\MediaBundle\Entity\Playlist $playlists)
+    public function addPlaylist(Playlist $playlists)
     {
         $this->playlists[] = $playlists;
 
@@ -222,7 +223,7 @@ class Series extends BaseSeries
      *
      * @param \MediaBundle\Entity\Playlist $playlists
      */
-    public function removePlaylist(\MediaBundle\Entity\Playlist $playlists)
+    public function removePlaylist(Playlist $playlists)
     {
         $this->playlists->removeElement($playlists);
     }
