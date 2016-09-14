@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaBundle\Entity\Repository;
+namespace Okto\MediaBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaBundle\Form;
+namespace Okto\MediaBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

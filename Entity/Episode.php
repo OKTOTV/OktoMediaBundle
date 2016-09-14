@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaBundle\Entity;
+namespace Okto\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
@@ -10,8 +10,8 @@ use Oktolab\MediaBundle\Entity\Episode as BaseEpisode;
  * Episode
  * @JMS\AccessType("public_method")
  * @JMS\ExclusionPolicy("all")
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="MediaBundle\Entity\Repository\EpisodeRepository")
+ * @ORM\MappedSuperclass()
+ * @ORM\Entity(repositoryClass="Okto\MediaBundle\Entity\Repository\EpisodeRepository")
  */
 class Episode extends BaseEpisode
 {
@@ -19,31 +19,14 @@ class Episode extends BaseEpisode
      *
      * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\Media", mappedBy="episode")
      */
-    private $media;
+    protected $media;
 
     /**
     * @JMS\Expose
     * @JMS\Groups({"okto"})
     * @ORM\ManyToOne(targetEntity="Series", inversedBy="episodes", cascade={"persist"})
     */
-    private $series;
-
-    /**
-    * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="favorites")
-    */
-    private $users;
-
-    /**
-     * @JMS\Expose
-     * @JMS\Type("array<string>")
-     * @JMS\Groups({"search"})
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag")
-     * @ORM\JoinTable(name="episode_tags",
-     *      joinColumns={@ORM\JoinColumn(name="episode_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
-     *      )
-     */
-    private $tags;
+    protected $series;
 
     /**
      * Constructor
@@ -83,39 +66,6 @@ class Episode extends BaseEpisode
             return $this->series->getName();
         }
         return "";
-    }
-
-    /**
-     * Add users
-     *
-     * @param \AppBundle\Entity\User $users
-     * @return Episode
-     */
-    public function addUser(\AppBundle\Entity\User $users)
-    {
-        $this->users[] = $users;
-
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param \AppBundle\Entity\User $users
-     */
-    public function removeUser(\AppBundle\Entity\User $users)
-    {
-        $this->users->removeElement($users);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
     }
 
     /**

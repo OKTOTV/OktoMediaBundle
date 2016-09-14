@@ -1,34 +1,34 @@
 <?php
 
-namespace MediaBundle\Entity;
+namespace Okto\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oktolab\MediaBundle\Entity\Series as BaseSeries;
 use Doctrine\Common\Collections\ArrayCollection;
-use MediaBundle\Entity\Reachme;
+use Okto\MediaBundle\Entity\Reachme;
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * Series
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="MediaBundle\Entity\Repository\SeriesRepository")
+ * @ORM\MappedSuperclass()
+ * @ ORM\Entity(repositoryClass="Okto\MediaBundle\Entity\Repository\SeriesRepository")
  */
 class Series extends BaseSeries
 {
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Abonnement", mappedBy="series", cascade="remove")
-     */
-    private $abonnements;
+    // /**
+    //  * @ORM\OneToMany(targetEntity="AppBundle\Entity\Abonnement", mappedBy="series", cascade="remove")
+    //  */
+    // private $abonnements;
 
     /**
     * @JMS\Expose
     * @JMS\Groups({"oktolab","okto"})
-    * @JMS\Type("array<MediaBundle\Entity\Episode>")
-    * @ORM\OneToMany(targetEntity="Episode", mappedBy="series", cascade="remove")
+    * @JMS\Type("array<Okto\MediaBundle\Entity\Episode>")
+    * @ORM\OneToMany(targetEntity="Okto\MediaBundle\Entity\Episode", mappedBy="series", cascade="remove")
     * @ORM\OrderBy({"onlineStart" = "DESC"})
     */
-    private $episodes;
+    protected $episodes;
 
     public function __construct() {
         parent::__construct();
@@ -40,25 +40,25 @@ class Series extends BaseSeries
         $this->users = new ArrayCollection();
     }
 
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="series")
-     */
-    private $posts;
+    // /**
+    //  * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="series")
+    //  */
+    // protected $posts;
 
     /**
     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="channels", fetch="EAGER")
     */
-    private $users;
+    protected $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="MediaBundle\Entity\Playlist", mappedBy="series")
+     * @ORM\OneToMany(targetEntity="Okto\MediaBundle\Entity\Playlist", mappedBy="series")
      */
-    private $playlists;
+    protected $playlists;
 
     /**
-     * @ORM\OneToMany(targetEntity="MediaBundle\Entity\Reachme", mappedBy="series")
+     * @ORM\OneToMany(targetEntity="Okto\MediaBundle\Entity\Reachme", mappedBy="series")
      */
-    private $reachmes;
+    protected $reachmes;
 
     /**
      * Add episodes
@@ -99,43 +99,43 @@ class Series extends BaseSeries
         return $this;
     }
 
-    /**
-     * Add posts
-     *
-     * @param \AppBundle\Entity\Post $posts
-     * @return Series
-     */
-    public function addPost(\AppBundle\Entity\Post $posts)
-    {
-        $this->posts[] = $posts;
-        $posts->setSeries($this);
-        return $this;
-    }
-
-    /**
-     * Remove posts
-     *
-     * @param \AppBundle\Entity\Post $posts
-     */
-    public function removePost(\AppBundle\Entity\Post $posts)
-    {
-        $this->posts->removeElement($posts);
-    }
-
-    /**
-     * Get posts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPosts()
-    {
-        return $this->posts;
-    }
-
-    public function setPosts($posts)
-    {
-        $this->posts = $posts;
-    }
+    // /**
+    //  * Add posts
+    //  *
+    //  * @param \AppBundle\Entity\Post $posts
+    //  * @return Series
+    //  */
+    // public function addPost(\AppBundle\Entity\Post $posts)
+    // {
+    //     $this->posts[] = $posts;
+    //     $posts->setSeries($this);
+    //     return $this;
+    // }
+    //
+    // /**
+    //  * Remove posts
+    //  *
+    //  * @param \AppBundle\Entity\Post $posts
+    //  */
+    // public function removePost(\AppBundle\Entity\Post $posts)
+    // {
+    //     $this->posts->removeElement($posts);
+    // }
+    //
+    // /**
+    //  * Get posts
+    //  *
+    //  * @return \Doctrine\Common\Collections\Collection
+    //  */
+    // public function getPosts()
+    // {
+    //     return $this->posts;
+    // }
+    //
+    // public function setPosts($posts)
+    // {
+    //     $this->posts = $posts;
+    // }
 
     /**
      * Add users
@@ -171,38 +171,38 @@ class Series extends BaseSeries
         return $this->users;
     }
 
-    /**
-     * Add abonnements
-     *
-     * @param \AppBundle\Entity\Abonnements $abonnements
-     * @return Series
-     */
-    public function addAbonnement(\AppBundle\Entity\Abonnement $abonnements)
-    {
-        $this->abonnements[] = $abonnements;
-
-        return $this;
-    }
-
-    /**
-     * Remove abonnements
-     *
-     * @param \AppBundle\Entity\Abonnements $abonnements
-     */
-    public function removeAbonnement(\AppBundle\Entity\Abonnement $abonnements)
-    {
-        $this->abonnements->removeElement($abonnements);
-    }
-
-    /**
-     * Get abonnements
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAbonnements()
-    {
-        return $this->abonnements;
-    }
+    // /**
+    //  * Add abonnements
+    //  *
+    //  * @param \AppBundle\Entity\Abonnements $abonnements
+    //  * @return Series
+    //  */
+    // public function addAbonnement(\AppBundle\Entity\Abonnement $abonnements)
+    // {
+    //     $this->abonnements[] = $abonnements;
+    //
+    //     return $this;
+    // }
+    //
+    // /**
+    //  * Remove abonnements
+    //  *
+    //  * @param \AppBundle\Entity\Abonnements $abonnements
+    //  */
+    // public function removeAbonnement(\AppBundle\Entity\Abonnement $abonnements)
+    // {
+    //     $this->abonnements->removeElement($abonnements);
+    // }
+    //
+    // /**
+    //  * Get abonnements
+    //  *
+    //  * @return \Doctrine\Common\Collections\Collection
+    //  */
+    // public function getAbonnements()
+    // {
+    //     return $this->abonnements;
+    // }
 
     /**
      * Add playlists

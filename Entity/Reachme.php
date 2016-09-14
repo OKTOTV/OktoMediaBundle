@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaBundle\Entity;
+namespace Okto\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use MediaBundle\Entity\Series;
@@ -43,7 +43,7 @@ class Reachme
     private $uri;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MediaBundle\Entity\Series", inversedBy="reachmes")
+     * @ORM\ManyToOne(targetEntity="Oktolab\MediaBundle\Entity\SeriesInterface", inversedBy="reachmes")
      * @ORM\JoinColumn(name="reachme_id", referencedColumnName="id")
      */
     private $series;

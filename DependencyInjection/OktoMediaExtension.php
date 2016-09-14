@@ -1,5 +1,5 @@
 <?php
-namespace MediaBundle\DependencyInjection;
+namespace Okto\MediaBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -1,5 +1,5 @@
 <?php
-namespace MediaBundle\Entity\Repository;
+namespace Okto\MediaBundle\Entity\Repository;
 
 use MediaBundle\Entity\Episode;
 use Oktolab\MediaBundle\Entity\Repository\BaseEpisodeRepository;

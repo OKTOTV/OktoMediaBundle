@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaBundle\Controller;
+namespace Okto\MediaBundle\Controller;
 
 use Oktolab\MediaBundle\Controller\SeriesController as BaseController;
 use Symfony\Component\HttpFoundation\Request;

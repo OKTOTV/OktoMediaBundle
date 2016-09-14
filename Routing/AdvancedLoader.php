@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaBundle\Routing;
+namespace Okto\MediaBundle\Routing;
 
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\RouteCollection;
@@ -11,7 +11,7 @@ class AdvancedLoader extends Loader
     {
         $collection = new RouteCollection();
 
-        $resource = __DIR__.'/../../../vendor/oktolab/media-bundle/Oktolab/MediaBundle/Resources/config/routing.yml';
+        $resource = __DIR__.'/../../../../../oktolab/media-bundle/Oktolab/MediaBundle/Resources/config/routing.yml';
         $type = 'yaml';
 
         $importedRoutes = $this->import($resource, $type);

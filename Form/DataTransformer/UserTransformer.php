@@ -1,5 +1,5 @@
 <?php
-namespace MediaBundle\Form\DataTransformer;
+namespace Okto\MediaBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;

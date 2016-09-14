@@ -1,11 +1,11 @@
 <?php
 
-namespace MediaBundle;
+namespace Okto\MediaBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-use MediaBundle\DependencyInjection\Compiler\OverrideServiceCompilerPass;
+use Okto\MediaBundle\DependencyInjection\Compiler\OverrideServiceCompilerPass;
 
 class OktoMediaBundle extends Bundle
 {

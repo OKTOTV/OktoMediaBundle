@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaBundle\Controller;
+namespace Okto\MediaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

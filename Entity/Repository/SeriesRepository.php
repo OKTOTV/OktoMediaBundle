@@ -1,5 +1,5 @@
 <?php
-namespace MediaBundle\Entity\Repository;
+namespace Okto\MediaBundle\Entity\Repository;
 
 use AppBundle\Entity\Tag;
 use MediaBundle\Entity\Series;
