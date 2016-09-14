@@ -9,6 +9,7 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
 
     private $media_service;
     private $logbook;
+    private $serializer;
 
     public function perform()
     {
@@ -19,11 +20,13 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
 
         $serializing_schema = $this->getContainer()->getParameter('oktolab_media.serializing_schema');
         if ($serializing_schema) {
-            $response = $this->mediaService->getResponse($this->keychain, MediaService::ROUTE_EPISODE, ['uniqID' => $this->args['uniqID'], 'group' => $serializing_schema]);
+            $response = $this->media_service->getResponse($episode->getKeychain(), MediaService::ROUTE_EPISODE, ['uniqID' => $this->args['uniqID'], 'group' => $serializing_schema]);
         } else {
-            $response = $this->mediaService->getResponse($this->keychain, MediaService::ROUTE_EPISODE, ['uniqID' => $this->args['uniqID']]);
+            $response = $this->media_service->getResponse($episode->getKeychain(), MediaService::ROUTE_EPISODE, ['uniqID' => $this->args['uniqID']]);
         }
         if ($response->getStatusCode() == 200) {
+            $this->serializer = $this->getContainer()->get('jms_serializer');
+            $episode_class = $this->getContainer()->getParameter('oktolab_media.episode_class');
             $remote_episode = $this->serializer->deserialize($response->getBody(), $episode_class, 'json');
             $series = $this->media_service->getSeries($remote_episode->getSeries()->getUniqID());
             if (!$series) {
@@ -57,7 +60,7 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
         if ($response->getStatusCode() == 200) {
             $series_class = $this->getContainer()->getParameter('oktolab_media.series_class');
             $series = $this->serializer->deserialize($response->getBody(), $series_class, 'json');
-            $local_series = $this->mediaService->getSeries($uniqID);
+            $local_series = $this->media_service->getSeries($uniqID);
             if (!$local_series) {
                 $series_class = $this->getContainer()->getParameter('oktolab_media.series_class');
                 $local_series = new $series_class;
@@ -65,7 +68,7 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
             $local_series->merge($series);
 
             //import Series Posterframe
-            $this->mediaService->addImportSeriesPosterframeJob($local_series->getUniqID(), $this->keychain, $series->getPosterframe());
+            $this->media_service->addImportSeriesPosterframeJob($local_series->getUniqID(), $this->keychain, $series->getPosterframe());
             return $series;
         } else {
             $this->logbook->error('okto_media.episode_import_series_error', [], $this->args['uniqID']);

@@ -23,6 +23,7 @@ class Episode extends BaseEpisode
     /**
     * @JMS\Expose
     * @JMS\Groups({"okto"})
+    * @JMS\Type("Okto\MediaBundle\Entity\Series")
     * @ORM\ManyToOne(targetEntity="Oktolab\MediaBundle\Entity\SeriesInterface", inversedBy="episodes", cascade={"persist"})
     */
     protected $series;
