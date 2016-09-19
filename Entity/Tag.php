@@ -43,7 +43,10 @@ class Tag
      */
     private $updatedAt;
 
-
+    /**
+     * @ORM\ManyToMany(targetEntity="Oktolab\MediaBundle\Entity\EpisodeInterface", mappedBy="tags")
+     */
+    protected $episodes;
 
     public function __construct()
     {
@@ -135,5 +138,27 @@ class Tag
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    public function getEpisodes()
+    {
+        return $this->episodes;
+    }
+
+    public function addEpisode($episode)
+    {
+        $this->episodes[] = $episode;
+        return $this;
+    }
+
+    public function removeEpisode($episode)
+    {
+        $this->episodes->removeElement($episode);
+        return $this;
+    }
+
+    public function setEpisodes($episodes)
+    {
+        $this->episodes = $episodes;
     }
 }

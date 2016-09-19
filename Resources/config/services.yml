@@ -17,13 +17,20 @@ services:
         tags:
             - { name: form.type, alias: tag }
 
-    oktothek_tag_collection.type:
-        class: Okto\MediaBundle\Form\TagCollectionType
-        arguments: [ "@oktothek_tag.repository" ]
+    # oktothek_tag_collection.type:
+    #     class: AppBundle\Form\TagCollectionType
+    #     arguments: [ "@oktothek_tag.repository" ]
+    #     tags:
+    #         - { name: form.type, alias: tag_collection }
+
+    okto_media.episode.type:
+        class: Okto\MediaBundle\Form\EpisodeType
+        arguments: [ "%oktolab_media.series_class%", "%oktolab_media.episode_class%"]
         tags:
-            - { name: form.type, alias: tag }
+            - { name: form.type }
 
     oktothek_tag.repository:
         class: Doctrine\ORM\EntityRepository
         factory: [ "@doctrine.orm.entity_manager", getRepository ]
-        arguments:  [ "Okto\MediaBundle\Entity\Tag" ]
+        arguments: [ "AppBundle\Entity\Tag" ]
+        #arguments:  [ "Okto\MediaBundle\Entity\Tag" ]

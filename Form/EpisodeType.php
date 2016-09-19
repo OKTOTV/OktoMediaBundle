@@ -15,6 +15,16 @@ use Bprs\AssetBundle\Form\Type\AssetType;
 
 class EpisodeType extends AbstractType
 {
+
+    private $series_class;
+    private $episode_class;
+
+    public function __construct($series_class, $episode_class)
+    {
+        $this->series_class = $series_class;
+        $this->episode_class = $episode_class;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -44,7 +54,6 @@ class EpisodeType extends AbstractType
                 [
                     'widget' => 'single_text',
                     'html5' => false,
-                    //'format' => 'd.m.Y H:i',
                     'label' => 'oktolab_media.onlineStart_label',
                     'attr' => ['placeholder' => 'oktolab_media.onlineStart_placeholder']
                 ]
@@ -54,7 +63,6 @@ class EpisodeType extends AbstractType
                 [
                     'widget' => 'single_text',
                     'html5' => false,
-                    //'format' => 'd.m.Y H:i',
                     'placeholder' => 'oktolab_media.onlineEnd_placeholder',
                     'label' => 'oktolab_media.onlineEnd_label',
                     'attr' => ['placeholder' => 'oktolab_media.onlineEnd_placeholder']
@@ -71,7 +79,7 @@ class EpisodeType extends AbstractType
 
             ->add('video', AssetType::class, ['label' => 'oktolab_media.video_label'])
 
-            ->add('series', EntityType::class, ['class' => 'OktoMediaBundle:Series', 'choice_label' => 'name'])
+            ->add('series', EntityType::class, ['class' => $this->series_class, 'choice_label' => 'name'])
 
             ->add('tags', TagType::class)
         ;
@@ -80,7 +88,7 @@ class EpisodeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Oktolab\MediaBundle\Entity\Episode'
+            'data_class' => $this->episode_class
         ));
     }
 

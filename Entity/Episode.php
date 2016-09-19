@@ -32,11 +32,8 @@ class Episode extends BaseEpisode
      * @JMS\Expose
      * @JMS\Type("array<string>")
      * @JMS\Groups({"search", "okto"})
-     * @ORM\ManyToMany(targetEntity="Okto\MediaBundle\Entity\TagInterface")
-     * @ORM\JoinTable(name="episode_tags",
-     *      joinColumns={@ORM\JoinColumn(name="episode_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
-     *      )
+     * @ORM\ManyToMany(targetEntity="Okto\MediaBundle\Entity\TagInterface", inversedBy="episodes", cascade={"persist"})
+     * @ORM\JoinTable(name="episode_tag")
      */
     protected $tags;
 
@@ -135,7 +132,7 @@ class Episode extends BaseEpisode
     public function addTag($tag)
     {
         $this->tags[] = $tag;
-
+        $tag->addEpisode($this);
         return $this;
     }
 
@@ -147,6 +144,7 @@ class Episode extends BaseEpisode
     public function removeTag($tag)
     {
         $this->tags->removeElement($tag);
+        return $this;
     }
 
     /**

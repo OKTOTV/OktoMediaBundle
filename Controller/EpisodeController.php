@@ -24,13 +24,14 @@ class EpisodeController extends BaseController
     /**
      * Displays a form to edit an existing Episode entity.
      * @Route("/{episode}/edit", name="oktolab_episode_edit")
-     * @ParamConverter("episode", class="MediaBundle:Episode")
+     * @ ParamConverter("episode", class="OktoMediaBundle:Episode")
      * @Method({"GET", "POST"})
      * @Template()
      */
     public function editAction(Request $request, $episode)
     {
-        $form = $this->createForm(new EpisodeType(), $episode);
+        $episode = $this->get('oktolab_media')->getEpisode($episode);
+        $form = $this->createForm(EpisodeType::class, $episode);
         $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.edit_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
         $form->add('delete', SubmitType::class, ['label' => 'oktolab_media.delete_episode_button', 'attr' => ['class' => 'btn btn-danger']]);
 
@@ -39,6 +40,10 @@ class EpisodeController extends BaseController
             $em = $this->getDoctrine()->getManager();
             if ($form->isValid()) { //form is valid, save or preview
                 if ($form->get('submit')->isClicked()) { //save me
+                    // die(var_dump($episode->getTags()));
+                    foreach($episode->getTags() as $tag) {
+                        $em->persist($tag);
+                    }
                     $em->persist($episode);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_edit_episode');
