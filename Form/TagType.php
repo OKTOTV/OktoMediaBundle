@@ -47,11 +47,6 @@ class TagType extends AbstractType
         return CollectionType::class;
     }
 
-    // public function getName()
-    // {
-    //     return 'tag';
-    // }
-
     public function getBlockPrefix()
     {
         return 'okto_mediabundle_tag';

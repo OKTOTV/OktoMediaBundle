@@ -6,9 +6,9 @@ use Okto\MediaBundle\Entity\Tag;
 
 class TagRepository extends EntityRepository
 {
-    public function findEpisodesWithTag(Tag $tag, $number = 5, $query_only = false) {
+    public function findEpisodesWithTag(Tag $tag, $number = 5, $query_only = false, $episode_class = "OktoMediaBundle:Episode") {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT e FROM OktoMediaBundle:Episode e JOIN e.tags t WHERE t.id = :tag_id ORDER BY e.firstranAt ')
+            ->createQuery('SELECT e FROM '.$episode_class.' e JOIN e.tags t WHERE t.id = :tag_id ORDER BY e.firstranAt ')
             ->setParameter('tag_id', $tag->getId());
 
         if ($query_only) {
@@ -17,9 +17,9 @@ class TagRepository extends EntityRepository
         return $query->setMaxResults($number)->getResult();
     }
 
-    public function findSeriesWithTag(Tag $tag, $number = 5, $query_only = false) {
+    public function findSeriesWithTag(Tag $tag, $number = 5, $query_only = false, $series_class = "OktoMediaBundle:Series") {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT s FROM MediaBundle:Series s LEFT JOIN s.episodes e LEFT JOIN e.tags t WHERE t.id = :tag_id')
+            ->createQuery('SELECT s FROM '.$series_class.' s LEFT JOIN s.episodes e LEFT JOIN e.tags t WHERE t.id = :tag_id')
             ->setParameter('tag_id', $tag->getId());
 
         if ($query_only) {
@@ -30,7 +30,7 @@ class TagRepository extends EntityRepository
 
     public function findPlaylistsWithTag(Tag $tag, $number = 5, $query_only = false) {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT p FROM MediaBundle:Playlist p JOIN p.items i JOIN i.episode e JOIN e.tags t WHERE t.id = :tag_id')
+            ->createQuery('SELECT p FROM OktolabMediaBundle:Playlist p JOIN p.items i JOIN i.episode e JOIN e.tags t JOIN e.posterframe pf WHERE t.id = :tag_id')
             ->setParameter('tag_id', $tag->getId());
 
         if ($query_only) {

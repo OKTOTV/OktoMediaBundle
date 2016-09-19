@@ -9,8 +9,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Tag
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Okto\MediaBundle\Entity\Repository\TagRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\MappedSuperclass()
  */
 class Tag
 {
@@ -43,15 +43,7 @@ class Tag
      */
     private $updatedAt;
 
-    /**
-     * @ORM\Column(name="rank", type="integer", nullable=true)
-     */
-    private $rank;
 
-    /**
-     * @ORM\Column(name="highlight", type="boolean", options={"default" = 0})
-     */
-    private $highlight;
 
     public function __construct()
     {
@@ -143,51 +135,5 @@ class Tag
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set rank
-     *
-     * @param integer $rank
-     * @return Tag
-     */
-    public function setRank($rank)
-    {
-        $this->rank = $rank;
-
-        return $this;
-    }
-
-    /**
-     * Get rank
-     *
-     * @return integer
-     */
-    public function getRank()
-    {
-        return $this->rank;
-    }
-
-    /**
-     * Set highlight
-     *
-     * @param boolean $highlight
-     * @return Tag
-     */
-    public function setHighlight($highlight)
-    {
-        $this->highlight = $highlight;
-
-        return $this;
-    }
-
-    /**
-     * Get highlight
-     *
-     * @return boolean
-     */
-    public function getHighlight()
-    {
-        return $this->highlight;
     }
 }

@@ -29,6 +29,18 @@ class Episode extends BaseEpisode
     protected $series;
 
     /**
+     * @JMS\Expose
+     * @JMS\Type("array<string>")
+     * @JMS\Groups({"search", "okto"})
+     * @ORM\ManyToMany(targetEntity="Okto\MediaBundle\Entity\TagInterface")
+     * @ORM\JoinTable(name="episode_tags",
+     *      joinColumns={@ORM\JoinColumn(name="episode_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
+     *      )
+     */
+    protected $tags;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -112,5 +124,44 @@ class Episode extends BaseEpisode
     public function getMedia()
     {
         return $this->media;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param $tag
+     * @return Episode
+     */
+    public function addTag($tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \AppBundle\Entity\Tag $tags
+     */
+    public function removeTag($tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+        return $this;
     }
 }
