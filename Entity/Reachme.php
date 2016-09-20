@@ -3,10 +3,12 @@
 namespace Okto\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Reachme
- *
+ * @JMS\AccessType("public_method")
+ * @JMS\ExclusionPolicy("all")
  * @ORM\Table()
  * @ORM\Entity
  */
@@ -29,19 +31,24 @@ class Reachme
 
     /**
      * @var string
-     *
+     * @JMS\Expose
+     * @JMS\Groups({"okto"})
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
 
     /**
      * @var string
-     *
+     * @JMS\Expose
+     * @JMS\Groups({"okto"})
      * @ORM\Column(name="uri", type="string", length=255)
      */
     private $uri;
 
     /**
+     * @JMS\Expose
+     * @JMS\Groups({"okto"})
+     * @JMS\Type("Okto\MediaBundle\Entity\Series")
      * @ORM\ManyToOne(targetEntity="Oktolab\MediaBundle\Entity\SeriesInterface", inversedBy="reachmes")
      * @ORM\JoinColumn(name="reachme_id", referencedColumnName="id")
      */

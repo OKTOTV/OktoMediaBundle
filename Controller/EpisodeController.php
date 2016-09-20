@@ -40,10 +40,6 @@ class EpisodeController extends BaseController
             $em = $this->getDoctrine()->getManager();
             if ($form->isValid()) { //form is valid, save or preview
                 if ($form->get('submit')->isClicked()) { //save me
-                    // die(var_dump($episode->getTags()));
-                    foreach($episode->getTags() as $tag) {
-                        $em->persist($tag);
-                    }
                     $em->persist($episode);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_edit_episode');
@@ -69,7 +65,7 @@ class EpisodeController extends BaseController
      */
     public function newAction(Request $request)
     {
-        $episode = new Episode();
+        $episode = $this->get('oktolab_media')->createEpisode();
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.create_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
 

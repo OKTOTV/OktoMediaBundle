@@ -4,10 +4,12 @@ namespace Okto\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Tag
- *
+ * @JMS\AccessType("public_method")
+ * @JMS\ExclusionPolicy("all")
  * @ORM\Table()
  * @ORM\HasLifecycleCallbacks()
  * @ORM\MappedSuperclass()
@@ -25,12 +27,13 @@ class Tag
 
     /**
      * @var string
-     *
+     * @JMS\Groups({"okto"})
      * @ORM\Column(name="text", type="string", length=30, unique=true)
      */
     private $text;
 
     /**
+     * @JMS\Groups({"okto"})
      * @ORM\Column(length=32, unique=true)
      * @Gedmo\Slug(fields={"text"}, updatable=false, separator="_")
      */
@@ -44,6 +47,8 @@ class Tag
     private $updatedAt;
 
     /**
+     * @JMS\Type("array<Okto\MediaBundle\Entity\Episode>")
+     * @JMS\Groups({"okto"})
      * @ORM\ManyToMany(targetEntity="Oktolab\MediaBundle\Entity\EpisodeInterface", mappedBy="tags")
      */
     protected $episodes;

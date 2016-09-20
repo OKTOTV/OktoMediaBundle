@@ -7,14 +7,14 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 class TagTransformer implements DataTransformerInterface
 {
 
-    private $repository;
+    private $tag_service;
 
     /**
      * @param ObjectManager $om
      */
-    public function __construct(\Doctrine\ORM\EntityRepository $repository)
+    public function __construct($tagservice)
     {
-        $this->repository = $repository;
+        $this->tag_service = $tagservice;
     }
 
     /**
@@ -55,12 +55,9 @@ class TagTransformer implements DataTransformerInterface
         }
         $tags = array();
         foreach ($texts as $text) {
-            $tag = $this->repository->findOneBy(['text' => $text]);
+            $tag = $this->tag_service->getTagByText($text);
             if (null === $tag) {
-                throw new TransformationFailedException(sprintf(
-                    'A tag with key "%s" does not exist!',
-                    $text
-                ));
+                $tag = $this->tag_service->saveTag($text);
             }
             $tags[] = $tag;
         }

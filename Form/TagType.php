@@ -11,11 +11,11 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class TagType extends AbstractType
 {
-    private $repository;
+    private $tag_service;
 
-    public function __construct($repository)
+    public function __construct($tag_service)
     {
-        $this->repository = $repository;
+        $this->tag_service = $tag_service;
     }
 
     /**
@@ -24,7 +24,7 @@ class TagType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new TagTransformer($this->repository);
+        $transformer = new TagTransformer($this->tag_service);
         $builder->addModelTransformer($transformer);
     }
 

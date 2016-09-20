@@ -20,6 +20,7 @@
     "target-dir": "Okto/MediaBundle",
 
     "require": {
-        "oktolab/media-bundle": "dev-master"
+        "oktolab/media-bundle": "dev-master",
+        "gedmo/doctrine-extensions": "^2.4"
     }
 }

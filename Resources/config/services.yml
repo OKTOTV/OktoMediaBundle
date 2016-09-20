@@ -13,7 +13,7 @@ services:
 
     oktothek_tag.type:
         class: Okto\MediaBundle\Form\TagType
-        arguments: [ "@oktothek_tag.repository" ]
+        arguments: [ "@okto_media_tag" ]
         tags:
             - { name: form.type, alias: tag }
 
@@ -34,3 +34,14 @@ services:
         factory: [ "@doctrine.orm.entity_manager", getRepository ]
         arguments: [ "AppBundle\Entity\Tag" ]
         #arguments:  [ "Okto\MediaBundle\Entity\Tag" ]
+
+    okto_media_tag:
+        class: Okto\MediaBundle\Model\TagService
+        arguments: [ "@doctrine.orm.entity_manager", "%okto_media.tag_class%"]
+
+    gedmo.listener.sluggable:
+        class: Gedmo\Sluggable\SluggableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]

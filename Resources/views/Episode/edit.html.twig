@@ -19,7 +19,7 @@
         {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.posterframe, 'adapter': 'posterframe', 'asset': form.vars.value.posterframe} %}
         {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineStart} %}
         {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineEnd} %}
-        {% include "AppBundle::Tag/widget.html.twig" with {'widget': form.tags} %}
+        {% include "OktoMediaBundle::Tag/widget.html.twig" with {'widget': form.tags} %}
     {{ form_end(form) }}
 {% endblock %}
 
@@ -31,6 +31,7 @@
     <script src="{{ asset('bundles/bprsstyle/js/typeahead.js') }}"></script>
     <script type="text/javascript">
         $(document).ready( function(){
+            console.log($('.tag-input').attr('data-url'));
             $('#oktolab_mediabundle_episode_onlineStart_picker').datetimepicker({
                 locale: 'de',
                 // format: "DD.MM.YYYY hh:mm",
@@ -77,27 +78,18 @@
                 name: 'tags',
                 source: tags
             }).bind('typeahead:select', function(ev, suggestion) {
-                // console.log('Selection: ' + suggestion);
                 var list = $(this).parents('.form-group').children('.tags');
                 addInput(list, suggestion);
+                $('.tag-input').typeahead('val', '');
             });
+
             $('.tag-input').keydown(function(e){
                 if(e.keyCode == 13) {
                     e.preventDefault();
                     var list = $(this).parents('.form-group').children('.tags');
                     var text = $(this).val();
-                    $.ajax({
-                        url: $(this).attr('data-url'),
-                        data: {
-                            'action': "add",
-                            'text':   text,
-                        },
-                        type: 'POST',
-                        success: function(data) {
-                            addInput(list, text);
-                            $(this).val('');
-                        }
-                    });
+                    addInput(list, text);
+                    $('.tag-input').typeahead('val', '');
                 }
             });
             // end tags

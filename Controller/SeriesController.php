@@ -21,13 +21,14 @@ class SeriesController extends BaseController
 {
     /**
      * Finds and displays a Series entity.
-     * @ParamConverter("series", class="OktoMediaBundle:Series")
+     * @ ParamConverter("series", class="OktoMediaBundle:Series")
      * @Route("/show/{series}", name="oktolab_series_show")
      * @Method("GET")
      * @Template()
      */
     public function showAction($series)
     {
+        $series = $this->get('oktolab_media')->getSeries($series);
         return ['series' => $series];
     }
 

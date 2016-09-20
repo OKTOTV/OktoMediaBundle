@@ -17,11 +17,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Series extends BaseSeries
 {
-    // /**
-    //  * @ORM\OneToMany(targetEntity="AppBundle\Entity\Abonnement", mappedBy="series", cascade="remove")
-    //  */
-    // private $abonnements;
-
     /**
     * @JMS\Expose
     * @JMS\Groups({"oktolab","okto"})
@@ -30,26 +25,6 @@ class Series extends BaseSeries
     * @ORM\OrderBy({"onlineStart" = "DESC"})
     */
     protected $episodes;
-
-    public function __construct() {
-        parent::__construct();
-        $this->abonnements = new ArrayCollection();
-        $this->episodes = new ArrayCollection();
-        $this->posts = new ArrayCollection();
-        $this->playlists = new ArrayCollection();
-        $this->reachmes = new ArrayCollection();
-        $this->users = new ArrayCollection();
-    }
-
-    // /**
-    //  * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="series")
-    //  */
-    // protected $posts;
-
-    /**
-    * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="channels", fetch="EAGER")
-    */
-    protected $users;
 
     /**
      * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\PlaylistInterface", mappedBy="series")
@@ -61,6 +36,13 @@ class Series extends BaseSeries
      */
     protected $reachmes;
 
+    public function __construct() {
+        parent::__construct();
+        $this->episodes = new ArrayCollection();
+        $this->playlists = new ArrayCollection();
+        $this->reachmes = new ArrayCollection();
+    }
+
     /**
      * Add episodes
      *
@@ -70,7 +52,6 @@ class Series extends BaseSeries
     public function addEpisode(\Oktolab\MediaBundle\Entity\Episode $episodes)
     {
         $this->episodes[] = $episodes;
-        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
         return $this;
     }
 
@@ -99,111 +80,6 @@ class Series extends BaseSeries
         $this->episodes = $episodes;
         return $this;
     }
-
-    // /**
-    //  * Add posts
-    //  *
-    //  * @param \AppBundle\Entity\Post $posts
-    //  * @return Series
-    //  */
-    // public function addPost(\AppBundle\Entity\Post $posts)
-    // {
-    //     $this->posts[] = $posts;
-    //     $posts->setSeries($this);
-    //     return $this;
-    // }
-    //
-    // /**
-    //  * Remove posts
-    //  *
-    //  * @param \AppBundle\Entity\Post $posts
-    //  */
-    // public function removePost(\AppBundle\Entity\Post $posts)
-    // {
-    //     $this->posts->removeElement($posts);
-    // }
-    //
-    // /**
-    //  * Get posts
-    //  *
-    //  * @return \Doctrine\Common\Collections\Collection
-    //  */
-    // public function getPosts()
-    // {
-    //     return $this->posts;
-    // }
-    //
-    // public function setPosts($posts)
-    // {
-    //     $this->posts = $posts;
-    // }
-
-    /**
-     * Add users
-     *
-     * @param \AppBundle\Entity\User $users
-     * @return Series
-     */
-    public function addUser(\AppBundle\Entity\User $users)
-    {
-        $this->users[] = $users;
-        $users->addChannel($this);
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param \AppBundle\Entity\User $users
-     */
-    public function removeUser(\AppBundle\Entity\User $users)
-    {
-        $this->users->removeElement($users);
-        $users->removeChannel($this);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-    // /**
-    //  * Add abonnements
-    //  *
-    //  * @param \AppBundle\Entity\Abonnements $abonnements
-    //  * @return Series
-    //  */
-    // public function addAbonnement(\AppBundle\Entity\Abonnement $abonnements)
-    // {
-    //     $this->abonnements[] = $abonnements;
-    //
-    //     return $this;
-    // }
-    //
-    // /**
-    //  * Remove abonnements
-    //  *
-    //  * @param \AppBundle\Entity\Abonnements $abonnements
-    //  */
-    // public function removeAbonnement(\AppBundle\Entity\Abonnement $abonnements)
-    // {
-    //     $this->abonnements->removeElement($abonnements);
-    // }
-    //
-    // /**
-    //  * Get abonnements
-    //  *
-    //  * @return \Doctrine\Common\Collections\Collection
-    //  */
-    // public function getAbonnements()
-    // {
-    //     return $this->abonnements;
-    // }
 
     /**
      * Add playlists
