@@ -30,7 +30,7 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
             $remote_episode = $this->serializer->deserialize($response->getBody(), $episode_class, 'json');
             $series = $this->media_service->getSeries($remote_episode->getSeries()->getUniqID());
             if (!$series) {
-                $series = $this->importSeries($episode->getSeries()->getUniqID());
+                $series = $this->importSeries($remote_episode->getSeries()->getUniqID());
             }
 
             $episode->setSeries($series);
