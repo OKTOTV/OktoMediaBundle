@@ -30,7 +30,7 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
             $remote_episode = $this->serializer->deserialize($response->getBody(), $episode_class, 'json');
             $series = $this->media_service->getSeries($remote_episode->getSeries()->getUniqID());
             if (!$series) {
-                $series = $this->importSeries($remote_episode->getSeries()->getUniqID());
+                $series = $this->importSeries($remote_episode->getSeries()->getUniqID(), $episode->getKeychain());
             }
 
             $episode->setSeries($series);
@@ -50,10 +50,10 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
         return 'Import Episode';
     }
 
-    private function importSeries($uniqID)
+    private function importSeries($uniqID, $keychain)
     {
         $response = $this->media_service->getResponse(
-            $this->keychain,
+            $keychain,
             MediaService::ROUTE_SERIES,
             ['uniqID' => $uniqID]
         );
@@ -68,7 +68,7 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
             $local_series->merge($series);
 
             //import Series Posterframe
-            $this->media_service->addImportSeriesPosterframeJob($local_series->getUniqID(), $this->keychain, $series->getPosterframe());
+            $this->media_service->addImportSeriesPosterframeJob($local_series->getUniqID(), $keychain, $series->getPosterframe());
             return $series;
         } else {
             $this->logbook->error('okto_media.episode_import_series_error', [], $this->args['uniqID']);
