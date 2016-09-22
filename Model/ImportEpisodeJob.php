@@ -62,14 +62,13 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
             $series = $this->serializer->deserialize($response->getBody(), $series_class, 'json');
             $local_series = $this->media_service->getSeries($uniqID);
             if (!$local_series) {
-                $series_class = $this->getContainer()->getParameter('oktolab_media.series_class');
-                $local_series = new $series_class;
+                $local_series = $this->media_service->createSeries();
             }
             $local_series->merge($series);
 
             //import Series Posterframe
             $this->media_service->addImportSeriesPosterframeJob($local_series->getUniqID(), $keychain, $series->getPosterframe());
-            return $series;
+            return $local_series;
         } else {
             $this->logbook->error('okto_media.episode_import_series_error', [], $this->args['uniqID']);
         }
