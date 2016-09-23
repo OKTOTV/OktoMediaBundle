@@ -26,13 +26,16 @@ class Tag
     private $id;
 
     /**
-     * @var string
+     * @JMS\Expose
+     * @JMS\Type("string")
      * @JMS\Groups({"okto"})
      * @ORM\Column(name="text", type="string", length=30, unique=true)
      */
     private $text;
 
     /**
+     * @JMS\Expose
+     * @JMS\Type("string")
      * @JMS\Groups({"okto"})
      * @ORM\Column(length=32, unique=true)
      * @Gedmo\Slug(fields={"text"}, updatable=false, separator="_")
