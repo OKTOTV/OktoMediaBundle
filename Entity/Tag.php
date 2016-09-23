@@ -59,7 +59,6 @@ class Tag
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
-        $this->highlight = false;
     }
 
     public function __toString()
