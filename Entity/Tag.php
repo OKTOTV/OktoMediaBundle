@@ -5,11 +5,14 @@ namespace Okto\MediaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Tag
  * @JMS\AccessType("public_method")
  * @JMS\ExclusionPolicy("all")
+ * @UniqueEntity("text")
  * @ORM\Table()
  * @ORM\HasLifecycleCallbacks()
  * @ORM\MappedSuperclass()
@@ -29,6 +32,7 @@ class Tag
      * @JMS\Expose
      * @JMS\Type("string")
      * @JMS\Groups({"okto"})
+     * @Assert\Length(min = 3, max = 30, maxMessage = "okto_media.max_tag_limit", minMessage = "okto_media.min_tag_limit")
      * @ORM\Column(name="text", type="string", length=30, unique=true)
      */
     private $text;
