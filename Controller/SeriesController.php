@@ -9,9 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use MediaBundle\Entity\Series;
-use MediaBundle\Form\EpisodeType;
-use MediaBundle\Form\SeriesUserType;
+use Okto\MediaBundle\Form\EpisodeType;
+use Okto\MediaBundle\Form\SeriesUserType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
@@ -63,10 +62,10 @@ class SeriesController extends BaseController
      * @Method({"GET", "POST"})
      * @Template()
      */
-    public function editUserAction(Request $request, Series $series)
+    public function editUserAction(Request $request, $series)
     {
-        $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
-        $form = $this->createForm(new SeriesUserType($repo), $series);
+        $series = $this->get('oktolab_media')->getSeries($series);
+        $form = $this->createForm(SeriesUserType::class, $series);
         $form->add('submit', SubmitType::class, ['label' => 'flux2.series_edit_user_button', 'attr' => ['class' => 'btn btn-default']]);
 
         if ($request->getMethod() == "POST") {
@@ -75,10 +74,10 @@ class SeriesController extends BaseController
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($series);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', 'flux2.series_edit_user_success');
-                return $this->redirect($this->generateUrl('oktolab_series_show', ['series' => $series->getId()]));
+                $this->get('session')->getFlashBag()->add('success', 'okto_media.series_edit_user_success');
+                return $this->redirect($this->generateUrl('oktolab_series_show', ['series' => $series->getUniqID()]));
             } else {
-                $this->get('session')->getFlashBag()->add('error', 'flux2.series_edit_user_error');
+                $this->get('session')->getFlashBag()->add('error', 'okto_media.series_edit_user_error');
             }
         }
         return ['form' => $form->createView(), 'series' => $series];

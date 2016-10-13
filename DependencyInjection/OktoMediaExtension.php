@@ -16,5 +16,6 @@ class OktoMediaExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
         $container->setParameter('okto_media.tag_class', $config['tag_class']);
+        $container->setParameter('okto_media.user_class', $config['user_class']);
     }
 }

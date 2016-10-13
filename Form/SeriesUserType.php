@@ -14,10 +14,12 @@ use Okto\MediaBundle\Form\UserType;
 class SeriesUserType extends AbstractType
 {
     private $repo;
+    private $series_class;
 
-    public function __construct($repo)
+    public function __construct($repo, $series_class)
     {
         $this->repo = $repo;
+        $this->series_class = $series_class;
     }
 
     /**
@@ -37,7 +39,6 @@ class SeriesUserType extends AbstractType
             ]);
 
         $UserTransformer = new UserTransformer($this->repo);
-
         $builder->get('users')->addModelTransformer($UserTransformer);
     }
 
@@ -46,15 +47,13 @@ class SeriesUserType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'MediaBundle\Entity\Series',
-        ));
+        $resolver->setDefaults(['data_class' => $this->series_class]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'okto_mediabundle_series_user';
     }

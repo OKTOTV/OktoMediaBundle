@@ -30,6 +30,7 @@ flux2_reachme_new:                          <span class="glyphicon glyphicon-plu
 ## User
 # show
 oktothek.series_add_user:                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Benutzer hinzufügen oder entfernen
+okto_media.series_edit_user_success:        Benutzer zur Sendereihe erfolgreich aktualisiert
 
 # edit
 flux2_media.edit_series_user_header:        Benutzer der Sendereihe %series% bearbeiten

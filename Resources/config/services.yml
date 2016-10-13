@@ -17,12 +17,6 @@ services:
         tags:
             - { name: form.type, alias: tag }
 
-    # oktothek_tag_collection.type:
-    #     class: AppBundle\Form\TagCollectionType
-    #     arguments: [ "@oktothek_tag.repository" ]
-    #     tags:
-    #         - { name: form.type, alias: tag_collection }
-
     okto_media.episode.type:
         class: Okto\MediaBundle\Form\EpisodeType
         arguments: [ "%oktolab_media.series_class%", "%oktolab_media.episode_class%"]
@@ -33,7 +27,11 @@ services:
         class: Doctrine\ORM\EntityRepository
         factory: [ "@doctrine.orm.entity_manager", getRepository ]
         arguments: [ "AppBundle\Entity\Tag" ]
-        #arguments:  [ "Okto\MediaBundle\Entity\Tag" ]
+
+    okto_media.user_repo:
+        class: Doctrine\ORM\EntityRepository
+        factory: [ "@doctrine.orm.entity_manager", getRepository ]
+        arguments: [ "%okto_media.user_class%"]
 
     okto_media_tag:
         class: Okto\MediaBundle\Model\TagService
@@ -45,3 +43,10 @@ services:
             - { name: doctrine.event_subscriber }
         calls:
             - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+    # forms
+    okto_media.series_user.type:
+        class: Okto\MediaBundle\Form\SeriesUserType
+        arguments:  [ "@okto_media.user_repo", "%oktolab_media.series_class%"]
+        tags:
+            - { name: form.type }

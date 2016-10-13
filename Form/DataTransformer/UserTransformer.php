@@ -3,11 +3,9 @@ namespace Okto\MediaBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use AppBundle\Entity\User;
 
 class UserTransformer implements DataTransformerInterface
 {
-
     private $repository;
 
     /**
@@ -21,16 +19,16 @@ class UserTransformer implements DataTransformerInterface
     /**
      * Transforms object to a string.
      *
-     * @param  Tag|null $tag
+     * @param  user|null $users
      * @return string
      */
     public function transform($users)
     {
-        if (null === $users) {
+        if (null == $users) {
             return "";
         }
-        $texts = [];
 
+        $texts = [];
         foreach ($users as $user) {
             $texts[] = $user->getUsername();
         }
@@ -39,19 +37,20 @@ class UserTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms a string (key) to an object (asset).
+     * Transforms a string (name) to an object (user).
      *
      * @param  string $text
      *
-     * @return Tag|null
+     * @return users|null
      *
-     * @throws TransformationFailedException if object (tag) is not found.
+     * @throws TransformationFailedException if object (user) is not found.
      */
     public function reverseTransform($texts)
     {
         if (!$texts) {
             return null;
         }
+
         $users = [];
         foreach ($texts as $text) {
             $user = $this->repository->findOneBy(['username' => $text]);

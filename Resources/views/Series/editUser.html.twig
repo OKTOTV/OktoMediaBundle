@@ -6,11 +6,11 @@
 
 {% block body_main %}
     <div class="page-header">
-        <h1>{{ 'flux2_media.edit_series_user_header'|trans({'%series%': series.name}) }}</h1>
+        <h1>{{ 'flux2_media.edit_series_user_header'|trans({'%series%': series}) }}</h1>
     </div>
 
 {{ form_start(form)}}
-    {% include "MediaBundle::Series/widget.html.twig" with {'widget': form.users} %}
+    {% include "OktoMediaBundle::Series/widget.html.twig" with {'widget': form.users} %}
 {{ form_end(form)}}
 {% endblock %}
 
