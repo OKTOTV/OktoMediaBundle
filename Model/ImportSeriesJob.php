@@ -18,7 +18,7 @@ class ImportSeriesJob extends BprsContainerAwareJob {
         $this->jms_serializer = $this->getContainer()->get('jms_serializer');
         $this->logbook = $this->getContainer()->get('bprs_logbook');
         $this->job_service = $this->getContainer()->get('bprs_jobservice');
-        $this->keychain = $this->getContainer()->get('bprs_applink')->getKeychain($this->args['keychain'];
+        $this->keychain = $this->getContainer()->get('bprs_applink')->getKeychain($this->args['keychain']);
 
         $this->logbook->info('okto_media.series_import_start', [], $this->args['uniqID']);
         $series = $this->media_service->getSeries($this->args['uniqID']);
