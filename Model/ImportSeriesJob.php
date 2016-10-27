@@ -3,6 +3,7 @@
 namespace Okto\MediaBundle\Model;
 
 use Bprs\CommandLineBundle\Model\BprsContainerAwareJob;
+use Oktolab\MediaBundle\Model\MediaService;
 
 class ImportSeriesJob extends BprsContainerAwareJob {
 
