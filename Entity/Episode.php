@@ -16,7 +16,7 @@ class Episode extends BaseEpisode
 {
     /**
      *
-     * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\Media", mappedBy="episode")
+     * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\Media", mappedBy="episode", cascade={"remove"})
      */
     protected $media;
 

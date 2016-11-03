@@ -6,20 +6,21 @@
 
 {% block body_main %}
     <div class="page-header">
-        <h1>{{ 'oktolab_media.edit_episode_header'|trans }}</h1>
-        <a href="{{ path('oktolab_episode_show', {'uniqID': form.vars.value.uniqID}) }}" class="btn btn-default">{{ 'oktolab_media.edit_episode_cancel'|trans }}</a>
+        <h1>{{ 'oktolab_media.new_episode_header'|trans }}</h1>
+        <a href="{{ path('oktolab_series') }}" class="btn btn-default">{{ 'oktolab_media.new_episode_back_to_list'|trans }}</a>
     </div>
 
     {{ form_start(form) }}
         {{ form_errors(form) }}
         {{ form_row(form.name) }}
         {{ form_row(form.description) }}
-        {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.video, 'adapter': 'video', 'asset': form.vars.value.video} %}
-        {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.posterframe, 'adapter': 'posterframe', 'asset': form.vars.value.posterframe} %}
+        {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.video, 'adapter': 'video'} %}
+        {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.posterframe, 'adapter': 'posterframe'} %}
         {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineStart} %}
         {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineEnd} %}
         {% include "OktoMediaBundle::Tag/widget.html.twig" with {'widget': form.tags} %}
     {{ form_end(form) }}
+
 {% endblock %}
 
 {% block javascripts %}
@@ -30,10 +31,10 @@
     <script src="{{ asset('bundles/bprsstyle/js/typeahead.js') }}"></script>
     <script type="text/javascript">
         $(document).ready( function(){
-            console.log($('.tag-input').attr('data-url'));
             $('#oktolab_mediabundle_episode_onlineStart_picker').datetimepicker({
                 locale: 'de',
                 // format: "DD.MM.YYYY hh:mm",
+                date: moment($('#oktolab_mediabundle_episode_onlineStart_picker').children(':input').val()),
                 useCurrent: true,
                 calendarWeeks: true,
                 allowInputToggle: true,
@@ -43,6 +44,7 @@
             $('#oktolab_mediabundle_episode_onlineEnd_picker').datetimepicker({
                 locale: 'de',
                 // format: "DD.MM.YYYY hh:mm",
+                date: moment($('#oktolab_mediabundle_episode_onlineEnd_picker').children(':input').val()),
                 useCurrent: true,
                 calendarWeeks: true,
                 allowInputToggle: true,

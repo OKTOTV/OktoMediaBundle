@@ -65,7 +65,10 @@ class EpisodeType extends AbstractType
                     'html5' => false,
                     'placeholder' => 'oktolab_media.onlineEnd_placeholder',
                     'label' => 'oktolab_media.onlineEnd_label',
-                    'attr' => ['placeholder' => 'oktolab_media.onlineEnd_placeholder']
+                    'attr' => [
+                        'placeholder' => 'oktolab_media.onlineEnd_placeholder',
+                        'novalidate'  => 'novalidate'
+                    ]
                 ]
             )
 
