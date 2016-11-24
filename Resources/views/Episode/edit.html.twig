@@ -34,6 +34,7 @@
             $('#oktolab_mediabundle_episode_onlineStart_picker').datetimepicker({
                 locale: 'de',
                 // format: "DD.MM.YYYY hh:mm",
+                date: moment($('#oktolab_mediabundle_episode_onlineStart_picker').children(':input').val()),
                 useCurrent: true,
                 calendarWeeks: true,
                 allowInputToggle: true,
@@ -43,6 +44,7 @@
             $('#oktolab_mediabundle_episode_onlineEnd_picker').datetimepicker({
                 locale: 'de',
                 // format: "DD.MM.YYYY hh:mm",
+                date: moment($('#oktolab_mediabundle_episode_onlineEnd_picker').children(':input').val()),
                 useCurrent: true,
                 calendarWeeks: true,
                 allowInputToggle: true,
