@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-8">
             {% if episode.video is not empty %}
-                <div id="video">
+                <div id="player">
                 </div>
             {% elseif episode.posterframe is not empty %}
                 <img src="{{ episode.posterframe|path }}" class="img-responsive"/>
@@ -41,10 +41,10 @@
             <p>UniqID: {{ episode.uniqID }}</p>
             <p>Technischer Status: {{ 'oktolab_media.show_episode_technical_state_choice'|transchoice(episode.technicalStatus) }}</p>
             {% if episode.video is not empty %}
-                <a href="{{ path('bprs_asset_download', {'key': episode.video.filekey}) }}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span>Video</a>
+                <a href="{{ path('bprs_asset_download', {'filekey': episode.video.filekey}) }}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span>Video</a>
             {% endif %}
             {% if episode.posterframe is not empty %}
-                <a href="{{ path('bprs_asset_download', {'key': episode.posterframe.filekey}) }}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span>Posterframe</a>
+                <a href="{{ path('bprs_asset_download', {'filekey': episode.posterframe.filekey}) }}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span>Posterframe</a>
             {% endif %}
             <h2>{{ 'oktolab_media_media_for_episode_header'|trans }}</h2>
             {{ render(controller('OktolabMediaBundle:Media:mediaForEpisode', {'uniqID': episode.uniqID})) }}
@@ -54,16 +54,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="http://content.jwplatform.com/libraries/qecJHTsP.js"></script>
-    {% if episode.video is not empty %}
-        <script type="text/javascript">
-            $(document).ready(function(){
-                var playerInstance = jwplayer("video");
-                playerInstance.setup({
-                    sources: [{% for media in episode.media %}{file: "{{ media.asset|path }}", label: "{{ media.quality }}", type: "mp4"}{% if not loop.last %},{% endif %}{% endfor %}],
-                    image: "{{ episode.posterframe|path }}"
-                });
-            });
-        </script>
-    {% endif %}
+    {{ player(episode)|raw }}
 {% endblock %}
