@@ -18,28 +18,40 @@
             {% elseif episode.posterframe is not empty %}
                 <img src="{{ episode.posterframe|path }}" class="img-responsive"/>
             {% endif %}
-            {{ episode.description|default('oktolab_media.show_episode_description_missing'|trans) }}
+            {{ episode.description|default('oktolab_media.show_episode_description_missing'|trans)|nl2br }}
         </div>
         <div class="col-md-4">
-            <p>Aktiv: {{ episode.isActive }}</p>
-            <p>Angelegt am: {{ episode.createdAt|date("d.m.Y H:i") }}</p>
-            <p>Aktualisiert am: {{ episode.updatedAt|date("d.m.Y H:i") }}</p>
-            <p>Online von: {{ episode.onlineStart|date("d.m.Y H:i") }}</p>
-            <p>Erstausstrahlung am: {{ episode.firstranAt|date("d.m.Y H:i") }}</p>
-            <p>
-                {% if episode.series is not empty %}
-                    Sendereihe: <a href="{{ path('oktolab_series_show', {'series': episode.series.uniqID})}}">{{ episode.series.name|default('Keiner Sendereihe zugewiesen') }}</a>
-                {% else %}
-                    Keiner Sendereihe zugewiesen
-                {% endif %}
-            </p>
-            {% if episode.onlineEnd is empty %}
-                Online bis: nicht beschränkt
-            {% else %}
-                Online bis: {{ episode.onlineEnd|date("d.m.Y H:i") }}</p>
-            {% endif %}
-            <p>UniqID: {{ episode.uniqID }}</p>
-            <p>Technischer Status: {{ 'oktolab_media.show_episode_technical_state_choice'|transchoice(episode.technicalStatus) }}</p>
+            <h4>{{ 'oktolab_media_info_for_episode_header'|trans }}</h4>
+            <dl class="dl-horizontal">
+                <dt>{{ 'oktolab_media.episode_info_isActive'|trans }}</dt>
+                <dd>{{ 'oktolab_media.episode_info_isActive_choice'|transchoice( episode.isActive ) }}</dd>
+
+                <dt>{{ 'oktolab_media.episode_info_createdAt'|trans }}</dt>
+                <dd>{{ episode.createdAt|date("d.m.Y H:i") }}</dd>
+
+                <dt>{{ 'oktolab_media.episode_info_updatedAt'|trans }}</dt>
+                <dd>{{ episode.updatedAt|date("d.m.Y H:i") }}</dd>
+
+                <dt>{{ 'oktolab_media.episode_info_onlineStart'|trans }}</dt>
+                <dd>{{ episode.onlineStart|date("d.m.Y H:i") }}</dd>
+
+                <dt>{{ 'oktolab_media.episode_info_onlineEnd'|trans}}</dt>
+                <dd>{% if episode.onlineEnd %}{{ episode.onlineEnd|date("d.m.Y H:i") }}{% endif %}</dd>
+
+                <dt>{{ 'oktolab_media.episode_info_firstranAt'|trans }}</dt>
+                <dd>{{ episode.firstranAt|date("d.m.Y H:i") }}</dd>
+
+                <dt>{{ 'okto_media.episode_info_series'|trans }}</dt>
+                <dd>
+                    {% if episode.series %}
+                        <a href="{{ path('oktolab_series_show', {'series': episode.series.uniqID})}}">{{ episode.series.name}}</a>
+                    {% endif %}
+                </dd>
+
+                <dt>{{ 'oktolab_media.episode_info_uniqID'|trans}}</dt>
+                <dd>{{ episode.uniqID }}</dd>
+            </dl>
+
             {% if episode.video is not empty %}
                 <a href="{{ path('bprs_asset_download', {'filekey': episode.video.filekey}) }}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span>Video</a>
             {% endif %}
