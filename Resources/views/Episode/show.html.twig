@@ -7,11 +7,20 @@
 {% block body_main %}
     <div class="page-header">
         <h1>{{ episode.name }}</h1>
-        <a href="{{ path('oktolab_episode_edit', {'episode': episode.uniqID}) }}" class="btn btn-default">Bearbeiten</a>
-        <a href="{{ path('oktolab_episode_encode', {'uniqID': episode.uniqID}) }}" class="btn btn-default">{{ 'oktolab_media.show_episode_add_to_encode_queue'|trans|raw }}</a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ 'oktolab_media.episode_show_actions'|trans|raw }}
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="{{ path('oktolab_episode_edit', {'episode': episode.uniqID}) }}">{{ 'oktolab_media.episode_edit_button'|trans|raw }}</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{{ path('oktolab_media_export_episode', {'uniqID': episode.uniqID}) }}">{{ 'oktolab_media.show_episode_export'|trans|raw }}</a></li>
+                <li><a href="{{ path('oktolab_episode_encode', {'uniqID': episode.uniqID}) }}">{{ 'oktolab_media.show_episode_add_to_encode_queue'|trans|raw }}</a></li>
+            </ul>
+        </div>
     </div>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             {% if episode.video is not empty %}
                 <div id="player">
                 </div>
@@ -20,7 +29,7 @@
             {% endif %}
             {{ episode.description|default('oktolab_media.show_episode_description_missing'|trans)|nl2br }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <h4>{{ 'oktolab_media_info_for_episode_header'|trans }}</h4>
             <dl class="dl-horizontal">
                 <dt>{{ 'oktolab_media.episode_info_isActive'|trans }}</dt>
