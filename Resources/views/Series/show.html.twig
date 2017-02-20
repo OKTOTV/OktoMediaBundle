@@ -40,6 +40,15 @@
                 {% endfor %}
                 <a href="{{ path('flux2_reachme_new', {'series_uid': series.uniqID})}}" class="list-group-item">{{ 'flux2_reachme_new'|trans|raw}}</a>
             </div>
+
+            <h2>{{ 'okto_media_series_tags_header'|trans }}</h2>
+            <ul class="list-group">
+                {% for tag in series.tags %}
+                    <li class="list-group-item">
+                        {{ tag }}
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
     <a class="btn btn-default" href="{{ path('oktolab_episode_new')}}">{{ 'oktolab_media.series_add_new_episode'|trans|raw }}</a>

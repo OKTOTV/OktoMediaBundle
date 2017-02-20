@@ -53,7 +53,7 @@ class EpisodeType extends AbstractType
             ->add('onlineStart', DateTimeType::class,
                 [
                     'widget' => 'single_text',
-                    'html5' => false,
+                    'required' => false,
                     'label' => 'oktolab_media.onlineStart_label',
                     'attr' => ['placeholder' => 'oktolab_media.onlineStart_placeholder']
                 ]
@@ -62,13 +62,19 @@ class EpisodeType extends AbstractType
             ->add('onlineEnd', DateTimeType::class,
                 [
                     'widget' => 'single_text',
-                    'html5' => false,
+                    'required' => false,
                     'placeholder' => 'oktolab_media.onlineEnd_placeholder',
                     'label' => 'oktolab_media.onlineEnd_label',
-                    'attr' => [
-                        'placeholder' => 'oktolab_media.onlineEnd_placeholder',
-                        'novalidate'  => 'novalidate'
-                    ]
+                    'attr' => ['placeholder' => 'oktolab_media.onlineEnd_placeholder']
+                ]
+            )
+
+            ->add('firstRanAt', DateTimeType::class,
+                [
+                    'widget' => 'single_text',
+                    'placeholder' => 'oktolab_media.firstRanAt_placeholder',
+                    'label' => 'oktolab_media.firstRanAt_label',
+                    'attr' => ['placeholder' => 'oktolab_media.firstRanAt_placeholder']
                 ]
             )
 

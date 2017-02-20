@@ -61,6 +61,15 @@
                 <dd>{{ episode.uniqID }}</dd>
             </dl>
 
+            <h2>{{ 'okto_media_episode_tags_header'|trans }}</h2>
+            <ul class="list-group">
+                {% for tag in episode.tags %}
+                    <li class="list-group-item">
+                        {{ tag }}
+                    </li>
+                {% endfor %}
+            </ul>
+
             {% if episode.video is not empty %}
                 <a href="{{ path('bprs_asset_download', {'filekey': episode.video.filekey}) }}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span>Video</a>
             {% endif %}

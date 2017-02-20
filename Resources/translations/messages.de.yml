@@ -29,6 +29,7 @@ flux2_media.error_edit_reachme:             Reachme konnte nicht aktualisiert we
 flux2_reachme_edit:                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Reachme bearbeiten
 flux2_reachme_new:                          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neues Reachme anlegen
 okto_media.episode_info_series:             Sendereihe
+okto_media_series_tags_header:              "Schlagwörter"
 
 ## User
 # show
@@ -53,3 +54,7 @@ okto_media.series_tag_edit_cancel_button:   '<span class="glyphicon glyphicon-ar
 
 # newEpisode.html.twig
 okto_media.new_episode_for_series_cancel:  '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Sendereihe'
+
+
+## Episode/show.html.twig
+okto_media_episode_tags_header:             "Schlagwörter"
