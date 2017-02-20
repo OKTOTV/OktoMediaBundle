@@ -36,11 +36,19 @@ class Series extends BaseSeries
      */
     protected $reachmes;
 
+    /**
+     * default tags for episodes
+     * @ORM\ManyToMany(targetEntity="Okto\MediaBundle\Entity\TagInterface", inversedBy="series", cascade={"persist"})
+     * @ORM\JoinTable(name="series_tag")
+     */
+    protected $tags;
+
     public function __construct() {
         parent::__construct();
         $this->episodes = new ArrayCollection();
         $this->playlists = new ArrayCollection();
         $this->reachmes = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -145,5 +153,28 @@ class Series extends BaseSeries
     public function getReachmes()
     {
         return $this->reachmes;
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+        return $this;
+    }
+
+    public function addTag($tag)
+    {
+        $this->tags[] = $tag;
+        return $this;
+    }
+
+    public function removeTag($tag)
+    {
+        $this->tags->removeElement($tag);
+        return $this;
     }
 }

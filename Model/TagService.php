@@ -43,5 +43,4 @@ class TagService {
     {
         return $this->em->getRepository($this->tag_class)->findAll();
     }
-
 }

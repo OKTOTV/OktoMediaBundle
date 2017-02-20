@@ -50,3 +50,19 @@ services:
         arguments:  [ "@okto_media.user_repo", "%oktolab_media.series_class%"]
         tags:
             - { name: form.type }
+
+    okto_media.series_tag.type:
+        class: Okto\MediaBundle\Form\SeriesTagType
+        arguments:  ["%oktolab_media.series_class%"]
+        tags:
+            - { name: form.type }
+
+    okto_media.series_episode.type:
+        class: Okto\MediaBundle\Form\SeriesEpisodeType
+        arguments: [ "%oktolab_media.episode_class%" ]
+        tags:
+            - { name: form.type }
+
+    okto_media:
+        class: Okto\MediaBundle\Model\MediaService
+        arguments:  [ "@oktolab_media", "@oktolab_media_helper"]

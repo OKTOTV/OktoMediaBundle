@@ -55,6 +55,7 @@ class Episode extends BaseEpisode
     public function setSeries($series = null)
     {
         $this->series = $series;
+        $series->addEpisode($this);
         return $this;
     }
 

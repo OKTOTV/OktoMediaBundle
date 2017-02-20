@@ -1,3 +1,6 @@
+## tag widget.html.twig
+okto_media.tag_placeholder:                Hund, Katze, Maus, ...
+
 ## reachme
 reachme_type_transchoice:       "{0} Mail|{1} Facebook|{2} Twitter|{3} Instagram|{4} Google+"
 
@@ -29,10 +32,24 @@ okto_media.episode_info_series:             Sendereihe
 
 ## User
 # show
+okto_media_series_show_publicate_tag_button: '<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Schlagworte an Episoden übertragen'
 oktothek.series_add_user:                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Benutzer hinzufügen oder entfernen
 okto_media.series_edit_user_success:        Benutzer zur Sendereihe erfolgreich aktualisiert
+okto_media.series_edit_tag_button:          '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Schlagwörter bearbeiten'
 
 # edit
 flux2_media.edit_series_user_header:        Benutzer der Sendereihe %series% bearbeiten
 flux2.series_edit_user_button:              <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Benutzer speichern
 flux2.series_edit_user_success:             Benutzer wurden erfolgreich aktualisiert
+
+# editTag.html.twig
+okto_media.series_edit_tag_success:         Änderungen der Standardsendereihenschlagworte erfolgreich gespeichert
+okto_media.series_edit_tag_error:           Änderungen konnten nicht gespeichert werden
+okto_media.series_publicate_tag_success:    "Standardsendereihenschlagworte wurden erfolgreich an Episoden übertragen"
+okto_media.edit_series_tag_header:          Schlagwörter für Sendereihe
+okto_media.series_tag_edit_placeholder:     Hund, Katze, Maus...
+okto_media.series_edit_tag_button:          '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Schlagwörter speichern'
+okto_media.series_tag_edit_cancel_button:   '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Ansicht'
+
+# newEpisode.html.twig
+okto_media.new_episode_for_series_cancel:  '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Sendereihe'

@@ -60,6 +60,11 @@ class Tag
      */
     protected $episodes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Oktolab\MediaBundle\Entity\SeriesInterface", mappedBy="tags")
+     */
+    protected $series;
+
     public function __construct()
     {
         $this->updatedAt = new \Datetime();

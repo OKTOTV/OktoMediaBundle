@@ -72,7 +72,7 @@ class EpisodeController extends BaseController
         if ($request->getMethod() == "POST") { //sends form
             $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            if ($form->isValid()) { //form is valid, save or preview
+            if ($form->isValid() || $form->get('delete')->isClicked()) { //form is valid, save or preview
                 if ($form->get('submit')->isClicked()) { //save me
                     $em->persist($episode);
                     $em->flush();
