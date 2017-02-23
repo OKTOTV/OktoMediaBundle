@@ -32,8 +32,9 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
             if (!$series) {
                 $series = $this->importSeries($remote_episode->getSeries()->getUniqID(), $episode->getKeychain());
             }
-
             $episode->setSeries($series);
+
+            $this->importTags($episode, $remote_episode);
 
             $em = $this->getContainer()->get('doctrine.orm.entity_manager');
             $em->persist($episode);
@@ -75,4 +76,18 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
         return null;
     }
 
+    private function importTags($episode, $remote_episode)
+    {
+        $tag_service = $this->getContainer()->get('okto_media_tag');
+        foreach ($remote_episode->getTags() as $tag) {
+            $localtag = $tag_service->getTagByText($tag->getText());
+            if (!$localtag) {
+                $localtag = $tag_service->createTag();
+                $localtag->setText($tag->getText());
+            }
+            if (!$episode->getTags()->contains($localtag)) {
+                $episode->addTag($localtag);
+            }
+        }
+    }
 }

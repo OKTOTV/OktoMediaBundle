@@ -36,7 +36,6 @@ class TagService {
         $this->em->persist($tag);
         $this->em->flush();
         return $tag;
-        // return $this->getTag($tag->getSlug());
     }
 
     public function findAll()
