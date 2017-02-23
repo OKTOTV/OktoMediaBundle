@@ -25,7 +25,6 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
             $response = $this->media_service->getResponse($episode->getKeychain(), MediaService::ROUTE_EPISODE, ['uniqID' => $this->args['uniqID']]);
         }
         if ($response->getStatusCode() == 200) {
-            $this->logbook->info('serial schema response ok', [], $this->args['uniqID']);
             $this->serializer = $this->getContainer()->get('jms_serializer');
             $episode_class = $this->getContainer()->getParameter('oktolab_media.episode_class');
             $remote_episode = $this->serializer->deserialize($response->getBody(), $episode_class, 'json');
@@ -34,8 +33,6 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
                 $series = $this->importSeries($remote_episode->getSeries()->getUniqID(), $episode->getKeychain());
             }
             $episode->setSeries($series);
-            $this->logbook->info('set episode series', [], $this->args['uniqID']);
-
             $this->importTags($episode, $remote_episode);
 
             $em = $this->getContainer()->get('doctrine.orm.entity_manager');
