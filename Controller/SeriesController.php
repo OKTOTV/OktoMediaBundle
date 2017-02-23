@@ -36,7 +36,7 @@ class SeriesController extends BaseController
     /**
      * Finds and displays a Series entity.
      * @ParamConverter("series", class="OktoMediaBundle:Series")
-     * @Route("/series/paginate", name="media_episode_paginator")
+     * @Route("/{series}/paginate", name="media_episode_paginator")
      * @Method("GET")
      * @Template()
      */
