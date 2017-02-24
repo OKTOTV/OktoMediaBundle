@@ -21,7 +21,7 @@ class Series extends BaseSeries
     * @JMS\Expose
     * @JMS\Groups({"oktolab","okto"})
     * @JMS\Type("array<Okto\MediaBundle\Entity\Episode>")
-    * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\EpisodeInterface", mappedBy="series", cascade="remove")
+    * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\EpisodeInterface", mappedBy="series", cascade={"persist", "remove"})
     * @ORM\OrderBy({"onlineStart" = "DESC"})
     */
     protected $episodes;

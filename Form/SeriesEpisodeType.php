@@ -66,7 +66,7 @@ class SeriesEpisodeType extends AbstractType
                 ]
             )
 
-            ->add('firstRanAt', DateTime::class,
+            ->add('firstranAt', DateTimeType::class,
                 [
                     'widget' => 'single_text',
                     'placeholder' => 'oktolab_media.firstRanAt_placeholder',
