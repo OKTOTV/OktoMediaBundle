@@ -10,6 +10,9 @@
     <th>{{ knp_pagination_sortable(pagination, 'UniqID', 'e.uniqID') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'name', 'e.name') }}</th>
     <th>Beschreibung</th>
+    <th>
+        {{ knp_pagination_sortable(pagination, 'okto_media.series_episodepagination_header_firstRan'|trans, 'e.firstranAt') }}
+    </th>
 </tr>
 <div class="navigation">
     {{ knp_pagination_render(pagination) }}
@@ -25,6 +28,9 @@
     <td><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.uniqID }}</a></td>
     <td><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.name }}</a></td>
     <td>{{ episode.description }}</td>
+    <td>
+        {{ episode.firstRanAt|date('H:i d.m.Y')}}
+    </td>
 </tr>
 {% endfor %}
 </table>

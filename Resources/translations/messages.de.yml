@@ -63,3 +63,6 @@ okto_media_episode_tags_header:             "Schlagwörter"
 okto_media.keychain_import_series_episodes_header:  "Episoden"
 okto_media.keychain_import_series_episode:          '<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Importieren'
 okto_media.keychain_import_series_episode_overwrite: '<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Überschreiben'
+
+# Okto/MediaBundle/Resources/views/Series/paginationEpisodes.html.twig
+okto_media.series_episodepagination_header_firstRan:    "Erstausstrahlung"
