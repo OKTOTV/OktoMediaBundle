@@ -18,7 +18,7 @@ class SeriesImportListener {
     {
         $this->job_service->addJob(
             "Okto\MediaBundle\Model\ImportSeriesJob",
-            ['uniqID' => $event->getUniqID()]
+            $event->getArgs()
         );
     }
 }

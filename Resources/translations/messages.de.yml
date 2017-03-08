@@ -58,3 +58,8 @@ okto_media.new_episode_for_series_cancel:  '<span class="glyphicon glyphicon-arr
 
 ## Episode/show.html.twig
 okto_media_episode_tags_header:             "Schlagwörter"
+
+# Okto/MediaBundle/Resources/views/Keychain/showSeries.html.twig
+okto_media.keychain_import_series_episodes_header:  "Episoden"
+okto_media.keychain_import_series_episode:          '<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Importieren'
+okto_media.keychain_import_series_episode_overwrite: '<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Überschreiben'
