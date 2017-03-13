@@ -84,7 +84,10 @@ class Episode extends BaseEpisode
         if (parent::getPosterframe() || !$fallback) {
             return parent::getPosterframe();
         }
-        return $this->series->getPosterframe();
+        if ($this->series) {
+            return $this->series->getPosterframe();
+        }
+        return null;
     }
 
     /**

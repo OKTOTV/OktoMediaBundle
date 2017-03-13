@@ -17,7 +17,7 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
         $this->logbook->info('okto_media.start_episode_import', [], $this->args['uniqID']);
         $this->media_service = $this->getContainer()->get('oktolab_media');
         $episode = $this->media_service->getEpisode($this->args['uniqID']);
-        if ($this->args['overwrite']) {
+        if (filter_var($this->args['overwrite'], FILTER_VALIDATE_BOOLEAN)) {
             $serializing_schema = $this->getContainer()->getParameter('oktolab_media.serializing_schema');
             if ($serializing_schema) {
                 $response = $this->media_service->getResponse(
