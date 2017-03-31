@@ -47,7 +47,10 @@ class EpisodeType extends AbstractType
             )
 
             ->add('isActive', CheckboxType::class,
-                ['label' => 'oktolab_media.isActive_label']
+                [
+                    'label' => 'oktolab_media.isActive_label',
+                    'required' => false
+                ]
             )
 
             ->add('onlineStart', DateTimeType::class,
