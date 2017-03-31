@@ -33,7 +33,10 @@ class EpisodeType extends AbstractType
     {
         $builder
             ->add('name', TextType::class,
-                ['label' => 'oktolab_media.name_label']
+                [
+                    'label' => 'oktolab_media.name_label',
+                    'required' => false
+                ]
             )
 
             ->add('description', TextareaType::class,
