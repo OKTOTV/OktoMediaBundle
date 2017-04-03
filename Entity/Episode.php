@@ -15,12 +15,6 @@ use Oktolab\MediaBundle\Entity\Episode as BaseEpisode;
 class Episode extends BaseEpisode
 {
     /**
-     *
-     * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\Media", mappedBy="episode", cascade={"remove"})
-     */
-    protected $media;
-
-    /**
     * @JMS\Expose
     * @JMS\Groups({"okto"})
     * @JMS\Type("Okto\MediaBundle\Entity\Series")
@@ -88,44 +82,6 @@ class Episode extends BaseEpisode
             return $this->series->getPosterframe();
         }
         return null;
-    }
-
-    /**
-     * Add media
-     *
-     * @param \Oktolab\MediaBundle\Entity\Media $media
-     * @return Episode
-     */
-    public function addMedia($media)
-    {
-        $this->media[] = $media;
-        $media->setEpisode($this);
-        return $this;
-    }
-
-    public function setMedia($media)
-    {
-        $this->media = $media;
-    }
-
-    /**
-     * Remove media
-     *
-     * @param \Oktolab\MediaBundle\Entity\Media $media
-     */
-    public function removeMedia($media)
-    {
-        $this->media->removeElement($media);
-    }
-
-    /**
-     * Get media
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMedia()
-    {
-        return $this->media;
     }
 
     /**
