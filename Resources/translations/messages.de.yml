@@ -54,7 +54,7 @@ okto_media.series_tag_edit_cancel_button:   '<span class="glyphicon glyphicon-ar
 
 # newEpisode.html.twig
 okto_media.new_episode_for_series_cancel:  '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Sendereihe'
-
+okto_media.series_add_new_episode: '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neue Episode'
 
 ## Episode/show.html.twig
 okto_media_episode_tags_header:             "Schlagwörter"

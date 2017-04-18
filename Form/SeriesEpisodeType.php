@@ -30,7 +30,10 @@ class SeriesEpisodeType extends AbstractType
     {
         $builder
             ->add('name', TextType::class,
-                ['label' => 'oktolab_media.name_label']
+                [
+                    'label' => 'oktolab_media.name_label',
+                    'required' => false
+                ]
             )
 
             ->add('description', TextareaType::class,
@@ -44,7 +47,10 @@ class SeriesEpisodeType extends AbstractType
             )
 
             ->add('isActive', CheckboxType::class,
-                ['label' => 'oktolab_media.isActive_label']
+                [
+                    'label' => 'oktolab_media.isActive_label',
+                    'required' => false
+                ]
             )
 
             ->add('onlineStart', DateTimeType::class,
@@ -66,7 +72,7 @@ class SeriesEpisodeType extends AbstractType
                 ]
             )
 
-            ->add('firstranAt', DateTimeType::class,
+            ->add('firstRanAt', DateTimeType::class,
                 [
                     'widget' => 'single_text',
                     'placeholder' => 'oktolab_media.firstRanAt_placeholder',

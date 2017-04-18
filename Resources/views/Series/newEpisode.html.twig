@@ -16,6 +16,7 @@
         {{ form_row(form.description) }}
         {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.video, 'adapter': 'video'} %}
         {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.posterframe, 'adapter': 'posterframe'} %}
+        {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.firstRanAt} %}
         {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineStart} %}
         {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineEnd} %}
         {% include "OktoMediaBundle::Tag/widget.html.twig" with {'widget': form.tags} %}
@@ -31,20 +32,30 @@
     <script src="{{ asset('bundles/bprsstyle/js/typeahead.js') }}"></script>
     <script type="text/javascript">
         $(document).ready( function(){
-            $('#oktolab_mediabundle_episode_onlineStart_picker').datetimepicker({
+            $('#oktolab_mediabundle_series_episode_onlineStart_picker').datetimepicker({
                 locale: 'de',
                 // format: "DD.MM.YYYY hh:mm",
-                date: moment($('#oktolab_mediabundle_episode_onlineStart_picker').children(':input').val()),
+                date: moment($('#oktolab_mediabundle_series_episode_onlineStart_picker').children(':input').val()),
                 useCurrent: true,
                 calendarWeeks: true,
                 allowInputToggle: true,
                 showTodayButton: true
             });
 
-            $('#oktolab_mediabundle_episode_onlineEnd_picker').datetimepicker({
+            $('#oktolab_mediabundle_series_episode_onlineEnd_picker').datetimepicker({
                 locale: 'de',
                 // format: "DD.MM.YYYY hh:mm",
-                date: moment($('#oktolab_mediabundle_episode_onlineEnd_picker').children(':input').val()),
+                date: moment($('#oktolab_mediabundle_series_episode_onlineEnd_picker').children(':input').val()),
+                useCurrent: true,
+                calendarWeeks: true,
+                allowInputToggle: true,
+                showTodayButton: true
+            });
+
+            $('#oktolab_mediabundle_series_episode_firstRanAt_picker').datetimepicker({
+                locale: 'de',
+                // format: "DD.MM.YYYY hh:mm",
+                date: moment($('#oktolab_mediabundle_series_episode_firstRanAt_picker').children(':input').val()),
                 useCurrent: true,
                 calendarWeeks: true,
                 allowInputToggle: true,
