@@ -74,78 +74,38 @@ class MediaService {
     {
         switch ($state) {
             case $this::SERIES_STATE_ALL_ACTIVE:
-                // $repo = $this->getOktolabMediaService()->getEpisodeRepo();
-                // $episodes = $repo->findEpisodesForSeries($series->getUniqID(), true, $this->episode_class)->iterate();
-                $flusher = 0;
-                // while (($row = $episodes->next()) !== false) {
-                //     die(var_dump($row));
-                // }
-                foreach ($series->getEpisodes() as $episode) {
-                    $episode->setIsActive(true);
-                    $this->em->persist($episode);
-                    $flusher++;
-                    if ($flusher > 20) {
-                        $this->em->flush();
-                        $this->em->clear();
-                    }
-                }
-
-                $series->setIsActive(true);
-                $this->em->persist($series);
-                $this->em->flush();
+                $this->setState($series, true, true);
                 break;
             case $this::SERIES_STATE_ALL_INACTIVE:
-                $flusher = 0;
-                foreach ($series->getEpisodes() as $episode) {
-                    $episode->setIsActive(false);
-                    $this->em->persist($episode);
-                    $flusher++;
-                    if ($flusher > 20) {
-                        $this->em->flush();
-                        $this->em->clear();
-                    }
-                }
-
-                $series->setIsActive(false);
-                $this->em->persist($series);
-                $this->em->flush();
+                $this->setState($series, false, false);
                 break;
             case $this::SERIES_STATE_SERIES_ACTIVE_ONLY:
-                $flusher = 0;
-                foreach ($series->getEpisodes() as $episode) {
-                    $episode->setIsActive(false);
-                    $this->em->persist($episode);
-                    $flusher++;
-                    if ($flusher > 20) {
-                        $this->em->flush();
-                        $this->em->clear();
-                    }
-                }
-
-                $series->setIsActive(true);
-                $this->em->persist($series);
-                $this->em->flush();
+                $this->setState($series, true, false);
                 break;
             case $this::SERIES_STATE_EPISODES_ACTIVE_ONLY:
-                $flusher = 0;
-                foreach ($series->getEpisodes() as $episode) {
-                    $episode->setIsActive(true);
-                    $this->em->persist($episode);
-                    $flusher++;
-                    if ($flusher > 20) {
-                        $this->em->flush();
-                        $this->em->clear();
-                    }
-                }
-
-                $series->setIsActive(false);
-                $this->em->persist($series);
-                $this->em->flush();
+                $this->setState($series, false, true);
                 break;
             default:
-                # code...
                 break;
         }
+    }
+
+    private function setState($series, $series_active = true, $episode_active = true)
+    {
+        $flusher = 0;
+        foreach ($series->getEpisodes() as $episode) {
+            $episode->setIsActive($episode_active);
+            $this->em->persist($episode);
+            $flusher++;
+            if ($flusher > 20) {
+                $this->em->flush();
+                $this->em->clear($episode);
+            }
+        }
+
+        $series->setIsActive($series_active);
+        $this->em->persist($series);
+        $this->em->flush();
     }
 }
 

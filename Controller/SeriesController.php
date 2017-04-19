@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Okto\MediaBundle\Form\EpisodeType;
 use Okto\MediaBundle\Form\SeriesUserType;
 use Okto\MediaBundle\Form\SeriesTagType;
@@ -18,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * @Route("/backend/oktolab_media/series")
- * @ Security("")
+ * @ Security("has_role('ROLE_OKTOLAB_MEDIA_READ')")
  */
 class SeriesController extends BaseController
 {
