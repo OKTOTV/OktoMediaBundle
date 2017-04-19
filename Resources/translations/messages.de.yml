@@ -66,3 +66,15 @@ okto_media.keychain_import_series_episode_overwrite: '<span class="glyphicon gly
 
 # Okto/MediaBundle/Resources/views/Series/paginationEpisodes.html.twig
 okto_media.series_episodepagination_header_firstRan:    "Erstausstrahlung"
+
+# Okto/MediaBundle/Model/MediaService
+okto_media_series_state_transchoice:            "{10} Alles aktiv schalten|{20} Alles inaktiv schalten|{30} Sendereihe aktiv, Episoden inaktiv schalten|{40} Sendereihe inaktiv, Episoden aktiv schalten"
+
+# Okto/MediaBundle/Resources/Series/show.html.twig
+okto_media.show_series_set_state:               '<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Status setzen'
+
+# Okto/MediaBundle/Resources/Series/setActive.html.twig
+okto_media.series_state_header:                 "Sendereihenstatus"
+okto_media.series_state_cancel:                 "Abbrechen"
+okto_media.set_series_state_button:             '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Status setzen'
+okto_media.success_set_state:                   "Status erfolgreich gesetzt"

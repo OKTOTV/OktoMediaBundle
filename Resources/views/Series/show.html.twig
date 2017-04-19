@@ -8,7 +8,16 @@
     <div class="page-header">
         <h1>{{ series.name }}</h1>
         <a href="{{ path('oktolab_series_edit', { 'series': series.uniqID }) }}" class="btn btn-default">{{ 'oktolab_media.series_edit_button'|trans|raw }}</a>
-        <li><a href="{{ path('oktolab_media_export_series', {'series': series.uniqID}) }}">{{ 'oktolab_media.series_export_button'|trans|raw }}</a></li>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ 'oktolab_media.series_show_actions'|trans|raw }}
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('oktolab_media_export_series', {'series': series.uniqID}) }}">
+                    {{ 'oktolab_media.series_export_button'|trans|raw }}
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="row">
         <div class="col-md-7">

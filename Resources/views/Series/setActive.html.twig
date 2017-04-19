@@ -1,0 +1,16 @@
+{% extends "BprsStyleBundle::layout.html.twig" %}
+
+{% block nav_head%}
+    {% include 'BprsStyleBundle::menu.html.twig' with {'selected': 'oktolab_media', 'dropdown': ''} %}
+{% endblock %}
+
+{% block body_main %}
+    <div class="page-header">
+        <h1>{{ 'okto_media.series_state_header'|trans }}</h1>
+        <a href="{{ path('oktolab_series_show', {'series': series.uniqID}) }}" class="btn btn-default">{{ 'okto_media.series_state_cancel'|trans|raw }}</a>
+    </div>
+
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}

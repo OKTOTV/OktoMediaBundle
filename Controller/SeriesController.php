@@ -13,10 +13,12 @@ use Okto\MediaBundle\Form\EpisodeType;
 use Okto\MediaBundle\Form\SeriesUserType;
 use Okto\MediaBundle\Form\SeriesTagType;
 use Okto\MediaBundle\Form\SeriesEpisodeType;
+use Okto\MediaBundle\Form\SeriesStateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * @Route("/backend/oktolab_media/series")
+ * @ Security("")
  */
 class SeriesController extends BaseController
 {
@@ -71,7 +73,14 @@ class SeriesController extends BaseController
     {
         $series = $this->get('oktolab_media')->getSeries($series);
         $form = $this->createForm(SeriesUserType::class, $series);
-        $form->add('submit', SubmitType::class, ['label' => 'flux2.series_edit_user_button', 'attr' => ['class' => 'btn btn-default']]);
+        $form->add(
+            'submit',
+            SubmitType::class,
+            [
+                'label' => 'flux2.series_edit_user_button',
+                'attr' => ['class' => 'btn btn-default']
+            ]
+        );
 
         if ($request->getMethod() == "POST") {
             $form->handleRequest($request);
@@ -97,7 +106,14 @@ class SeriesController extends BaseController
     {
         $series = $this->get('oktolab_media')->getSeries($series);
         $form = $this->createForm(SeriesTagType::class, $series);
-        $form->add('submit', SubmitType::class, ['label' => 'okto_media.series_edit_tag_button', 'attr' => ['class' => 'btn btn-primary']]);
+        $form->add(
+            'submit',
+            SubmitType::class,
+            [
+                'label' => 'okto_media.series_edit_tag_button',
+                'attr' => ['class' => 'btn btn-primary']
+            ]
+        );
 
         if ($request->getMethod() == "POST") {
             $form->handleRequest($request);
@@ -105,10 +121,22 @@ class SeriesController extends BaseController
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($series);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('success', 'okto_media.series_edit_tag_success');
-                return $this->redirect($this->generateUrl('oktolab_series_show', ['series' => $series->getUniqID()]));
+                $this->get('session')->getFlashBag()->add(
+                    'success',
+                    'okto_media.series_edit_tag_success'
+                );
+                return $this->redirect(
+                    $this->generateUrl(
+                        'oktolab_series_show',
+                        ['series' => $series->getUniqID()]
+                    )
+                );
+
             } else {
-                $this->get('session')->getFlashBag()->add('error', 'okto_media.series_edit_tag_error');
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    'okto_media.series_edit_tag_error'
+                );
             }
         }
         return ['form' => $form->createView(), 'series' => $series];
@@ -159,20 +187,71 @@ class SeriesController extends BaseController
                     $em->persist($episode);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_edit_episode');
-                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                    return $this->redirect(
+                        $this->generateUrl(
+                            'oktolab_episode_show',
+                            ['uniqID' => $episode->getUniqID()]
+                        )
+                    );
                 } elseif ($form->get('delete')->isClicked()) {
                     $em->remove($episode);
                     $em->flush();
-                    $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_delete_episode');
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'oktolab_media.success_delete_episode'
+                    );
                     return $this->redirect($this->generateUrl('backend'));
                 } else { //???
-                    $this->get('session')->getFlashBag()->add('success', 'oktothek.info_edit_episode_unknown_button');
-                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'oktothek.info_edit_episode_unknown_button'
+                    );
+                    return $this->redirect(
+                        $this->generateUrl(
+                            'oktolab_episode_show',
+                            ['uniqID' => $episode->getUniqID()]
+                        )
+                    );
                 }
             }
             $this->get('session')->getFlashBag()->add('error', 'oktothek.error_edit_episode');
         }
 
         return ['form' => $form->createView()];
+    }
+
+    /**
+     * @Route("/{uniqID}/set_state", name="okto_media_set_state")
+     * @Template()
+     */
+    public function setActiveAction(Request $request, $uniqID)
+    {
+        $mediaService = $this->get('okto_media');
+        $series = $mediaService->getSeries($uniqID);
+        $form = $this->createForm(SeriesStateType::class);
+        $form->add(
+            'sumbit',
+            SubmitType::class,
+            [
+                'label' =>'okto_media.set_series_state_button',
+                'attr' => ['class' => 'btn btn-primary']
+            ]
+        );
+
+        if ($request->getMethod = "POST") { //sends form
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $mediaService->setSeriesState(
+                    $series,
+                    $form->get('state')->getData()
+                );
+                $this->get('session')->getFlashBag()->add('success', 'okto_media.success_set_state');
+                return $this->redirect(
+                    $this->generateUrl('oktolab_series_show', ['series' => $uniqID])
+                );
+            }
+        }
+
+        return ['form' => $form->createView(), 'series' => $series];
     }
 }

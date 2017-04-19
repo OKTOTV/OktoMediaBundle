@@ -63,6 +63,12 @@ services:
         tags:
             - { name: form.type }
 
+    okto_media.series_state.type:
+        class: Okto\MediaBundle\Form\SeriesStateType
+        arguments: [ "@translator" ]
+        tags:
+            - { name: form.type }
+
     okto_media:
         class: Okto\MediaBundle\Model\MediaService
-        arguments:  [ "@oktolab_media", "@oktolab_media_helper"]
+        arguments:  [ "@oktolab_media", "@oktolab_media_helper", "@doctrine.orm.entity_manager"]
