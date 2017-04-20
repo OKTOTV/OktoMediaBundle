@@ -17,20 +17,6 @@ class EpisodeRepository extends BaseEpisodeRepository
         }
         return $query->getResult();
     }
-
-    public function findEpisodesForSeries($uniqID, $query_only = false, $episode_class = "OktoMediaBundle::Episode")
-    {
-        $query = $this->getEntityManager()->createQuery(
-                'SELECT e, p FROM '.$episode_class.' e LEFT JOIN e.posterframe p WHERE e.series = :uniqID'
-            );
-        $query->setParameter('uniqID', $uniqID);
-
-        if ($query_only) {
-            return $query;
-        }
-
-        return $query->getResult();
-    }
 }
 
 ?>
