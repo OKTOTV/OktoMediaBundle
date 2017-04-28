@@ -19,7 +19,7 @@ class Series extends BaseSeries
 {
     /**
     * @JMS\Expose
-    * @JMS\Groups({"oktolab","okto"})
+    * @JMS\Groups({"oktolab","okto", "search"})
     * @JMS\Type("array<Okto\MediaBundle\Entity\Episode>")
     * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\EpisodeInterface", mappedBy="series", cascade={"persist", "remove"})
     * @ORM\OrderBy({"onlineStart" = "DESC"})
@@ -71,6 +71,7 @@ class Series extends BaseSeries
     public function removeEpisode(\Oktolab\MediaBundle\Entity\Episode $episodes)
     {
         $this->episodes->removeElement($episodes);
+        $episodes->setSeries(null);
     }
 
     /**

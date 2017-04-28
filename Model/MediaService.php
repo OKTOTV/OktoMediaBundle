@@ -42,14 +42,12 @@ class MediaService {
         }
     }
 
+    /**
+     * @deprecated use createEpisode
+     */
     public function createEpisodeForSeries($uniqID)
     {
-        $series = $this->oktolab_media->getSeries($uniqID);
-        $episode = $this->oktolab_media->createEpisode();
-        $episode->setSeries($series);
-        $episode->setTags($series->getTags());
-
-        return $episode;
+        return $this->createEpisode($uniqID);
     }
 
     public function getOktolabMediaService()

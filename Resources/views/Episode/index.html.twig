@@ -57,7 +57,11 @@
                                 <dt>{{ 'oktolab_media.episode_index_uniqID'|trans }}</dt>
                                 <dd><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.uniqID }}</a></dd>
                                 <dt>{{ 'oktolab_media.episode_index_series_name'|trans }}</dt>
-                                <dd><a href="{{ path('oktolab_series_show', {'series': episode.series.uniqID}) }}">{{ episode.series.name }}</a></dd>
+                                <dd>
+                                    {% if episode.series is not empty %}
+                                        <a href="{{ path('oktolab_series_show', {'series': episode.series.uniqID}) }}">{{ episode.series.name }}</a>
+                                    {% endif %}
+                                </dd>
                                 <dt>{{ 'oktolab_media.episode_index_firstranAt'|trans }}</dt>
                                 <dd>{{ episode.firstRanAt|date('d.m.Y')}}</dd>
                                 <dt>{{ 'oktolab_media.episode_index_updatedAt'|trans }}</dt>
