@@ -8,6 +8,7 @@
 <ul class="nav nav-tabs">
     <li role="presentation"><a href="{{ path('oktolab_series') }}">{{ 'oktolab_media.series_index_header'|trans }}</a></li>
     <li role="presentation" class="active"><a href="{{ path('oktolab_episode_index') }}">{{ 'oktolab_media.episode_index_header'|trans }}</a></li>
+    <li role="presentation"><a href="{{ path('oktolab_media_index') }}">{{ 'oktolab_media.media_index_header'|trans }}</a></li>
 </ul>
 
     <div class="page-header">
@@ -33,6 +34,7 @@
             <li{% if episodes.isSorted('e.updatedAt') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.episode_index_updatedAt'|trans, 'e.updatedAt') }}</li>
             <li{% if episodes.isSorted('e.uniqID') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'UniqID', 'e.uniqID') }}</li>
             <li{% if episodes.isSorted('s.name') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'Series', 's.name') }}</li>
+            <li{% if episodes.isSorted('e.duration') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.episode_index_duration'|trans, 'e.duration') }}</li>
           </ul>
         </div>
     </div>
@@ -73,6 +75,12 @@
                                     {% else %}
                                         {{ episode.description|nl2br }}
                                     {% endif %}
+                                </dd>
+                                <dt>
+                                    {{ 'oktolab_media.episode_index_duration'|trans }}
+                                </dt>
+                                <dd>
+                                    {{ episode.duration|duration }}
                                 </dd>
                             </dl>
                         </div>
