@@ -52,6 +52,7 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
                 }
                 $episode->setSeries($series);
                 $this->importTags($episode, $remote_episode);
+                $this->setOnlineStart($episode, $remote_episode);
 
                 $em = $this->getContainer()->get('doctrine.orm.entity_manager');
                 $em->persist($episode);
@@ -136,6 +137,13 @@ class ImportEpisodeJob extends BprsContainerAwareJob {
             if (!$episode->getTags()->contains($localtag)) {
                 $episode->addTag($localtag);
             }
+        }
+    }
+
+    private function setOnlineStart($episode, $remote_episode)
+    {
+        if (!$episode->getOnlineStart()) {
+            $episode->setOnlineStart($remote_episode->getFirstranAt());
         }
     }
 }
