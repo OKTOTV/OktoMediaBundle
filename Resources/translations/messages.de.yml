@@ -58,6 +58,7 @@ okto_media.series_add_new_episode: '<span class="glyphicon glyphicon-plus" aria-
 
 ## Episode/show.html.twig
 okto_media_episode_tags_header:             "Schlagwörter"
+okto_media.set_currentposition_asposterframe: '<span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Aktuelles Bild als Posterframe verwenden'
 
 # Okto/MediaBundle/Resources/views/Keychain/showSeries.html.twig
 okto_media.keychain_import_series_episodes_header:  "Episoden"
