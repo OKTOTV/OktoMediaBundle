@@ -4,6 +4,7 @@ namespace Okto\MediaBundle\Controller;
 
 use Oktolab\MediaBundle\Controller\EpisodeController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -96,5 +97,15 @@ class EpisodeController extends BaseController
         }
 
         return ['form' => $form->createView()];
+    }
+
+    /**
+     * @Route("/{uniqID}/extractPosterframe", name="oktolab_episode_extractposterframe")
+     * @Method({"GET"})
+     */
+    public function extractPosterframeAction(Request $request, $uniqID)
+    {
+        $this->get('okto_media')->addExtractPosterfameJob($uniqID, $request->query->get('position', 0));
+        return new Response();
     }
 }

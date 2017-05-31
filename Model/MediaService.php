@@ -11,12 +11,14 @@ class MediaService {
 
     private $oktolab_media;
     private $oktolab_media_helper;
+    private $jobService;
     private $em;
 
-    public function __construct($oktolab_media, $oktolab_media_helper, $em)
+    public function __construct($oktolab_media, $oktolab_media_helper, $em, $jobService)
     {
         $this->oktolab_media = $oktolab_media;
         $this->oktolab_media_helper = $oktolab_media_helper;
+        $this->jobService = $jobService;
         $this->em = $em;
     }
 
@@ -40,6 +42,14 @@ class MediaService {
             }
             $this->oktolab_media_helper->persistEpisode($episode);
         }
+    }
+
+    public function addExtractPosterfameJob($uniqID, $position)
+    {
+        $this->jobService->addJob(
+            "Okto\MediaBundle\Model\ExtractPosterframeJob",
+            ['uniqID' => $uniqID, 'position' => $position]
+        );
     }
 
     /**

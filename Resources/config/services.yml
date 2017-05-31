@@ -71,4 +71,4 @@ services:
 
     okto_media:
         class: Okto\MediaBundle\Model\MediaService
-        arguments:  [ "@oktolab_media", "@oktolab_media_helper", "@doctrine.orm.entity_manager"]
+        arguments:  [ "@oktolab_media", "@oktolab_media_helper", "@doctrine.orm.entity_manager", "@bprs_jobservice"]
