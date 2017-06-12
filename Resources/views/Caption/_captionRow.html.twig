@@ -1,0 +1,44 @@
+{% spaceless %}
+<div class="list-group-item caption-item" data-number="__number__" data-from="__from__" data-from-raw="__fromraw__" data-to="__to__" data-to-raw="__toraw__" data-caption="__caption__">
+    <div class="row">
+        <div class="col-lg-3 col-md-5 col-xs-5">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default update-from-back" type="button"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                </span>
+                <input type="text" class="form-control caption-update-from" placeholder="00:00:00.000" value="__from__">
+                <span class="input-group-btn">
+                    <button class="btn btn-default update-from-forward" type="button"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                </span>
+            </div>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default update-to-back" type="button"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                </span>
+                <input type="text" class="form-control caption-update-to" placeholder="00:00:00.000" value="__to__">
+                <span class="input-group-btn">
+                    <button class="btn btn-default update-to-forward" type="button"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-7 col-xs-7">
+            <div class="row">
+                <div class="col-md-7 caption-text" data-from-raw="__fromraw__">__caption__</div>
+                <div class="col-md-5">
+                    <div class="btn-group" role="toolbar" aria-label="player controls">
+                        <div class="btn remove" role="group" aria-label="remove caption">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </div>
+                        <div class="btn move-up" role="group" aria-label="move caption up">
+                            <span class="glyphicon glyphicon-chevron-up"></span>
+                        </div>
+                        <div class="btn move-down" role="group" aria-label="move caption down">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endspaceless %}

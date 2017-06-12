@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('tag_class')->defaultValue('Okto\MediaBundle\Entity\Tag')->end()
                 ->scalarNode('user_class')->defaultValue('AppBundle\Entity\User')->end()
+                ->scalarNode('default_queue')->defaultValue('okto_media')->end()
             ->end();
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

@@ -106,6 +106,7 @@ class EpisodeController extends BaseController
     public function extractPosterframeAction(Request $request, $uniqID)
     {
         $this->get('okto_media')->addExtractPosterfameJob($uniqID, $request->query->get('position', 0));
-        return new Response();
+        $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_extractPosterframe_job');
+        return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $uniqID]));
     }
 }

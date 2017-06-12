@@ -1,0 +1,456 @@
+{% extends "BprsStyleBundle::layout.html.twig" %}
+
+{% block nav_head%}
+    {% include 'BprsStyleBundle::menu.html.twig' with {'selected': 'oktolab_media', 'dropdown': ''} %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+{% block menu %}
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="page-header">
+        <h1>{{ 'okto_media.caption_editor_header'|trans }}</h1>
+        <a href="{{ path('oktolab_caption_show', {'caption': form.vars.value.id }) }}" class="btn btn-default">{{ 'okto_media.caption_editor_close'|trans|raw }}</a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        {{ 'okto_media.caption_show_help_modal'|trans }}
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            {{ 'okto_media.caption_modal_header'|trans }}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            {{ 'okto_media.caption_modal_body'|trans|markdown }}
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            {{ 'okto_media.caption_modal_close'|trans }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <video id="player">
+            </video>
+        </div>
+        <div class="col-md-8">
+            <div class="btn-group" role="toolbar" aria-label="player controls">
+                <div class="btn back" role="group" aria-label="5 seconds back">
+                    <span class="glyphicon glyphicon-backward"></span>
+                </div>
+                <div class="btn playpause" role="group" aria-label="play/pause">
+                    <span class="glyphicon glyphicon-pause"></span>
+                    <span class="glyphicon glyphicon-play"></span>
+                </div>
+                <div class="btn forward" role="group" aria-label="5 seconds forward">
+                    <span class="glyphicon glyphicon-forward"></span>
+                </div>
+                <div class="btn save" role="group" aria-label="save changes">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>
+                </div>
+                <div class="btn refresh" role="group" aria-label="refresh player">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </div>
+                <div class="btn sort" role="group" aria-label="refresh player">
+                    <span class="glyphicon glyphicon-sort"></span>
+                </div>
+                <div class="btn time" role="group" aria-label="current time">
+                    -- / --
+                </div>
+            </div>
+
+            <div class="input-group">
+              <input type="text" class="form-control add-caption-text" placeholder="Deine Caption" autofocus>
+              <span class="input-group-btn">
+                <button class="btn btn-default add-caption" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+              </span>
+            </div>
+
+            <div class="list-group captions" style="height: 500px; overflow: auto;">
+            </div>
+        </div>
+    </div>
+    <div class="row hidden">
+        {{ form(form) }}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ playerUrl()|raw }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var initPlayer = function() {
+                player = jwplayer("player");
+                player.setup({
+                    playbackRateControls: true,
+                    sources: [{% for media in caption.episode.media %}{file: "{{ media.asset|path }}", label: "{{ media.quality }}", type: "mp4"}{% if not loop.last %},{% endif %}{% endfor %}],
+                    tracks: [
+                        {
+                            file: "{{ url('oktolab_media_caption_for_episode', {'uniqID': caption.uniqID}) }}",
+                            label: "{{ caption.label }}",
+                            kind: "{{ caption.kind }}"
+                        }
+                    ],
+                    image: "{{ caption.episode.posterframe|thumb(720,1280) }}"
+                }).on('time', function(event) {
+                    highlightCaption(event.position);
+                    setTime(event);
+                });
+            }
+
+            initCaptions(); // load caption to javascript and userfriendly list
+            initPlayer();   // init player so users can see the video
+
+            var setTime = function(event) {
+                $('.time').html(toHHMMSS(event.position) + " / " + toHHMMSS(event.duration));
+            }
+
+            var highlightCaption = function(position) {
+                $('.caption-item').each(function(index) {
+                    if ($(this).attr('data-from-raw') <= position && $(this).attr('data-to-raw') >= position) {
+                        $(this).addClass('list-group-item-info');
+                    } else {
+                        if ($(this).hasClass('list-group-item-info')) {
+                            $(this).removeClass('list-group-item-info');
+                        }
+                    }
+                });
+            }
+
+            var addCaption = function() {
+                if ($('.add-caption-text').val().length) {
+                    var caption = captionPlaceholder();
+                    var startposition = player.getPosition() - ($('.add-caption-text').val().length * 0.4);
+                    if (startposition < 0) {
+                        startposition = "00:00:00.000";
+                    }
+                    var start = toHHMMSS(startposition); // calculate start back the length of a word
+                    var end = toHHMMSS(player.getPosition()); // use current player position for end of capture part
+                    caption = caption.replace(/__number__/g, $('.captions').length);
+                    caption = caption.replace(/__from__/g, start);
+                    caption = caption.replace(/__fromraw__/g, startposition);
+                    caption = caption.replace(/__toraw__/g, player.getPosition());
+                    caption = caption.replace(/__to__/g, end);
+                    caption = caption.replace(/__caption__/g, $('.add-caption-text').val());
+                    // $('.captions').append(caption);
+                    insertCaption(caption);
+                    $('.add-caption-text').val('');
+                }
+            }
+
+            var insertCaption = function(caption) {
+                var searching = true;
+                $('.caption-item').each(function(index) {
+                    if (searching) {
+                        if ($(this).attr('data-from-raw') >= player.getPosition()) {
+                            $(this).before(caption)
+                            searching = false;
+                        }
+                    }
+                });
+                if (searching) {
+                    $('.captions').append(caption);
+                }
+            }
+
+            var skipBack = function() {
+                var pos = player.getPosition() - 5;
+                if (pos < 0) {
+                    pos = 0;
+                }
+                player.seek(pos);
+            }
+
+            var skipForward = function() {
+                var pos = player.getPosition() + 5;
+
+                player.seek(pos);
+            }
+
+            var pausePlay = function() {
+
+                if (player.getState() == "paused" || player.getState() == "idle") {
+                    player.play();
+                }
+                if (player.getState() == "buffering" || player.getState() == "playing") {
+                    player.pause();
+                }
+            }
+
+            $('.add-caption').click(function(e) {
+                addCaption();
+                parseCaptions();
+            });
+
+            $('.back').click(function(e) {
+                skipBack();
+            });
+
+            $('.forward').click(function(e) {
+                skipForward();
+            });
+
+            $('.playpause').click(function(e) {
+                e.preventDefault();
+                pausePlay();
+            });
+
+            $('.save').click(function(e) {
+                e.preventDefault();
+                parseCaptions();
+            })
+
+            $('.refresh').click(function(e) {
+                e.preventDefault();
+                var time = player.getPosition();
+                player.remove();
+                initPlayer();
+                player.seek(time);
+            });
+
+            $('.sort').click(function(e) {
+                var captions = $('.captions');
+                var captionitems = captions.children('.caption-item').get();
+                captionitems.sort(function(a, b) {
+                   var compA = parseFloat($(a).attr('data-from-raw'));
+                   var compB = parseFloat($(b).attr('data-from-raw'));
+                   return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+                })
+                $.each(captionitems, function(idx, itm) { captions.append(itm); });
+                parseCaptions();
+            });
+
+            $('.add-caption-text').on('input', function(e) {
+                if ($(this).val().length > 80) {
+                    if (!$(this).hasClass('label-danger')) {
+                        $(this).addClass('label-danger');
+                    }
+                } else {
+                    $(this).removeClass('label-danger');
+                }
+            });
+
+            $('.caption-update-from').on('input', function(e) {
+                $(this).parents('.caption-item').attr('data-from', $(this).val());
+                $(this).parents('.caption-item').attr('data-from-raw', toSSMM($(this).val()));
+                $(this).parents('.caption-item').find('.caption-text').attr('data-from-raw', toSSMM($(this).val()));
+                if ($(this).val().length == 12) {
+                    parseCaptions();
+                }
+            });
+
+            $('.caption-update-to').on('input', function(e) {
+                $(this).parents('.caption-item').attr('data-to', $(this).val());
+                $(this).parents('.caption-item').attr('data-to-raw', toSSMM($(this).val()));
+                if ($(this).val().length == 12) {
+                    parseCaptions();
+                }
+            });
+
+            $(document).keydown(function(e) {
+                if (e.shiftKey && e.which == 37) { //left arrow back
+                    e.preventDefault();
+                    skipBack();
+                }
+
+                if (e.shiftKey && e.which == 39) {//right arrow forward
+                    e.preventDefault();
+                    skipForward();
+                }
+                if (e.shiftKey && e.which == 32) {// space pause/play
+                    e.preventDefault();
+                    pausePlay();
+                }
+                if (e.which == 13) { // enter, add caption
+                    addCaption();
+                    parseCaptions();
+                }
+            });
+
+            $('.time').on("click", function(event) {
+                // var video = document.getElementById('player');
+                // console.log(document.querySelector(".jw-video"));
+                var video = document.querySelector(".jw-video");
+                if (video.webkitSupportsPresentationMode && typeof video.webkitSetPresentationMode === "function") {
+                    console.log(video.webkitPresentationMode)
+                    video.webkitSetPresentationMode(video.webkitPresentationMode === "picture-in-picture" ? "inline" : "picture-in-picture");
+                }
+                // document.querySelector(".jw-video").webkitSetPresentationMode("picture-in-picture");
+            });
+        });
+
+        var player;
+        var parseCaptions = function() {
+            var webvttcaption = "WEBVTT\n\n";
+            $('.caption-item').each(function(index) {
+                webvttcaption = webvttcaption+$(this).attr('data-from') + " --> " + $(this).attr('data-to')+"\n"+$(this).data('caption')+"\n\n";
+            });
+            $('#oktolab_mediabundle_caption_content').val(webvttcaption);
+
+            // update captions on server
+            saveCaptions();
+        }
+
+        var saveCaptions = function () {
+            $.ajax({
+                url: '{{ url('oktolab_capiton_editor', {'uniqID': caption.uniqID})}}',
+                type: 'post',
+                dataType: 'json',
+                data: $('form[name="oktolab_mediabundle_caption"]').serialize(),
+                success: function(data) {
+                },
+                statuscode: {
+                    404: function() { console.log('not found')},
+                    500: function() { console.log('error')}
+                }
+            });
+        }
+
+        var initCaptions = function() {
+            var webttcaption = $('#oktolab_mediabundle_caption_content').val();
+            var lines = webttcaption.split("\n\n");
+            for(var i  in lines){
+                if (i > 0) { // skip WEBVTT line(s)
+                    var parts = lines[i].split('\n');
+                    var from = parts[0].slice(0,12);
+                    var to = parts[0].slice(17, 30);
+
+                    var caption = captionPlaceholder();
+                    caption = caption.replace(/__number__/g, $('.captions').length);
+                    caption = caption.replace(/__from__/g, from);
+                    caption = caption.replace(/__fromraw__/g, toSSMM(from));
+                    caption = caption.replace(/__toraw__/g, toSSMM(to));
+                    caption = caption.replace(/__to__/g, to);
+                    caption = caption.replace(/__caption__/g, parts[1]);
+
+                    $('.captions').append(caption);
+                }
+            }
+        }
+
+        var toHHMMSS = function (position) {
+            var stamp = position.toString().split('.');
+            var sec_num = parseInt(stamp[0], 10); // don't forget the second param
+            var hours   = Math.floor(sec_num / 3600);
+            var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+            var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+            if (hours   < 10) {hours   = "0"+hours;}
+            if (minutes < 10) {minutes = "0"+minutes;}
+            if (seconds < 10) {seconds = "0"+seconds;}
+            return hours+':'+minutes+':'+seconds+'.'+stamp[1].slice(0,3);
+        }
+
+        var toSSMM = function (timestamp) {
+            var parts = timestamp.split(':');
+            return parts[0] * 3600 + parts[1] * 60 + parseFloat(parts[2]);
+        }
+
+        var captionPlaceholder = function() {
+            return '{% include "OktoMediaBundle::Caption/_captionRow.html.twig" %}';
+        }
+
+        // caption item actions
+        //----------------------
+        $(document).on('click', '.caption-text', function(e) {
+            e.preventDefault();
+            player.seek($(this).data('from-raw'));
+        });
+
+        $(document).on('click', '.remove', function(e) {
+            e.preventDefault();
+            var item = $(this).parents('.caption-item');
+            item.hide('slow', function() {
+                item.remove();
+                parseCaptions();
+            });
+        });
+
+        $(document).on('click', '.move-up', function(e) {
+            e.preventDefault();
+            var item = $(this).parents('.caption-item');
+            if (item.prev().length) {
+                item.slideUp(function() {
+                    item.insertBefore(item.prev()).slideDown(function() {
+                        parseCaptions();
+                    });
+                });
+            }
+        });
+
+        $(document).on('click', '.move-down', function(e) {
+            e.preventDefault();
+            var item = $(this).parents('.caption-item');
+            if (item.next().length) {
+                item.slideUp(function() {
+                    item.insertAfter(item.next()).slideDown(function() {
+                        parseCaptions();
+                    });
+                });
+            }
+        });
+
+        $(document).on('click', '.update-from-back', function(e) {
+            var captionitem = $(this).parents('.caption-item');
+            var time = (toSSMM(captionitem.find('.caption-update-from').val()) - 1).toFixed(3);
+            if (time < 0) { time = 0.001 };
+            captionitem.find('.caption-update-from').val(toHHMMSS(time));
+            captionitem.attr('data-from', toHHMMSS(time));
+            captionitem.attr('data-from-raw', time);
+            captionitem.find('.caption-text').attr('data-from-raw', time);
+            parseCaptions();
+        });
+
+        $(document).on('click', '.update-from-forward', function(e) {
+            var captionitem = $(this).parents('.caption-item');
+            var time = (parseFloat(toSSMM(captionitem.find('.caption-update-from').val())) + 1).toFixed(3);
+            captionitem.find('.caption-update-from').val(toHHMMSS(time));
+            captionitem.attr('data-from', toHHMMSS(time));
+            captionitem.attr('data-from-raw', time);
+            captionitem.find('.caption-text').attr('data-from-raw', time);
+            parseCaptions();
+        });
+
+        $(document).on('click', '.update-to-back', function(e) {
+            var captionitem = $(this).parents('.caption-item');
+            var time = (toSSMM(captionitem.find('.caption-update-to').val()) - 1).toFixed(3);
+            if (time < 0) { time = 0.001 };
+            console.log(time);
+            captionitem.find('.caption-update-to').val(toHHMMSS(time));
+            captionitem.attr('data-to', toHHMMSS(time));
+            captionitem.attr('data-to-raw', time);
+            parseCaptions();
+        });
+
+        $(document).on('click', '.update-to-forward', function(e) {
+            var captionitem = $(this).parents('.caption-item');
+            var time = (parseFloat(toSSMM(captionitem.find('.caption-update-to').val())) + 1).toFixed(3);
+            captionitem.find('.caption-update-to').val(toHHMMSS(time));
+            captionitem.attr('data-to', toHHMMSS(time));
+            captionitem.attr('data-to-raw', time);
+            parseCaptions();
+        });
+        // caption item actions end
+        //----------------------
+
+    </script>
+{% endblock %}

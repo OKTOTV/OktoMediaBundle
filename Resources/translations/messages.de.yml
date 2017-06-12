@@ -79,3 +79,39 @@ okto_media.series_state_header:                 "Sendereihenstatus"
 okto_media.series_state_cancel:                 "Abbrechen"
 okto_media.set_series_state_button:             '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Status setzen'
 okto_media.success_set_state:                   "Status erfolgreich gesetzt"
+
+# Okto/MediaBundle/Resources/Caption/show.html.twig
+okto_media.caption_dropdown_button:             'Aktionen <span class="caret"></span>'
+okto_media.caption_editor_button:               '<span class="glyphicon glyphicon-subtitles" aria-hidden="true"></span> Zum Untertiteleditor'
+
+# Okto/MediaBundle/Resources/Caption/captionEditor.html.twig
+okto_media.caption_editor_header:               "Caption Editor"
+okto_media.caption_editor_close:                "Editor schließen"
+okto_media.caption_show_help_modal:             "Hilfe einblenden"
+okto_media.caption_modal_header:                "Hilfe"
+okto_media.caption_modal_body:   |
+    ### Allgemein
+    Mit dem Editor und dem Player werden Untertitel im Format [WEBVTT](https://en.wikipedia.org/wiki/WebVTT) angefertigt.
+    Dazu muss einfach der Player an einer beliebigen Stelle pausiert und im <i>Deine Caption</i>
+    Feld der Text eingefügt werden (empfohlene Maximallänge: 80 Zeichen). Die genaue Start- und Endzeit kann mit den Pfeiltasten oder mit Tastatureingabe festgelegt werden.
+    <br />
+    ### Arbeiten
+    <span class="glyphicon glyphicon-backward"></span> Lässt den Player 5 Sekunden zurückspulen.<br />
+    <span class="glyphicon glyphicon-forward"></span> Lässt den Player 5 Sekunden vorspulen.<br />
+    <span class="glyphicon glyphicon-pause"></span><span class="glyphicon glyphicon-play"></span> Lässt den Player pausieren/abspielen.<br />
+    <span class="glyphicon glyphicon-floppy-disk"></span> Manuelles speichern. Es wird automatisch nach jeder Änderung gespeichert.<br />
+    <span class="glyphicon glyphicon-refresh"></span> Lädt die Änderungen am Untertitel in den Player.<br />
+    00:00:00.000 / 01:23:45.678 Zeigt die aktuelle / totale Zeit des Players.<br />
+    <br />
+    <span class="glyphicon glyphicon-trash"></span> Entfernt den Untertitel.<br />
+    <span class="glyphicon glyphicon-chevron-up"></span> Verschiebt den Untertitel nach oben.<br />
+    <span class="glyphicon glyphicon-chevron-down"></span> Verschiebt den Untertitel nach unten.<br />
+    Ein Klick auf den Untertiteltext lässt den Player an die Startzeit des Texts springen.
+    Während der Wiedergabe färbt sich der Untertitel blau solange er sichtbar ist.
+
+    ### Tastenkürzel
+    <kbd>Shift</kbd> + <kbd><span class="glyphicon glyphicon-arrow-left"></span></kbd> = 5 Sekunden zurück<br />
+    <kbd>Shift</kbd> + <kbd><span class="glyphicon glyphicon-arrow-right"></span></kbd> = 5 Sekunden voraus<br />
+    <kbd>Shift</kbd> + <kbd>Space</kbd> = Player pausieren/starten<br />
+
+okto_media.caption_modal_close:                 "Schließen"

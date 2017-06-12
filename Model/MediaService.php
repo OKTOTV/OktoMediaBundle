@@ -12,14 +12,16 @@ class MediaService {
     private $oktolab_media;
     private $oktolab_media_helper;
     private $jobService;
+    private $queue;
     private $em;
 
-    public function __construct($oktolab_media, $oktolab_media_helper, $em, $jobService)
+    public function __construct($oktolab_media, $oktolab_media_helper, $em, $jobService, $queue)
     {
         $this->oktolab_media = $oktolab_media;
         $this->oktolab_media_helper = $oktolab_media_helper;
         $this->jobService = $jobService;
         $this->em = $em;
+        $this->queue = $queue;
     }
 
     public function createEpisode($series_uniqID)
@@ -44,11 +46,16 @@ class MediaService {
         }
     }
 
-    public function addExtractPosterfameJob($uniqID, $position)
+    public function addExtractPosterfameJob($uniqID, $position, $queue = false)
     {
+        if (!$queue) {
+            $queue = $this->queue;
+        }
+
         $this->jobService->addJob(
             "Okto\MediaBundle\Model\ExtractPosterframeJob",
-            ['uniqID' => $uniqID, 'position' => $position]
+            ['uniqID' => $uniqID, 'position' => $position],
+            $queue
         );
     }
 
