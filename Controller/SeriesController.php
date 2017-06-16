@@ -179,6 +179,7 @@ class SeriesController extends BaseController
         $episode = $this->get('okto_media')->createEpisodeForSeries($uniqID);
         $form = $this->createForm(SeriesEpisodeType::class, $episode);
         $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.create_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
+        $form->add('submitAndEncode', SubmitType::class, ['label' => 'okto_media.create_episode_submitAndEncode_button', 'attr' => ['class' => 'btn btn-default']]);
 
         if ($request->getMethod() == "POST") { //sends form
             $form->handleRequest($request);
@@ -194,6 +195,12 @@ class SeriesController extends BaseController
                             ['uniqID' => $episode->getUniqID()]
                         )
                     );
+                } elseif ($form->get('submitAndEncode')->isClicked()) {
+                    $em->persist($episode);
+                    $em->flush();
+                    $this->get('oktolab_media')->addEncodeVideoJob($episode->getUniqID());
+                    $this->get('session')->getFlashBag()->add('success', 'okto_media.success_create_and_encode_episode');
+                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
                 } elseif ($form->get('delete')->isClicked()) {
                     $em->remove($episode);
                     $em->flush();

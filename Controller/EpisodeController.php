@@ -34,6 +34,7 @@ class EpisodeController extends BaseController
         $episode = $this->get('oktolab_media')->getEpisode($episode);
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.edit_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
+        $form->add('submitAndEncode', SubmitType::class, ['label' => 'okto_media.edit_episode_submitAndEncode_button', 'attr' => ['class' => 'btn btn-default']]);
         $form->add('delete', SubmitType::class, ['label' => 'oktolab_media.delete_episode_button', 'attr' => ['class' => 'btn btn-danger']]);
 
         if ($request->getMethod() == "POST") { //sends form
@@ -44,6 +45,12 @@ class EpisodeController extends BaseController
                     $em->persist($episode);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_edit_episode');
+                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                } elseif ($form->get('submitAndEncode')->isClicked()) {
+                    $em->persist($episode);
+                    $em->flush();
+                    $this->get('oktolab_media')->addEncodeVideoJob($episode->getUniqID());
+                    $this->get('session')->getFlashBag()->add('success', 'okto_media.success_edit_and_encode_episode');
                     return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
                 } elseif ($form->get('delete')->isClicked()) {
                     $em->remove($episode);
@@ -73,6 +80,7 @@ class EpisodeController extends BaseController
         $episode = $this->get('oktolab_media')->createEpisode();
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.create_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
+        $form->add('submitAndEncode', SubmitType::class, ['label' => 'okto_media.create_episode_submitAndEncode_button', 'attr' => ['class' => 'btn btn-default']]);
 
         if ($request->getMethod() == "POST") { //sends form
             $form->handleRequest($request);
@@ -82,6 +90,12 @@ class EpisodeController extends BaseController
                     $em->persist($episode);
                     $em->flush();
                     $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_edit_episode');
+                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                } elseif ($form->get('submitAndEncode')->isClicked()) {
+                    $em->persist($episode);
+                    $em->flush();
+                    $this->get('oktolab_media')->addEncodeVideoJob($episode->getUniqID());
+                    $this->get('session')->getFlashBag()->add('success', 'okto_media.success_create_and_encode_episode');
                     return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
                 } elseif ($form->get('delete')->isClicked()) {
                     $em->remove($episode);

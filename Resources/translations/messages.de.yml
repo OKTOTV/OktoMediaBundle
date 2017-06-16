@@ -55,10 +55,17 @@ okto_media.series_tag_edit_cancel_button:   '<span class="glyphicon glyphicon-ar
 # newEpisode.html.twig
 okto_media.new_episode_for_series_cancel:  '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Sendereihe'
 okto_media.series_add_new_episode: '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neue Episode'
+okto_media.create_episode_submitAndEncode_button: '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Anlegen & Encodieren'
+okto_media.success_create_and_encode_episode: "Episode erfolgreich angelegt und zur Umrechnung eingereiht"
 
 ## Episode/show.html.twig
 okto_media_episode_tags_header:             "Schlagwörter"
 okto_media.set_currentposition_asposterframe: '<span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Aktuelles Bild als Posterframe verwenden'
+
+## Episode/edit.html.twig
+okto_media.edit_episode_submitAndEncode_button: '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Speichern & Encodieren'
+okto_media.success_edit_and_encode_episode:     "Änderungen gespeichert und zur Umrechnung eingereiht"
+
 
 # Okto/MediaBundle/Resources/views/Keychain/showSeries.html.twig
 okto_media.keychain_import_series_episodes_header:  "Episoden"
