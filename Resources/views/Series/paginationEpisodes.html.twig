@@ -13,6 +13,9 @@
     <th>
         {{ knp_pagination_sortable(pagination, 'okto_media.series_episodepagination_header_firstRan'|trans, 'e.firstranAt') }}
     </th>
+    <th>
+        {{ knp_pagination_sortable(pagination, 'okto_media.series_episodePagination_isActive'|trans, 'e.isActive') }}
+    </th>
 </tr>
 <div class="navigation">
     {{ knp_pagination_render(pagination) }}
@@ -30,6 +33,9 @@
     <td>{{ episode.description }}</td>
     <td>
         {{ episode.firstRanAt|date('H:i d.m.Y')}}
+    </td>
+    <td>
+        {{ 'okto_media.series_episodePagination_isActiveChoice'|transchoice(episode.isActive)}}
     </td>
 </tr>
 {% endfor %}

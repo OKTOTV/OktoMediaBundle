@@ -74,6 +74,8 @@ okto_media.keychain_import_series_episode_overwrite: '<span class="glyphicon gly
 
 # Okto/MediaBundle/Resources/views/Series/paginationEpisodes.html.twig
 okto_media.series_episodepagination_header_firstRan:    "Erstausstrahlung"
+okto_media.series_episodePagination_isActive:           "Aktiv"
+okto_media.series_episodePagination_isActiveChoice:     "{0} Nein | {1} Ja"
 
 # Okto/MediaBundle/Model/MediaService
 okto_media_series_state_transchoice:            "{10} Alles aktiv schalten|{20} Alles inaktiv schalten|{30} Sendereihe aktiv, Episoden inaktiv schalten|{40} Sendereihe inaktiv, Episoden aktiv schalten"

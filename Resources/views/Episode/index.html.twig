@@ -36,6 +36,7 @@
             <li{% if episodes.isSorted('e.uniqID') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'UniqID', 'e.uniqID') }}</li>
             <li{% if episodes.isSorted('s.name') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'Series', 's.name') }}</li>
             <li{% if episodes.isSorted('e.duration') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.episode_index_duration'|trans, 'e.duration') }}</li>
+            <li{% if episodes.isSorted('e.isActive') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.episode_index_isActive'|trans, 'e.isActive') }}</li>
           </ul>
         </div>
     </div>
@@ -82,6 +83,12 @@
                                 </dt>
                                 <dd>
                                     {{ episode.duration|duration }}
+                                </dd>
+                                <dt>
+                                    {{ 'oktolab_media.episode_index_isActive'|trans }}
+                                </dt>
+                                <dd>
+                                    {{ 'oktolab_media.episode_index_isActiveChoice'|transchoice(episode.isActive) }}
                                 </dd>
                             </dl>
                         </div>

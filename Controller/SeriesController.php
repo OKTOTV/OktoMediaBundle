@@ -46,7 +46,7 @@ class SeriesController extends BaseController
     public function paginationEpisodesAction(Request $request, $series)
     {
         $em = $this->getDoctrine()->getManager();
-        $dql = "SELECT e FROM ".$this->container->getParameter('oktolab_media.episode_class')." e WHERE e.series = :series";
+        $dql = "SELECT e FROM ".$this->container->getParameter('oktolab_media.episode_class')." e WHERE e.series = :series ORDER By e.firstranAt DESC";
         $query = $em->createQuery($dql);
         $query->setParameter('series', $series->getId());
 
