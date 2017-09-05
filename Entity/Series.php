@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Okto\MediaBundle\Entity\Reachme;
 use Oktolab\MediaBundle\Entity\Playlist;
 use JMS\Serializer\Annotation as JMS;
+use Okto\MediaBundle\Entity\Channelmanager;
 
 /**
  * Series

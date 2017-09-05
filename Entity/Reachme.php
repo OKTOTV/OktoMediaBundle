@@ -19,6 +19,7 @@ class Reachme
     const TYPE_TWITTER = 2;
     const TYPE_INST = 3;
     const TYPE_GP   = 4;
+    const TYPE_LINK = 5;
 
     /**
      * @var integer

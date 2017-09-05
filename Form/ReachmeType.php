@@ -31,7 +31,8 @@ class ReachmeType extends AbstractType
                     Reachme::TYPE_FB      => $this->trans->transchoice('reachme_type_transchoice', Reachme::TYPE_FB),
                     Reachme::TYPE_TWITTER => $this->trans->transchoice('reachme_type_transchoice', Reachme::TYPE_TWITTER),
                     Reachme::TYPE_INST    => $this->trans->transchoice('reachme_type_transchoice', Reachme::TYPE_INST),
-                    Reachme::TYPE_GP      => $this->trans->transchoice('reachme_type_transchoice', Reachme::TYPE_GP)
+                    Reachme::TYPE_GP      => $this->trans->transchoice('reachme_type_transchoice', Reachme::TYPE_GP),
+                    Reachme::TYPE_LINK    => $this->trans->transchoice('reachme_type_transchoice', Reachme::TYPE_LINK)
                 ]
             ])
             ->add('uri', TextType::class, ['attr' => ['placeholder' => 'media.reachme_uri_placeholder']])
