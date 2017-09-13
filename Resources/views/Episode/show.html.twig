@@ -12,10 +12,22 @@
                 {{ 'oktolab_media.episode_show_actions'|trans|raw }}
             </button>
             <ul class="dropdown-menu">
-                <li><a href="{{ path('oktolab_episode_edit', {'episode': episode.uniqID}) }}">{{ 'oktolab_media.episode_edit_button'|trans|raw }}</a></li>
+                <li>
+                    <a href="{{ path('oktolab_episode_edit', {'episode': episode.uniqID}) }}">
+                        {{ 'oktolab_media.episode_edit_button'|trans|raw }}
+                    </a>
+                </li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{{ path('oktolab_media_export_episode', {'uniqID': episode.uniqID}) }}">{{ 'oktolab_media.show_episode_export'|trans|raw }}</a></li>
-                <li><a href="{{ path('oktolab_episode_encode', {'uniqID': episode.uniqID}) }}">{{ 'oktolab_media.show_episode_add_to_encode_queue'|trans|raw }}</a></li>
+                <li>
+                    <a href="{{ path('oktolab_media_export_episode', {'uniqID': episode.uniqID}) }}">
+                        {{ 'oktolab_media.show_episode_export'|trans|raw }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('oktolab_episode_encode', {'uniqID': episode.uniqID}) }}">
+                        {{ 'oktolab_media.show_episode_add_to_encode_queue'|trans|raw }}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -53,7 +65,9 @@
                 <dt>{{ 'okto_media.episode_info_series'|trans }}</dt>
                 <dd>
                     {% if episode.series %}
-                        <a href="{{ path('oktolab_series_show', {'series': episode.series.uniqID})}}">{{ episode.series.name}}</a>
+                        <a href="{{ path('oktolab_series_show', {'series': episode.series.uniqID})}}">
+                            {{ episode.series.name}}
+                        </a>
                     {% endif %}
                 </dd>
 
@@ -71,7 +85,9 @@
             </ul>
 
             {% if episode.video is not empty %}
-                <a href="{{ path('bprs_asset_download', {'filekey': episode.video.filekey}) }}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span>Video</a>
+                <a href="{{ path('bprs_asset_download', {'filekey': episode.video.filekey}) }}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-download"></span>Video
+                </a>
             {% endif %}
             {% if episode.posterframe is not empty %}
                 <a href="{{ path('bprs_asset_download', {'filekey': episode.posterframe.filekey}) }}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span>Posterframe</a>
