@@ -49,7 +49,7 @@ class EpisodeController extends BaseController
                 } elseif ($form->get('submitAndEncode')->isClicked()) {
                     $em->persist($episode);
                     $em->flush();
-                    $this->get('oktolab_media')->addEncodeVideoJob($episode->getUniqID());
+                    $this->get('oktolab_media')->addEncodeEpisodeJob($episode->getUniqID());
                     $this->get('session')->getFlashBag()->add('success', 'okto_media.success_edit_and_encode_episode');
                     return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
                 } elseif ($form->get('delete')->isClicked()) {

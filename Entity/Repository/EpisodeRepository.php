@@ -22,6 +22,25 @@ class EpisodeRepository extends BaseEpisodeRepository
         }
         return $query->getResult();
     }
+
+    public function findInactiveEpisodesAction($episode_class, $query_only = false)
+    {
+        $query = $this->getEntityManager()->createQuery(
+            sprintf(
+                "SELECT e, s FROM %s e
+                LEFT JOIN e.series s
+                WHERE e.isActive = 0 AND s.isActive = 1
+                ORDER BY s.name ASC",
+                $episode_class
+                )
+            );
+
+        if ($query_only) {
+            return $query;
+        }
+
+        return $query->getResult();
+    }
 }
 
 ?>

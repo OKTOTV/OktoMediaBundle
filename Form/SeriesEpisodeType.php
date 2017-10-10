@@ -9,9 +9,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Okto\MediaBundle\Form\TagType;
 use Bprs\AssetBundle\Form\Type\AssetType;
+use Oktolab\MediaBundle\Entity\Episode;
 
 class SeriesEpisodeType extends AbstractType
 {
@@ -29,6 +31,18 @@ class SeriesEpisodeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('stereomode', ChoiceType::class,
+                [
+                    'choices' => [
+                        Episode::STEREOMODE_NONE => "oktolab_media.stereomode_none",
+                        Episode::STEREOMODE_MONOSCOPIC => "oktolab_media.stereomode_monoscopic",
+                        Episode::STEREOMODE_TOPBOTTOM => "oktolab_media.stereomode_topbottom",
+                        Episode::STEREOMODE_LEFTRIGHT => "oktolab_media.stereomode_leftright"
+                    ],
+                    'label' => 'oktolab_media.stereomode_label'
+                ]
+            )
+
             ->add('name', TextType::class,
                 [
                     'label' => 'oktolab_media.name_label',
