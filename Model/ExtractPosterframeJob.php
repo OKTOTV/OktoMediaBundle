@@ -21,7 +21,12 @@ class ExtractPosterframeJob extends BprsContainerAwareJob {
         $path = $this->getContainer()->get('bprs.asset_helper')->getPath($posterframe, true);
 
         // build ffmpeg command to extract posterframe at position from video to cache asset
-        $cmd = sprintf('ffmpeg -i %s -ss %s -vframes 1 "%s"', $uri, $this->args['position'], $path);
+        $cmd = sprintf(
+            'ffmpeg -ss %s -i %s -vframes 1 "%s"',
+            $this->args['position'],
+            $uri,
+            $path
+        );
         exec($cmd);
 
         // delete old posterframe
