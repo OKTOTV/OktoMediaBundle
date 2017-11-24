@@ -34,7 +34,9 @@ class EpisodeController extends BaseController
         $episode = $this->get('oktolab_media')->getEpisode($episode);
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.edit_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
-        $form->add('submitAndEncode', SubmitType::class, ['label' => 'okto_media.edit_episode_submitAndEncode_button', 'attr' => ['class' => 'btn btn-default']]);
+        if ($episode->getTechnicalStatus() != Episode::STATE_IN_PROGRESS_QUEUE) {
+            $form->add('submitAndEncode', SubmitType::class, ['label' => 'okto_media.edit_episode_submitAndEncode_button', 'attr' => ['class' => 'btn btn-default']]);
+        }
         $form->add('delete', SubmitType::class, ['label' => 'oktolab_media.delete_episode_button', 'attr' => ['class' => 'btn btn-danger']]);
 
         if ($request->getMethod() == "POST") { //sends form

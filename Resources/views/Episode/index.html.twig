@@ -77,20 +77,16 @@
                         </div>
                         <div class="col-md-9">
                             <dl class="dl-horizontal">
-                                <dt>{{ 'oktolab_media.episode_index_name'|trans }}</dt>
-                                <dd><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.name }}</a></dd>
                                 <dt>{{ 'oktolab_media.episode_index_uniqID'|trans }}</dt>
                                 <dd><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.uniqID }}</a></dd>
+                                <dt>{{ 'oktolab_media.episode_index_name'|trans }}</dt>
+                                <dd><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.name }}</a></dd>
                                 <dt>{{ 'oktolab_media.episode_index_series_name'|trans }}</dt>
                                 <dd>
                                     {% if episode.series is not empty %}
                                         <a href="{{ path('oktolab_series_show', {'series': episode.series.uniqID}) }}">{{ episode.series.name }}</a>
                                     {% endif %}
                                 </dd>
-                                <dt>{{ 'oktolab_media.episode_index_firstranAt'|trans }}</dt>
-                                <dd>{{ episode.firstRanAt|date('d.m.Y')}}</dd>
-                                <dt>{{ 'oktolab_media.episode_index_updatedAt'|trans }}</dt>
-                                <dd>{{ episode.updatedAt|date('H:i:s d.m.Y')}}</dd>
                                 <dt>{{ 'oktolab_media.episode_index_description'|trans }}</dt>
                                 <dd>
                                     {% if episode.description|length > 500 %}
@@ -99,12 +95,18 @@
                                         {{ episode.description|nl2br }}
                                     {% endif %}
                                 </dd>
+                                <dt>{{ 'oktolab_media.episode_index_firstranAt'|trans }}</dt>
+                                <dd>{{ episode.firstRanAt|date('d.m.Y')}}</dd>
                                 <dt>
                                     {{ 'oktolab_media.episode_index_duration'|trans }}
                                 </dt>
                                 <dd>
                                     {{ episode.duration|duration }}
                                 </dd>
+                                <dt>{{ 'oktolab_media.episode_index_updatedAt'|trans }}</dt>
+                                <dd>{{ episode.updatedAt|date('d.m.Y H:i')}}</dd>
+                                <dt>{{ 'oktolab_media.episode_info_technicalStatus'|trans }}</dt>
+                                <dd>{{ 'oktolab_media.show_episode_technical_state_choice'|transchoice(episode.technicalStatus) }}</dd>
                                 <dt>
                                     {{ 'oktolab_media.episode_index_isActive'|trans }}
                                 </dt>
