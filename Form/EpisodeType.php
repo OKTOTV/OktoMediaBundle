@@ -38,10 +38,10 @@ class EpisodeType extends AbstractType
             ->add('stereomode', ChoiceType::class,
                 [
                     'choices' => [
-                        Episode::STEREOMODE_NONE => "oktolab_media.stereomode_none",
-                        Episode::STEREOMODE_MONOSCOPIC => "oktolab_media.stereomode_monoscopic",
-                        Episode::STEREOMODE_TOPBOTTOM => "oktolab_media.stereomode_topbottom",
-                        Episode::STEREOMODE_LEFTRIGHT => "oktolab_media.stereomode_leftright"
+                        "oktolab_media.stereomode_none" => Episode::STEREOMODE_NONE,
+                        "oktolab_media.stereomode_monoscopic" => Episode::STEREOMODE_MONOSCOPIC,
+                        "oktolab_media.stereomode_topbottom" => Episode::STEREOMODE_TOPBOTTOM,
+                        "oktolab_media.stereomode_leftright" => Episode::STEREOMODE_LEFTRIGHT
                     ],
                     'label' => 'oktolab_media.stereomode_label'
                 ]
