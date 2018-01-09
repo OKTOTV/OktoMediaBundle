@@ -26,7 +26,7 @@ services:
     oktothek_tag.repository:
         class: Doctrine\ORM\EntityRepository
         factory: [ "@doctrine.orm.entity_manager", getRepository ]
-        arguments: [ "AppBundle\Entity\Tag" ]
+        arguments: [ "AppBundle\\Entity\\Tag" ]
 
     okto_media.user_repo:
         class: Doctrine\ORM\EntityRepository
