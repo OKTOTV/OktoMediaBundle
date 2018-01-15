@@ -1,0 +1,29 @@
+{% extends "BprsStyleBundle::layout.html.twig" %}
+
+{% block nav_head%}
+    {% include 'BprsStyleBundle::menu.html.twig' with {'selected': 'delorian', 'dropdown': ''} %}
+{% endblock %}
+
+
+{% block body_main %}
+    <div class="page-header">
+        <h1>{{ 'oktolab_media.new_series_header'|trans }}</h1>
+        <a href="{{ path('oktolab_series') }}" class="btn btn-default">{{ 'oktolab_media.new_episode_back_to_list'|trans }}</a>
+    </div>
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.posterframe, 'adapter': 'posterframe'} %}
+    {{ form_end(form) }}
+</ul>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% include "BprsAssetBundle::singleUpload.js.twig" %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% include "BprsAssetBundle::singleUpload.css.twig" %}
+{% endblock %}
