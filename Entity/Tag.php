@@ -33,7 +33,7 @@ class Tag
      * @JMS\Type("string")
      * @JMS\Groups({"okto"})
      * @Assert\Length(min = 3, max = 30, maxMessage = "okto_media.max_tag_limit", minMessage = "okto_media.min_tag_limit")
-     * @ORM\Column(name="text", type="string", length=30, unique=true)
+     * @ORM\Column(name="text", type="string", length=70, unique=true)
      */
     private $text;
 
@@ -41,7 +41,7 @@ class Tag
      * @JMS\Expose
      * @JMS\Type("string")
      * @JMS\Groups({"okto"})
-     * @ORM\Column(length=32, unique=true)
+     * @ORM\Column(length=72, unique=true)
      * @Gedmo\Slug(fields={"text"}, updatable=false, separator="_")
      */
     private $slug;
