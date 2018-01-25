@@ -16,7 +16,7 @@ class AdvancedLoader extends Loader
 
         $importedRoutes = $this->import($resource, $type);
 
-        $resource_overwrite = '@OktolabMediaBundle/Resources/config/routing.yml';
+        $resource_overwrite = '@OktoMediaBundle/Resources/config/routing.yml';
 
         $overwrittenRoutes = $this->import($resource_overwrite, $type);
 
