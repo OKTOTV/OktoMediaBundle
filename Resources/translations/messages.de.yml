@@ -128,3 +128,7 @@ okto_media.caption_modal_body:   |
     <kbd>Shift</kbd> + <kbd>Space</kbd> = Player pausieren/starten<br />
 
 okto_media.caption_modal_close:                 "Schließen"
+
+# ImportEpisodeJob.php
+okto_media.end_episode_import:      "Episodenimport nach OKTO Schema beendet"
+okto_media.start_episode_import:    "Beginne Episodenimport nach OKTO Schema"
