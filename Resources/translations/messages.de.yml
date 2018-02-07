@@ -36,7 +36,6 @@ okto_media_series_tags_header:              "Schlagwörter"
 okto_media_series_show_publicate_tag_button: '<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Schlagworte an Episoden übertragen'
 oktothek.series_add_user:                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Benutzer hinzufügen oder entfernen
 okto_media.series_edit_user_success:        Benutzer zur Sendereihe erfolgreich aktualisiert
-okto_media.series_edit_tag_button:          '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Schlagwörter bearbeiten'
 
 # edit
 flux2_media.edit_series_user_header:        Benutzer der Sendereihe %series% bearbeiten
