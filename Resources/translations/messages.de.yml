@@ -5,7 +5,7 @@ okto_media.tag_placeholder:                Hund, Katze, Maus, ...
 reachme_type_transchoice:       "{0} Mail|{1} Facebook|{2} Twitter|{3} Instagram|{4} Google+|{5} Sendungsblog"
 
 #form
-media.reachme_uri_placeholder:              URI to point to
+media.reachme_uri_placeholder:              Adresse auf die verlinkt werden soll
 flux2_media.reachme_type_label:             Typ
 flux2_media.reachme_uri_label:              URI
 flux2_media.reachme_series_label:           Sendereihe

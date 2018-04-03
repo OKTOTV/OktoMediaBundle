@@ -41,7 +41,7 @@ class ReachmeController extends Controller
             $series = $this->get('oktolab_media')->getSeries($series_uid);
             $reachme->setSeries($series);
         }
-        $form = $this->createForm(new ReachmeType($this->get('translator')), $reachme);
+        $form = $this->createForm(ReachmeType::class, $reachme);
         $form->add('submit', SubmitType::class, ['label' => 'flux2_media.create_reachme_button', 'attr' => ['class' => 'btn btn-primary']]);
 
         if ($request->getMethod() == "POST") {
@@ -65,7 +65,7 @@ class ReachmeController extends Controller
      */
     public function editAction(Request $request, Reachme $reachme)
     {
-        $form = $this->createForm(new ReachmeType($this->get('translator')), $reachme);
+        $form = $this->createForm(ReachmeType::class, $reachme);
         $form->add('submit', SubmitType::class, ['label' => 'flux2_media.edit_reachme_button', 'attr' => ['class' => 'btn btn-primary']]);
         $form->add('delete', SubmitType::class, ['label' => 'flux2_media.delete_reachme_button', 'attr' => ['class' => 'btn btn-danger']]);
 
