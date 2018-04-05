@@ -176,5 +176,29 @@ class Tag
     public function setEpisodes($episodes)
     {
         $this->episodes = $episodes;
+        return $this;
+    }
+
+    public function getSeries()
+    {
+        return $this->series;
+    }
+
+    public function addSeries($series)
+    {
+        $this->series[] = $series;
+        return $this;
+    }
+
+    public function removeSeries($series)
+    {
+        $this->series->removeElement($series);
+        return $this;
+    }
+
+    public function setSeries($seriess)
+    {
+        $this->series = $seriess;
+        return $this;
     }
 }

@@ -59,6 +59,7 @@ okto_media.success_create_and_encode_episode: "Episode erfolgreich angelegt und 
 
 ## Episode/show.html.twig
 okto_media_episode_tags_header:             "Schlagwörter"
+okto_media_episode_edit_tags_button:        '<span class="glyphicon glyphicon-plus"></span> Schlagwörter hinzufügen'
 okto_media.set_currentposition_asposterframe: '<span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Aktuelles Bild als Posterframe verwenden'
 okto_media.episode_show_files:              'Dateien<span class="caret"></span>'
 okto_media.episode_show_files_video:        "Video"
