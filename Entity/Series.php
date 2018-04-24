@@ -44,12 +44,18 @@ class Series extends BaseSeries
      */
     protected $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Oktolab\MediaBundle\Entity\StreamInterface", mappedBy="series")
+     */
+    protected $streams;
+
     public function __construct() {
         parent::__construct();
-        $this->episodes = new ArrayCollection();
-        $this->playlists = new ArrayCollection();
-        $this->reachmes = new ArrayCollection();
-        $this->tags = new ArrayCollection();
+        $this->episodes =   new ArrayCollection();
+        $this->playlists =  new ArrayCollection();
+        $this->reachmes =   new ArrayCollection();
+        $this->tags =       new ArrayCollection();
+        $this->streams =    new ArrayCollection();
     }
 
     /**
@@ -178,5 +184,27 @@ class Series extends BaseSeries
     {
         $this->tags->removeElement($tag);
         return $this;
+    }
+
+    public function addStream($stream)
+    {
+        $this->streams[] = $stream;
+        return $this;
+    }
+
+    public function removeStream($stream)
+    {
+        $this->streams->removeElement($stream);
+        return $this;
+    }
+
+    public function getStreams()
+    {
+        return $this->streams;
+    }
+
+    public function setStreams($streams)
+    {
+        $this->streams = $streams;
     }
 }
