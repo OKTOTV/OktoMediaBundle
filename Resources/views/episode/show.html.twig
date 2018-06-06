@@ -134,11 +134,62 @@
             {% endif %}
             <h2>{{ 'oktolab_media_media_for_episode_header'|trans }}</h2>
             {{ render(controller('OktolabMediaBundle:Media:mediaForEpisode', {'uniqID': episode.uniqID})) }}
+
+            <h2>Captions</h2>
+            <div class="list-group">
+                {% for caption in episode.captions %}
+                    <a href="{{ path('oktolab_capiton_editor', {'uniqID': caption.uniqID}) }}" class="list-group-item">{{ caption }}</a>
+                {% endfor %}
+                <a href="{{ path('oktolab_caption_new', {'uniqID': episode.uniqID}) }}" class="list-group-item">Neue Textspur hinzufügen</a>
+            </div>
         </div>
+    </div>
+    <div class="row">
+        {{ render(controller('BprsLogbookBundle:Default:pager', {'reference': episode.uniqID})) }}
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     {{ player(episode)|raw }}
+    <script>
+        // Set posterframe
+        $(document).ready(function(){
+            var playerInstance = jwplayer("player");
+
+            $('#set_posterframe').click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "{{ path('oktolab_episode_extractposterframe', {'uniqID': episode.uniqID}) }}",
+                    data: {'position': playerInstance.getPosition()},
+                    type: 'GET'
+                });
+            });
+        });
+        // AJAX pagination
+        var updateView = function(e, link) {
+            e.preventDefault();
+            var link = $(link);
+            $.ajax({
+                url: link.attr('href'),
+                context: document.body
+            }).success(function(data) {
+                $(link.parents('.episode-pager')).replaceWith(data);
+            });
+        }
+
+        $( document ).on('click', '.pagination > li > a', function(e){
+            updateView(e, this);
+        });
+
+        $( document ).on('click', '.sortable', function(e){
+            updateView(e, this);
+        });
+        $( document ).on('click', '.asc', function(e){
+            updateView(e, this);
+        });
+        $( document ).on('click', '.desc', function(e){
+            updateView(e, this);
+        });
+    </script>
 {% endblock %}

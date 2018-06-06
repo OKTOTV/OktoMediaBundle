@@ -117,9 +117,9 @@ class SeriesEpisodeType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => $this->episode_class
-        ));
+        ]);
     }
 
     public function getBlockPrefix()

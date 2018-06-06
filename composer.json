@@ -21,6 +21,7 @@
 
     "require": {
         "oktolab/media-bundle": "dev-master",
-        "gedmo/doctrine-extensions": "^2.4"
+        "gedmo/doctrine-extensions": "^2.4",
+        "knplabs/knp-markdown-bundle": "^1.5"
     }
 }

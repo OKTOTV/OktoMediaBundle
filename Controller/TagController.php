@@ -32,4 +32,22 @@ class TagController  extends Controller {
         // }
         return $this->redirect('oktothek_tag_index');
     }
+
+    /**
+     * @Route("", name="okto_tag_episodes")
+     * @Method({"GET"})
+     */
+    public function episodesAction(Request $request)
+    {
+        // code...
+    }
+
+    /**
+     * @Route("", name="okto_tag_series"))
+     * @Method({"GET"})
+     */
+    public function seriesAction(Request $request)
+    {
+        // code...
+    }
 }
