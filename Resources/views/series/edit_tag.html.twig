@@ -1,5 +1,9 @@
 {% extends "BprsStyleBundle::layout.html.twig" %}
 
+{% block title %}
+    {{ 'okto_media.edit_series_tag_title'|trans({'%series%': series, '%project%': name}) }}
+{% endblock %}
+
 {% block nav_head%}
     {% include 'BprsStyleBundle::menu.html.twig' with {'selected': '', 'dropdown': ''} %}
 {% endblock %}

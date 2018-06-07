@@ -36,6 +36,7 @@ services:
     okto_media_tag:
         class: Okto\MediaBundle\Model\TagService
         arguments: [ "@doctrine.orm.entity_manager", "%okto_media.tag_class%"]
+        public: true
 
     gedmo.listener.sluggable:
         class: Gedmo\Sluggable\SluggableListener

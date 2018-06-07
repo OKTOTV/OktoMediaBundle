@@ -1,0 +1,92 @@
+{% extends "BprsStyleBundle::layout.html.twig" %}
+
+{%- block title -%}
+    {{ 'okto_media.tag_index_title'|trans({'%tag%': tag, '%project%': name}) }}
+{%- endblock -%}
+
+{% block nav_head %}
+    {% include 'BprsStyleBundle::menu.html.twig' with {'selected': 'backend', 'dropdown': ''} %}
+{% endblock %}
+
+{% block body_main -%}
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="{{ path('okto_tag_series', {'slug': tag.slug}) }}">{{ 'oktolab_media.series_index_header'|trans }}</a></li>
+        <li role="presentation" class="active"><a href="{{ path('okto_tag_episodes', {'slug': tag.slug}) }}">{{ 'oktolab_media.episode_index_header'|trans }}</a></li>
+    </ul>
+
+    <div class="page-header">
+        <p>{{ 'okto_media.tag_index_total_episodes_choice'|transchoice(episodes.getTotalItemCount)}}</p>
+        <!-- Single button -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ 'oktolab_media.series_index_sortby'|trans|raw }}
+            </button>
+            <ul class="dropdown-menu">
+                <li{% if episodes.isSorted('s.name') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_name'|trans, 's.name') }}</li>
+                <li{% if episodes.isSorted('s.webtitle') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_webtitle'|trans, 's.webtitle') }}</li>
+                <li{% if episodes.isSorted('s.uniqID') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_uniqID'|trans, 's.uniqID') }}</li>
+                <li{% if episodes.isSorted('s.createdAt') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_createdAt'|trans, 's.createdAt', {'direction': 'desc'}) }}</li>
+                <li{% if episodes.isSorted('s.updatedAt') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_updatedAt'|trans, 's.updatedAt', {'direction': 'desc'}) }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="navigation">
+        {{ knp_pagination_render(episodes) }}
+    </div>
+    <div class="row">
+        {% for episode in episodes %}
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">
+                            <img src="{{ episode.posterframe(true)|thumb(720,1280) }}" class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="col-md-9">
+                        <dl class="dl-horizontal">
+                            <dt>{{ 'oktolab_media.episode_index_uniqID'|trans }}</dt>
+                            <dd><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.uniqID }}</a></dd>
+                            <dt>{{ 'oktolab_media.episode_index_name'|trans }}</dt>
+                            <dd><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.name }}</a></dd>
+                            <dt>{{ 'oktolab_media.episode_index_series_name'|trans }}</dt>
+                            <dd>
+                                {% if episode.series is not empty %}
+                                    <a href="{{ path('oktolab_series_show', {'series': episode.series.uniqID}) }}">{{ episode.series.name }}</a>
+                                {% endif %}
+                            </dd>
+                            <dt>{{ 'oktolab_media.episode_index_description'|trans }}</dt>
+                            <dd>
+                                {% if episode.description|length > 500 %}
+                                    {{ episode.description|slice(0, 497) ~ '...'|nl2br }}
+                                {% else %}
+                                    {{ episode.description|nl2br }}
+                                {% endif %}
+                            </dd>
+                            <dt>{{ 'oktolab_media.episode_index_firstranAt'|trans }}</dt>
+                            <dd>{{ episode.firstRanAt|date('d.m.Y')}}</dd>
+                            <dt>
+                                {{ 'oktolab_media.episode_index_duration'|trans }}
+                            </dt>
+                            <dd>
+                                {{ episode.duration|duration }}
+                            </dd>
+                            <dt>{{ 'oktolab_media.episode_index_updatedAt'|trans }}</dt>
+                            <dd>{{ episode.updatedAt|date('d.m.Y H:i')}}</dd>
+                            <dt>{{ 'oktolab_media.episode_info_technicalStatus'|trans }}</dt>
+                            <dd>{{ 'oktolab_media.show_episode_technical_state_choice'|transchoice(episode.technicalStatus) }}</dd>
+                            <dt>
+                                {{ 'oktolab_media.episode_index_isActive'|trans }}
+                            </dt>
+                            <dd>
+                                {{ 'oktolab_media.episode_index_isActiveChoice'|transchoice(episode.isActive) }}
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(episodes) }}
+    </div>
+</div>
+{% endblock %}

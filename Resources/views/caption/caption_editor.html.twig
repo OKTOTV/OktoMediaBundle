@@ -15,7 +15,7 @@
         <h1>{{ 'okto_media.caption_editor_header'|trans }}</h1>
         <a href="{{ path('oktolab_caption_show', {'caption': form.vars.value.id }) }}" class="btn btn-default">{{ 'okto_media.caption_editor_close'|trans|raw }}</a>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
         {{ 'okto_media.caption_show_help_modal'|trans }}
         </button>
         <!-- Modal -->
@@ -366,7 +366,7 @@
         }
 
         var captionPlaceholder = function() {
-            return '{% include "OktoMediaBundle::Caption/_captionRow.html.twig" %}';
+            return '{% include "OktoMediaBundle::Caption/_caption_row.html.twig" %}';
         }
 
         // caption item actions

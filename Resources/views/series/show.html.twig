@@ -7,29 +7,42 @@
 {% block body_main -%}
     <div class="page-header">
         <h1>{{ series.name }}</h1>
-        <a href="{{ path('oktolab_series_edit', { 'series': series.uniqID }) }}" class="btn btn-default">{{ 'oktolab_media.series_edit_button'|trans|raw }}</a>
         <div class="btn-group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ 'oktolab_media.series_show_actions'|trans|raw }}
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="{{ path('oktolab_media_export_series', {'series': series.uniqID}) }}">
-                        {{ 'oktolab_media.series_export_button'|trans|raw }}
+                    <a href="{{ path('oktolab_series_edit', { 'series': series.uniqID }) }}">
+                        {{ 'oktolab_media.series_edit_button'|trans|raw }}
                     </a>
                 </li>
                 <li>
                     <a href="{{ path('oktolab_series_edit_tags', { 'series': series.uniqID }) }}">
-                        {{ 'okto_media.series_edit_tag_button'|trans|raw }}
+                        {{ 'okto_media.show_series_tag_button_menu'|trans|raw }}
                     </a>
                 </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                    <a href="{{ path('oktolab_media_export_series', {'series': series.uniqID}) }}">
+                        {{ 'oktolab_media.series_export_button'|trans|raw }}
+                    </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                {% if series.posterframe is not empty %}
+                    <li>
+                        <a href="{{ path('bprs_asset_download', {'filekey': series.posterframe.filekey}) }}">
+                            {{ 'okto_media.show_series_posterframe_download_menu'|trans|raw }}
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
     <div class="row">
         <div class="col-md-7">
             {% if series.posterframe is not empty %}
-                <img src="{{ series.posterframe|path }}" class="img-responsive" />
+                <img src="{{ series.posterframe|thumb(720,1280) }}" class="img-responsive" />
             {% endif %}
             {{ series.description }}
         </div>
@@ -51,6 +64,7 @@
                 <dt>{{ 'oktolab_media.series_info_webtitle'|trans}}</dt>
                 <dd>{{ series.webtitle }}</dd>
             </dl>
+            <h4>Kontaktmöglichkeiten</h4>
             <div class="list-group">
                 {% for reachme in series.reachmes %}
                         <a href="{{ path('flux2_reachme_show', {'reachme': reachme.id })}}" class="list-group-item">{{ 'reachme_type_transchoice'|transchoice(reachme.type) }}</a>
@@ -58,14 +72,17 @@
                 <a href="{{ path('flux2_reachme_new', {'series_uid': series.uniqID})}}" class="list-group-item">{{ 'flux2_reachme_new'|trans|raw}}</a>
             </div>
 
-            <h2>{{ 'okto_media_series_tags_header'|trans }}</h2>
-            <ul class="list-group">
+            <h4>{{ 'okto_media_series_tags_header'|trans }}</h4>
+            <div class="list-group">
                 {% for tag in series.tags %}
-                    <li class="list-group-item">
+                    <a href="{{ path('okto_tag_series', {'tag': tag.id}) }}" class="list-group-item">
                         {{ tag }}
-                    </li>
+                    </a>
                 {% endfor %}
-            </ul>
+                <a href="{{ path('oktolab_series_edit_tags', { 'series': series.uniqID }) }}" class="list-group-item">
+                    {{ 'okto_media.show_series_tag_button_list'|trans|raw }}
+                </a>
+            </div>
         </div>
     </div>
     <a class="btn btn-default" href="{{ path('okto_media_new_episode_for_series', {'uniqID': series.uniqID})}}">

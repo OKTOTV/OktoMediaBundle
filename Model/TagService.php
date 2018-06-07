@@ -15,7 +15,7 @@ class TagService {
 
     public function getTag($slug)
     {
-        $tag = $this->em->getRepository($this->tag_class)->findOneOrNoneBy(['slug' => $slug]);
+        $tag = $this->em->getRepository($this->tag_class)->findTagBySlug($slug);
         return $tag;
     }
 

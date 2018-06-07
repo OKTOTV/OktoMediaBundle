@@ -43,13 +43,15 @@ flux2.series_edit_user_button:              <span class="glyphicon glyphicon-flo
 flux2.series_edit_user_success:             Benutzer wurden erfolgreich aktualisiert
 
 # editTag.html.twig
+okto_media.edit_series_tag_title:           'Schlagworteditor für "%series%" | %project%'
+okto_media.edit_series_tag_header:          Schlagwörter für Sendereihe %series%
 okto_media.series_edit_tag_success:         Änderungen der Standardsendereihenschlagworte erfolgreich gespeichert
 okto_media.series_edit_tag_error:           Änderungen konnten nicht gespeichert werden
 okto_media.series_publicate_tag_success:    "Standardsendereihenschlagworte wurden erfolgreich an Episoden übertragen"
-okto_media.edit_series_tag_header:          Schlagwörter für Sendereihe
+okto_media.edit_series_tag_header:          Schlagwörter für Sendereihe %series%
 okto_media.series_tag_edit_placeholder:     Hund, Katze, Maus...
 okto_media.series_edit_tag_button:          '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Schlagwörter speichern'
-okto_media.series_tag_edit_cancel_button:   '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Ansicht'
+okto_media.series_tag_edit_cancel_button:   '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Sendereihe'
 
 # newEpisode.html.twig
 okto_media.new_episode_for_series_cancel:  '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Sendereihe'
@@ -58,13 +60,13 @@ okto_media.create_episode_submitAndEncode_button: '<span class="glyphicon glyphi
 okto_media.success_create_and_encode_episode: "Episode erfolgreich angelegt und zur Umrechnung eingereiht"
 
 ## Episode/show.html.twig
-okto_media_episode_tags_header:             "Schlagwörter"
-okto_media_episode_edit_tags_button:        '<span class="glyphicon glyphicon-plus"></span> Schlagwörter hinzufügen'
-okto_media.set_currentposition_asposterframe: '<span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Aktuelles Bild als Posterframe verwenden'
-okto_media.episode_show_files:              'Dateien<span class="caret"></span>'
-okto_media.episode_show_files_video:        "Video"
-okto_media.episode_show_files_posterframe:  "Posterframe"
-okto_media.episode_show_files_sprite:       "Sprite"
+okto_media_episode_tags_header:                 "Schlagwörter"
+okto_media_episode_edit_tags_button:            '<span class="glyphicon glyphicon-plus"></span> Schlagwörter hinzufügen'
+okto_media.set_currentposition_asposterframe:   '<span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Aktuelles Bild als Posterframe verwenden'
+okto_media.episode_show_files:                  'Dateien <span class="caret"></span>'
+okto_media.episode_show_files_video:            "Video"
+okto_media.episode_show_files_posterframe:      "Posterframe"
+okto_media.episode_show_files_sprite:           "Sprite"
 
 ## Episode/edit.html.twig
 okto_media.edit_episode_submitAndEncode_button: '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Speichern & Encodieren'
@@ -86,12 +88,22 @@ okto_media_series_state_transchoice:            "{10} Alles aktiv schalten|{20} 
 
 # Okto/MediaBundle/Resources/Series/show.html.twig
 okto_media.show_series_set_state:               '<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Status setzen'
+okto_media.show_series_tag_button_menu:         '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Schlagwörter bearbeiten'
+okto_media.show_series_posterframe_download_menu:   '<span class="glyphicon glyphicon-download" aria-hidden="true"></span> Posterframe herunterladen'
+okto_media.show_series_tag_button_list:         '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Schlagwörter hinzufügen'
 
 # Okto/MediaBundle/Resources/Series/setActive.html.twig
 okto_media.series_state_header:                 "Sendereihenstatus"
 okto_media.series_state_cancel:                 "Abbrechen"
 okto_media.set_series_state_button:             '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Status setzen'
 okto_media.success_set_state:                   "Status erfolgreich gesetzt"
+
+# Okto/MediaBundle/Resources/views/tag/episodes.html.twig
+okto_media.tag_index_title:                  "Episoden zu Schlagwort '%tag%' | %project%"
+okto_media.tag_index_total_episodes_choice:  "{0} Keine Episoden mit diesem Schlagwort | {1} Eine Episode mit diesem Schlagwort | ]1,Inf] %count% Episoden mit diesem Schlagwort"
+
+# Okto/MediaBundle/Resources/views/tag/series.html.twig
+okto_media.tag_index_total_series_choice:    "{0} Keine Sendereihe mit diesem Schlagwort | {1} Eine Sendereihe mit diesem Schlagwort | ]1,Inf] %count% Sendereihen mit diesem Schlagwort"
 
 # Okto/MediaBundle/Resources/Caption/show.html.twig
 okto_media.caption_dropdown_button:             'Aktionen <span class="caret"></span>'

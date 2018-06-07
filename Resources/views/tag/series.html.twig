@@ -1,29 +1,29 @@
 {% extends "BprsStyleBundle::layout.html.twig" %}
 
-{% block nav_head%}
+{%- block title -%}
+    {{ 'okto_media.tag_series_title'|trans({'%tag%': tag, '%project%': name}) }}
+{%- endblock -%}
+
+{% block nav_head %}
     {% include 'BprsStyleBundle::menu.html.twig' with {'selected': 'backend', 'dropdown': ''} %}
 {% endblock %}
 
 {% block body_main -%}
     <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="{{ path('oktolab_series') }}">{{ 'oktolab_media.series_index_header'|trans }}</a></li>
-        <li role="presentation"><a href="{{ path('oktolab_episode_index') }}">{{ 'oktolab_media.episode_index_header'|trans }}</a></li>
-        <li role="presentation"><a href="{{ path('oktolab_media_index') }}">{{ 'oktolab_media.media_index_header'|trans }}</a></li>
+        <li role="presentation" class="active">
+            <a href="{{ path('okto_tag_series', {'slug': tag.slug}) }}">
+                {{ 'oktolab_media.series_index_header'|trans }}
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="{{ path('okto_tag_episodes', {'slug': tag.slug}) }}">
+                {{ 'oktolab_media.episode_index_header'|trans }}
+            </a>
+        </li>
     </ul>
 
     <div class="page-header">
-        <p>{{ 'oktolab_media.series_index_total_series_choice'|transchoice(seriess.getTotalItemCount)}}</p>
-        <!-- Single button -->
-        <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ 'oktolab_media.series_index_action_dropdown'|trans|raw }}
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="{{ path('oktolab_series_new') }}">
-                    {{ 'oktolab_media.series_index_create_new_series'|trans|raw }}
-                </a></li>
-            </ul>
-        </div>
+        <p>{{ 'okto_media.tag_index_total_series_choice'|transchoice(seriess.getTotalItemCount)}}</p>
         <!-- Single button -->
         <div class="btn-group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,8 +38,7 @@
             </ul>
         </div>
     </div>
-</div>
-<div class="container">
+
     <div class="navigation">
         {{ knp_pagination_render(seriess) }}
     </div>
