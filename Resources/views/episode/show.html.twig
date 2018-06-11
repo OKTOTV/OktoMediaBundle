@@ -141,7 +141,7 @@
             <div class="list-group">
                 {% for tag in episode.tags %}
                     <a href="{{ path('okto_tag_episodes', {'slug': tag.slug}) }}" class="list-group-item">
-                        <span class="glyphicon glyphicon-tag"></span> {{ tag }}
+                        {{ 'okto_media.episode_show_tag_list_entry'|trans({'%tag%': tag})|raw }}
                     </a>
                 {% endfor %}
                 <a href="{{ path('oktolab_episode_edit', {'episode': episode.uniqID}) }}" class="list-group-item">

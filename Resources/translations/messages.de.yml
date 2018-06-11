@@ -66,6 +66,7 @@ okto_media.episode_show_files:                  'Dateien <span class="caret"></s
 okto_media.episode_show_files_video:            "Video"
 okto_media.episode_show_files_posterframe:      "Posterframe"
 okto_media.episode_show_files_sprite:           "Sprite"
+okto_media.episode_show_tag_list_entry:         '<span class="glyphicon glyphicon-tag"></span> %tag%'
 
 ## Episode/edit.html.twig
 okto_media.edit_episode_submitAndEncode_button: '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Speichern & Encodieren'
