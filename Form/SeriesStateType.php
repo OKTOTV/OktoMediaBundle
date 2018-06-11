@@ -27,10 +27,10 @@ class SeriesStateType extends AbstractType
         $builder
             ->add('state', ChoiceType::class, [
                 'choices' => [
-                    MediaService::SERIES_STATE_ALL_ACTIVE    => $this->trans->transchoice('okto_media_series_state_transchoice', MediaService::SERIES_STATE_ALL_ACTIVE),
-                    MediaService::SERIES_STATE_ALL_INACTIVE      => $this->trans->transchoice('okto_media_series_state_transchoice', MediaService::SERIES_STATE_ALL_INACTIVE),
-                    MediaService::SERIES_STATE_SERIES_ACTIVE_ONLY => $this->trans->transchoice('okto_media_series_state_transchoice', MediaService::SERIES_STATE_SERIES_ACTIVE_ONLY),
-                    MediaService::SERIES_STATE_EPISODES_ACTIVE_ONLY    => $this->trans->transchoice('okto_media_series_state_transchoice', MediaService::SERIES_STATE_EPISODES_ACTIVE_ONLY),
+                    $this->trans->transchoice('okto_media_series_state_transchoice', MediaService::SERIES_STATE_ALL_ACTIVE) => MediaService::SERIES_STATE_ALL_ACTIVE,
+                    $this->trans->transchoice('okto_media_series_state_transchoice', MediaService::SERIES_STATE_ALL_INACTIVE) => MediaService::SERIES_STATE_ALL_INACTIVE,
+                    $this->trans->transchoice('okto_media_series_state_transchoice', MediaService::SERIES_STATE_SERIES_ACTIVE_ONLY) => MediaService::SERIES_STATE_SERIES_ACTIVE_ONLY,
+                    $this->trans->transchoice('okto_media_series_state_transchoice', MediaService::SERIES_STATE_EPISODES_ACTIVE_ONLY) => MediaService::SERIES_STATE_EPISODES_ACTIVE_ONLY,
                 ],
                 'mapped' => false
             ])

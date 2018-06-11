@@ -15,18 +15,17 @@
     </ul>
 
     <div class="page-header">
-        <p>{{ 'okto_media.tag_index_total_episodes_choice'|transchoice(episodes.getTotalItemCount)}}</p>
+        <p>{{ 'okto_media.tag_index_total_episodes_choice'|transchoice(episodes.getTotalItemCount, {'%tag%': tag})}}</p>
         <!-- Single button -->
         <div class="btn-group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ 'oktolab_media.series_index_sortby'|trans|raw }}
             </button>
             <ul class="dropdown-menu">
-                <li{% if episodes.isSorted('s.name') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_name'|trans, 's.name') }}</li>
-                <li{% if episodes.isSorted('s.webtitle') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_webtitle'|trans, 's.webtitle') }}</li>
-                <li{% if episodes.isSorted('s.uniqID') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_uniqID'|trans, 's.uniqID') }}</li>
-                <li{% if episodes.isSorted('s.createdAt') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_createdAt'|trans, 's.createdAt', {'direction': 'desc'}) }}</li>
-                <li{% if episodes.isSorted('s.updatedAt') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_updatedAt'|trans, 's.updatedAt', {'direction': 'desc'}) }}</li>
+                <li{% if episodes.isSorted('s.name') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_name'|trans, 'e.name') }}</li>
+                <li{% if episodes.isSorted('s.uniqID') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_uniqID'|trans, 'e.uniqID') }}</li>
+                <li{% if episodes.isSorted('s.createdAt') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_createdAt'|trans, 'e.createdAt', {'direction': 'desc'}) }}</li>
+                <li{% if episodes.isSorted('s.updatedAt') %} class="active"{% endif %}>{{ knp_pagination_sortable(episodes, 'oktolab_media.series_index_sortby_updatedAt'|trans, 'e.updatedAt', {'direction': 'desc'}) }}</li>
             </ul>
         </div>
     </div>

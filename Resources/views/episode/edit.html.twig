@@ -7,7 +7,7 @@
 {% block body_main %}
     <div class="page-header">
         <h1>{{ 'oktolab_media.edit_episode_header'|trans }}</h1>
-        <a href="{{ path('oktolab_episode_show', {'uniqID': form.vars.value.uniqID}) }}" class="btn btn-default">{{ 'oktolab_media.edit_episode_cancel'|trans }}</a>
+        <a href="{{ path('oktolab_episode_show', {'uniqID': form.vars.value.uniqID}) }}" class="btn btn-default">{{ 'oktolab_media.edit_episode_cancel'|trans|raw }}</a>
     </div>
 
     {{ form_start(form) }}
@@ -17,8 +17,14 @@
         {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.video, 'adapter': 'cache', 'asset': form.vars.value.video} %}
         {% include "BprsAssetBundle::singleUpload.html.twig" with {'widget': form.posterframe, 'adapter': 'posterframe', 'asset': form.vars.value.posterframe} %}
         {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.firstRanAt} %}
-        {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineStart} %}
-        {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineEnd} %}
+        <div class="row">
+            <div class="col-md-6">
+            {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineStart} %}
+            </div>
+            <div class="col-md-6">
+                {% include "BprsStyleBundle::datetimepicker.html.twig" with {'widget': form.onlineEnd} %}
+            </div>
+        </div>
         {% include "OktoMediaBundle::tag/widget.html.twig" with {'widget': form.tags} %}
     {{ form_end(form) }}
 {% endblock %}

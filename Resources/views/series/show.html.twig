@@ -13,6 +13,12 @@
             </button>
             <ul class="dropdown-menu">
                 <li>
+                    <a href="{{ path('okto_media_new_episode_for_series', {'uniqID': series.uniqID})}}">
+                        {{ 'okto_media.series_add_new_episode'|trans|raw }}
+                    </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
                     <a href="{{ path('oktolab_series_edit', { 'series': series.uniqID }) }}">
                         {{ 'oktolab_media.series_edit_button'|trans|raw }}
                     </a>
@@ -20,6 +26,11 @@
                 <li>
                     <a href="{{ path('oktolab_series_edit_tags', { 'series': series.uniqID }) }}">
                         {{ 'okto_media.show_series_tag_button_menu'|trans|raw }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('okto_media_set_state', {'uniqID': series.uniqID}) }}">
+                        {{ 'okto_media.show_series_set_state'|trans|raw }}
                     </a>
                 </li>
                 <li role="separator" class="divider"></li>
@@ -85,9 +96,6 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-default" href="{{ path('okto_media_new_episode_for_series', {'uniqID': series.uniqID})}}">
-        {{ 'okto_media.series_add_new_episode'|trans|raw }}
-    </a>
     {{ render(controller('OktoMediaBundle:Series:paginationEpisodes', {'page': 1, 'series': series.id })) }}
 {% endblock %}
 

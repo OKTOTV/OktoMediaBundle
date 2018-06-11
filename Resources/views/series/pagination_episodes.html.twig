@@ -1,47 +1,68 @@
 {# total items count #}
 <div class="row episode-pager">
-<div class="count">
-    {{ pagination.getTotalItemCount }}
-</div>
-<table class="table table-striped">
-<tr>
-    <th>Posterframe</th>
-{# sorting of properties based on query components #}
-    <th>{{ knp_pagination_sortable(pagination, 'UniqID', 'e.uniqID') }}</th>
-    <th>{{ knp_pagination_sortable(pagination, 'name', 'e.name') }}</th>
-    <th>Beschreibung</th>
-    <th>
-        {{ knp_pagination_sortable(pagination, 'okto_media.series_episodepagination_header_firstRan'|trans, 'e.firstranAt') }}
-    </th>
-    <th>
-        {{ knp_pagination_sortable(pagination, 'okto_media.series_episodePagination_isActive'|trans, 'e.isActive') }}
-    </th>
-</tr>
-<div class="navigation">
-    {{ knp_pagination_render(pagination) }}
-</div>
-{# table body #}
-{% for episode in pagination %}
-<tr {% if loop.index is odd %}class="color"{% endif %}>
-    <td>
-        {% if episode.posterframe is not empty %}
-            <a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}"><img src="{{ episode.posterframe|thumb(80,120)}}" /></a>
-        {% endif %}
-    </td>
-    <td><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.uniqID }}</a></td>
-    <td><a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">{{ episode.name }}</a></td>
-    <td>{{ episode.description }}</td>
-    <td>
-        {{ episode.firstRanAt|date('H:i d.m.Y')}}
-    </td>
-    <td>
-        {{ 'okto_media.series_episodePagination_isActiveChoice'|transchoice(episode.isActive)}}
-    </td>
-</tr>
-{% endfor %}
-</table>
-{# display navigation #}
-<div class="navigation">
-    {{ knp_pagination_render(pagination) }}
-</div>
+    {{ 'okto_media.series_episodepagination_episode_choice'|transchoice(pagination.getTotalItemCount) }}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                {{ 'okto_media.series_episodepagination_posterframe'|trans }}
+            </th>
+            {# sorting of properties based on query components #}
+            <th>
+                {{ knp_pagination_sortable(pagination, 'okto_media.series_episodepagination_uniqID'|trans, 'e.uniqID') }}
+            </th>
+            <th>
+                {{ knp_pagination_sortable(pagination, 'okto_media.series_episodepagination_name'|trans, 'e.name') }}
+            </th>
+            <th>
+                {{ 'okto_media.series_episodepagination_description'|trans }}
+            </th>
+            <th>
+                {{ knp_pagination_sortable(pagination, 'okto_media.series_episodepagination_header_firstRan'|trans, 'e.firstranAt') }}
+            </th>
+            <th>
+                {{ knp_pagination_sortable(pagination, 'okto_media.series_episodePagination_isActive'|trans, 'e.isActive') }}
+            </th>
+        </tr>
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+        {# table body #}
+        {% for episode in pagination %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>
+                    {% if episode.posterframe is not empty %}
+                        <a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">
+                            <img src="{{ episode.posterframe|thumb(80,120)}}" />
+                        </a>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">
+                        {{ episode.uniqID }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('oktolab_episode_show', {'uniqID': episode.uniqID}) }}">
+                        {{ episode.name }}
+                    </a>
+                </td>
+                <td>
+                    {{ episode.description }}
+                </td>
+                <td>
+                    {{ episode.firstRanAt|date('H:i d.m.Y')}}
+                </td>
+                <td>
+                    {{ 'okto_media.series_episodePagination_isActiveChoice'|transchoice(episode.isActive) }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 </div>

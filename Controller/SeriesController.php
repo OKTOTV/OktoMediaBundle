@@ -246,7 +246,7 @@ class SeriesController extends BaseController
             ]
         );
 
-        if ($request->getMethod = "POST") { //sends form
+        if ($form->isSubmitted()) { //sends form
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $mediaService->setSeriesState(

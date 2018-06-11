@@ -1,7 +1,7 @@
 {% extends "BprsStyleBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ 'oktolab_media.episode_show_title'|trans({'%episode%': episode, '%project': name}) }}
+    {{ 'oktolab_media.episode_show_title'|trans({'%episode%': episode, '%project%': name}) }}
 {% endblock %}
 
 {% block nav_head%}
@@ -69,12 +69,20 @@
     <div class="row">
         <div class="col-md-7">
             {% if episode.video is not empty %}
+            <div class="panel panel-default">
+                <div class="panel-body">
                 <div id="player">
                 </div>
+            </div>
+        </div>
             {% elseif episode.posterframe is not empty %}
                 <img src="{{ episode.posterframe|path }}" class="img-responsive"/>
             {% endif %}
-            {{ episode.description|default('oktolab_media.show_episode_description_missing'|trans)|nl2br }}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {{ episode.description|default('oktolab_media.show_episode_description_missing'|trans)|nl2br }}
+                </div>
+            </div>
         </div>
         <div class="col-md-5">
             <h4>{{ 'oktolab_media_info_for_episode_header'|trans }}</h4>
@@ -119,13 +127,21 @@
                         {{ episode.agerating }}
                     </span>
                 </dd>
+                <dt>{{ 'oktolab_media.episode_info_storage'|trans }}</dt>
+                {% set size = 0 %}
+                {% for media in episode.media %}
+                    {% if media.asset is not empty %}
+                        {% set size = size + media.asset.filesize %}
+                    {% endif %}
+                {% endfor %}
+                <dd>{{ size|filesize(true) }}</dd>
             </dl>
 
             <h4>{{ 'okto_media_episode_tags_header'|trans }}</h4>
             <div class="list-group">
                 {% for tag in episode.tags %}
                     <a href="{{ path('okto_tag_episodes', {'slug': tag.slug}) }}" class="list-group-item">
-                        {{ tag }}
+                        <span class="glyphicon glyphicon-tag"></span> {{ tag }}
                     </a>
                 {% endfor %}
                 <a href="{{ path('oktolab_episode_edit', {'episode': episode.uniqID}) }}" class="list-group-item">
@@ -140,7 +156,7 @@
             <div class="list-group">
                 {% for caption in episode.captions %}
                     <a href="{{ path('oktolab_capiton_editor', {'uniqID': caption.uniqID}) }}" class="list-group-item">
-                        {{ caption }}
+                        {{ 'oktolab_media.show_episode_caption_list_entry'|trans({'%caption%': caption})|raw }}
                     </a>
                 {% endfor %}
                 <a href="{{ path('oktolab_caption_new', {'uniqID': episode.uniqID}) }}" class="list-group-item">
@@ -150,7 +166,9 @@
         </div>
     </div>
     <div class="row">
-        {{ render(controller('BprsLogbookBundle:Default:pager', {'reference': episode.uniqID})) }}
+        <div class="col-md-12">
+            {{ render(controller('BprsLogbookBundle:Default:pager', {'reference': episode.uniqID})) }}
+        </div>
     </div>
 {% endblock %}
 

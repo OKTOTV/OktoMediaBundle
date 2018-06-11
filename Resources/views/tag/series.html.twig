@@ -23,7 +23,7 @@
     </ul>
 
     <div class="page-header">
-        <p>{{ 'okto_media.tag_index_total_series_choice'|transchoice(seriess.getTotalItemCount)}}</p>
+        <p>{{ 'okto_media.tag_index_total_series_choice'|transchoice(seriess.getTotalItemCount, {'%tag%': tag})}}</p>
         <!-- Single button -->
         <div class="btn-group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

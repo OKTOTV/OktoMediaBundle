@@ -1,63 +1,62 @@
 ## tag widget.html.twig
-okto_media.tag_placeholder:                Hund, Katze, Maus, ...
+okto_media.tag_placeholder:                "Hund, Katze, Maus, ..."
 
 ## reachme
 reachme_type_transchoice:       "{0} Mail|{1} Facebook|{2} Twitter|{3} Instagram|{4} Google+|{5} Sendungsblog"
 
 #form
-media.reachme_uri_placeholder:              Adresse auf die verlinkt werden soll
-flux2_media.reachme_type_label:             Typ
-flux2_media.reachme_uri_label:              URI
-flux2_media.reachme_series_label:           Sendereihe
+media.reachme_uri_placeholder:              "Adresse auf die verlinkt werden soll"
+flux2_media.reachme_type_label:             "Typ"
+flux2_media.reachme_uri_label:              "URI"
+flux2_media.reachme_series_label:           "Sendereihe"
 
 #new
-flux2_media.new_reachme_header:             Neues Reachme anlegen
-flux2_media.success_create_reachme:         Reachme erfolgreich angelegt
-flux2_media.error_create_reachme:           Reachme konnte nicht angelegt werden
-flux2_media.create_reachme_button:          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Reachme anlegen
+flux2_media.new_reachme_header:             "Neues Reachme anlegen"
+flux2_media.success_create_reachme:         "Reachme erfolgreich angelegt"
+flux2_media.error_create_reachme:           "Reachme konnte nicht angelegt werden"
+flux2_media.create_reachme_button:          '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Reachme anlegen'
 
 #edit
-flux2_media.edit_reachme_header:            Reachme bearbeiten
-flux2_media.edit_reachme_button:            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Aktualisieren
-flux2_media.delete_reachme_button:          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
-flux2_media.success_edit_reachme:           Reachme erfolgreich aktualisiert
-flux2_media.success_delete_reachme:         Reachme erfolgreich gelöscht
-flux2_media.info_edit_reachme_unknown_button: Aktion unbekannt. Bitte nutze die vorgegebenen Buttons
-flux2_media.error_edit_reachme:             Reachme konnte nicht aktualisiert werden
+flux2_media.edit_reachme_header:            "Reachme bearbeiten"
+flux2_media.edit_reachme_button:            '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Aktualisieren'
+flux2_media.delete_reachme_button:          '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen'
+flux2_media.success_edit_reachme:           "Reachme erfolgreich aktualisiert"
+flux2_media.success_delete_reachme:         "Reachme erfolgreich gelöscht"
+flux2_media.info_edit_reachme_unknown_button: "Aktion unbekannt. Bitte nutze die vorgegebenen Buttons"
+flux2_media.error_edit_reachme:             "Reachme konnte nicht aktualisiert werden"
 
 #show
-flux2_reachme_edit:                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Reachme bearbeiten
-flux2_reachme_new:                          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neues Reachme anlegen
-okto_media.episode_info_series:             Sendereihe
+flux2_reachme_edit:                         '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Reachme bearbeiten'
+flux2_reachme_new:                          '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neues Reachme anlegen'
+okto_media.episode_info_series:             "Sendereihe"
 okto_media_series_tags_header:              "Schlagwörter"
 
 ## User
 # show
-okto_media_series_show_publicate_tag_button: '<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Schlagworte an Episoden übertragen'
-oktothek.series_add_user:                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Benutzer hinzufügen oder entfernen
-okto_media.series_edit_user_success:        Benutzer zur Sendereihe erfolgreich aktualisiert
+okto_media_series_show_publicate_tag_button:    '<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Schlagworte an Episoden übertragen'
+oktothek.series_add_user:                       '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Benutzer hinzufügen oder entfernen'
+okto_media.series_edit_user_success:            "Benutzer zur Sendereihe erfolgreich aktualisiert"
 
-# edit
-flux2_media.edit_series_user_header:        Benutzer der Sendereihe %series% bearbeiten
-flux2.series_edit_user_button:              <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Benutzer speichern
-flux2.series_edit_user_success:             Benutzer wurden erfolgreich aktualisiert
+# edit #TODO: this does not belong here
+flux2_media.edit_series_user_header:        "Benutzer der Sendereihe %series% bearbeiten"
+flux2.series_edit_user_button:              '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Benutzer speichern'
+flux2.series_edit_user_success:             "Benutzer wurden erfolgreich aktualisiert"
 
 # editTag.html.twig
 okto_media.edit_series_tag_title:           'Schlagworteditor für "%series%" | %project%'
-okto_media.edit_series_tag_header:          Schlagwörter für Sendereihe %series%
-okto_media.series_edit_tag_success:         Änderungen der Standardsendereihenschlagworte erfolgreich gespeichert
-okto_media.series_edit_tag_error:           Änderungen konnten nicht gespeichert werden
+okto_media.edit_series_tag_header:          "Schlagwörter für Sendereihe %series%"
+okto_media.series_edit_tag_success:         "Änderungen der Standardsendereihenschlagworte erfolgreich gespeichert"
+okto_media.series_edit_tag_error:           "Änderungen konnten nicht gespeichert werden"
 okto_media.series_publicate_tag_success:    "Standardsendereihenschlagworte wurden erfolgreich an Episoden übertragen"
-okto_media.edit_series_tag_header:          Schlagwörter für Sendereihe %series%
-okto_media.series_tag_edit_placeholder:     Hund, Katze, Maus...
+okto_media.series_tag_edit_placeholder:     "Hund, Katze, Maus..."
 okto_media.series_edit_tag_button:          '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Schlagwörter speichern'
 okto_media.series_tag_edit_cancel_button:   '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Sendereihe'
 
 # newEpisode.html.twig
-okto_media.new_episode_for_series_cancel:  '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Sendereihe'
-okto_media.series_add_new_episode: '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neue Episode'
-okto_media.create_episode_submitAndEncode_button: '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Anlegen & Encodieren'
-okto_media.success_create_and_encode_episode: "Episode erfolgreich angelegt und zur Umrechnung eingereiht"
+okto_media.new_episode_for_series_cancel:           '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Zurück zur Sendereihe'
+okto_media.series_add_new_episode:                  '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neue Episode'
+okto_media.create_episode_submitAndEncode_button:   '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Anlegen & Encodieren'
+okto_media.success_create_and_encode_episode:       "Episode erfolgreich angelegt und zur Umrechnung eingereiht"
 
 ## Episode/show.html.twig
 okto_media_episode_tags_header:                 "Schlagwörter"
@@ -71,14 +70,20 @@ okto_media.episode_show_files_sprite:           "Sprite"
 ## Episode/edit.html.twig
 okto_media.edit_episode_submitAndEncode_button: '<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Speichern & Encodieren'
 okto_media.success_edit_and_encode_episode:     "Änderungen gespeichert und zur Umrechnung eingereiht"
-
+okto_media.episode_edit_series_label:           "Sendereihe"
+okto_media.episode_edit_tags_label:             "Schlagwörter"
 
 # Okto/MediaBundle/Resources/views/Keychain/showSeries.html.twig
-okto_media.keychain_import_series_episodes_header:  "Episoden"
-okto_media.keychain_import_series_episode:          '<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Importieren'
-okto_media.keychain_import_series_episode_overwrite: '<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Überschreiben'
+okto_media.keychain_import_series_episodes_header:      "Episoden"
+okto_media.keychain_import_series_episode:              '<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Importieren'
+okto_media.keychain_import_series_episode_overwrite:    '<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Überschreiben'
 
 # Okto/MediaBundle/Resources/views/Series/paginationEpisodes.html.twig
+okto_media.series_episodepagination_episode_choice:     "{0} Noch keine Episoden angelegt | {1} Eine Episode vorhanden | ]1,Inf] %count% Episoden vorhanden"
+okto_media.series_episodepagination_posterframe:        "Posterframe"
+okto_media.series_episodepagination_uniqID:             "Episoden ID"
+okto_media.series_episodepagination_name:               "Folgenname"
+okto_media.series_episodepagination_description:        "Beschreibungstext"
 okto_media.series_episodepagination_header_firstRan:    "Erstausstrahlung"
 okto_media.series_episodePagination_isActive:           "Aktiv"
 okto_media.series_episodePagination_isActiveChoice:     "{0} Nein | {1} Ja"
@@ -87,10 +92,10 @@ okto_media.series_episodePagination_isActiveChoice:     "{0} Nein | {1} Ja"
 okto_media_series_state_transchoice:            "{10} Alles aktiv schalten|{20} Alles inaktiv schalten|{30} Sendereihe aktiv, Episoden inaktiv schalten|{40} Sendereihe inaktiv, Episoden aktiv schalten"
 
 # Okto/MediaBundle/Resources/Series/show.html.twig
-okto_media.show_series_set_state:               '<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Status setzen'
-okto_media.show_series_tag_button_menu:         '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Schlagwörter bearbeiten'
+okto_media.show_series_set_state:                   '<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Status setzen'
+okto_media.show_series_tag_button_menu:             '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Schlagwörter bearbeiten'
 okto_media.show_series_posterframe_download_menu:   '<span class="glyphicon glyphicon-download" aria-hidden="true"></span> Posterframe herunterladen'
-okto_media.show_series_tag_button_list:         '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Schlagwörter hinzufügen'
+okto_media.show_series_tag_button_list:             '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Schlagwörter hinzufügen'
 
 # Okto/MediaBundle/Resources/Series/setActive.html.twig
 okto_media.series_state_header:                 "Sendereihenstatus"
@@ -100,10 +105,11 @@ okto_media.success_set_state:                   "Status erfolgreich gesetzt"
 
 # Okto/MediaBundle/Resources/views/tag/episodes.html.twig
 okto_media.tag_index_title:                  "Episoden zu Schlagwort '%tag%' | %project%"
-okto_media.tag_index_total_episodes_choice:  "{0} Keine Episoden mit diesem Schlagwort | {1} Eine Episode mit diesem Schlagwort | ]1,Inf] %count% Episoden mit diesem Schlagwort"
+okto_media.tag_index_total_episodes_choice:  '{0} Keine Episoden mit Schlagwort "%tag%" | {1} Eine Episode zu Schlagwort "%tag%" | ]1,Inf] %count% Episoden zu Schlagwort "%tag%"'
 
 # Okto/MediaBundle/Resources/views/tag/series.html.twig
-okto_media.tag_index_total_series_choice:    "{0} Keine Sendereihe mit diesem Schlagwort | {1} Eine Sendereihe mit diesem Schlagwort | ]1,Inf] %count% Sendereihen mit diesem Schlagwort"
+okto_media.tag_series_title:                 "Sendereihen mit Schlagwort '%tag%' | %project%"
+okto_media.tag_index_total_series_choice:    '{0} Keine Sendereihe mit Schlagwort "%tag%" | {1} Eine Sendereihe zu Schlagwort "%tag%" | ]1,Inf] %count% Sendereihen zu Schlagwort "%tag%"'
 
 # Okto/MediaBundle/Resources/Caption/show.html.twig
 okto_media.caption_dropdown_button:             'Aktionen <span class="caret"></span>'
