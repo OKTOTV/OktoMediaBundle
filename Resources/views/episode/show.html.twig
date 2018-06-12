@@ -68,13 +68,13 @@
     </div>
     <div class="row">
         <div class="col-md-7">
-            {% if episode.video is not empty %}
+            {% if episode.technicalStatus == constant('Oktolab\\MediaBundle\\Entity\\Episode::STATE_READY') %}
             <div class="panel panel-default">
                 <div class="panel-body">
-                <div id="player">
+                    <div id="player">
+                    </div>
                 </div>
             </div>
-        </div>
             {% elseif episode.posterframe is not empty %}
                 <img src="{{ episode.posterframe|path }}" class="img-responsive"/>
             {% endif %}
@@ -174,20 +174,24 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ player(episode)|raw }}
+    {% if episode.technicalStatus == constant('Oktolab\\MediaBundle\\Entity\\Episode::STATE_READY') %}
+        {{ player(episode)|raw }}
+    {% endif %}
     <script>
         // Set posterframe
         $(document).ready(function(){
-            var playerInstance = jwplayer("player");
+            {% if episode.technicalStatus == constant('Oktolab\\MediaBundle\\Entity\\Episode::STATE_READY') %}
+                var playerInstance = jwplayer("player");
 
-            $('#set_posterframe').click(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "{{ path('oktolab_episode_extractposterframe', {'uniqID': episode.uniqID}) }}",
-                    data: {'position': playerInstance.getPosition()},
-                    type: 'GET'
+                $('#set_posterframe').click(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "{{ path('oktolab_episode_extractposterframe', {'uniqID': episode.uniqID}) }}",
+                        data: {'position': playerInstance.getPosition()},
+                        type: 'GET'
+                    });
                 });
-            });
+            {% endif %}
         });
         // AJAX pagination
         var updateView = function(e, link) {

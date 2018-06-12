@@ -5,7 +5,7 @@ namespace Okto\MediaBundle\Event;
 use Oktolab\MediaBundle\Event\ImportedEpisodeMetadataEvent;
 use Oktolab\MediaBundle\Event\ImportedEpisodePosterframeEvent;
 
-class EpisodeImportListener {
+class EnqueuedEncodeEpisodeListener {
 
     private $logbook;
     private $security_token_storage;

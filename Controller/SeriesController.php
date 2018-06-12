@@ -172,7 +172,7 @@ class SeriesController extends BaseController
 
     /**
      * @Route("/{uniqID}/episode/new", name="okto_media_new_episode_for_series")
-     * @Template()
+     * @Template("OktoMediaBundle:series:new_episode.html.twig")
      */
     public function newEpisodeAction(Request $request, $uniqID)
     {

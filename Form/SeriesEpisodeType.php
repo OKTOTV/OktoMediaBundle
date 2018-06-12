@@ -111,7 +111,13 @@ class SeriesEpisodeType extends AbstractType
 
             ->add('video', AssetType::class, ['label' => 'oktolab_media.video_label'])
 
-            ->add('tags', TagType::class)
+            ->add(
+                'tags',
+                TagType::class,
+                [
+                    'label' => 'okto_media.episode_edit_tags_label'
+                ]
+            )
         ;
     }
 
