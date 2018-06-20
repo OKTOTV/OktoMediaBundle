@@ -27,9 +27,6 @@
                     {{ knp_pagination_sortable(pagination, 'okto_media.series_episodePagination_isActive'|trans, 'e.isActive') }}
                 </th>
             </tr>
-            <div class="navigation">
-                {{ knp_pagination_render(pagination) }}
-            </div>
             {# table body #}
             {% for episode in pagination %}
                 <tr {% if loop.index is odd %}class="color"{% endif %}>
