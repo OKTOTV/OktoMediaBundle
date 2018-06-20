@@ -86,7 +86,7 @@
             <h4>{{ 'okto_media_series_tags_header'|trans }}</h4>
             <div class="list-group">
                 {% for tag in series.tags %}
-                    <a href="{{ path('okto_tag_series', {'tag': tag.id}) }}" class="list-group-item">
+                    <a href="{{ path('okto_tag_series', {'slug': tag.slug}) }}" class="list-group-item">
                         {{ tag }}
                     </a>
                 {% endfor %}
