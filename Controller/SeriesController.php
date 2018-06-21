@@ -33,7 +33,15 @@ class SeriesController extends BaseController
     public function showAction($series)
     {
         $series = $this->get('oktolab_media')->getSeries($series);
-        return ['series' => $series];
+        if ($series) {
+            return ['series' => $series];
+        }
+
+        $this->get('session')->getFlashBag()->add(
+            'info',
+            'oktolab_media.series_not_found'
+        );
+        return $this->redirect($this->generateUrl('oktolab_series'));
     }
 
     /**
