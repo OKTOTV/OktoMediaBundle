@@ -185,11 +185,7 @@
 
                 $('#set_posterframe').click(function(e) {
                     e.preventDefault();
-                    $.ajax({
-                        url: "{{ path('oktolab_episode_extractposterframe', {'uniqID': episode.uniqID}) }}",
-                        data: {'position': playerInstance.getPosition()},
-                        type: 'GET'
-                    });
+                    location.href = "{{ path('oktolab_episode_extractposterframe', {'uniqID': episode.uniqID}) }}" + "?" + $.param({'position': playerInstance.getPosition()});
                 });
             {% endif %}
         });

@@ -33,11 +33,32 @@ class EpisodeController extends BaseController
     {
         $episode = $this->get('oktolab_media')->getEpisode($episode);
         $form = $this->createForm(EpisodeType::class, $episode);
-        $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.edit_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
+        $form->add(
+            'submit',
+            SubmitType::class,
+            [
+                'label' => 'oktolab_media.edit_episode_button',
+                'attr' => ['class' => 'btn btn-primary']
+            ]
+        );
         if ($episode->getTechnicalStatus() != Episode::STATE_IN_PROGRESS_QUEUE) {
-            $form->add('submitAndEncode', SubmitType::class, ['label' => 'okto_media.edit_episode_submitAndEncode_button', 'attr' => ['class' => 'btn btn-default']]);
+            $form->add(
+                'submitAndEncode',
+                SubmitType::class,
+                [
+                    'label' => 'okto_media.edit_episode_submitAndEncode_button',
+                    'attr' => ['class' => 'btn btn-default']
+                ]
+            );
         }
-        $form->add('delete', SubmitType::class, ['label' => 'oktolab_media.delete_episode_button', 'attr' => ['class' => 'btn btn-danger']]);
+        $form->add(
+            'delete',
+            SubmitType::class,
+            [
+                'label' => 'oktolab_media.delete_episode_button',
+                'attr' => ['class' => 'btn btn-danger']
+            ]
+        );
 
         if ($request->getMethod() == "POST") { //sends form
             $form->handleRequest($request);
@@ -46,29 +67,66 @@ class EpisodeController extends BaseController
                 if ($form->get('submit')->isClicked()) { //save me
                     $em->persist($episode);
                     $em->flush();
-                    $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_edit_episode');
-                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'oktolab_media.success_edit_episode'
+                    );
+                    return $this->redirect(
+                        $this->generateUrl(
+                            'oktolab_episode_show',
+                            ['uniqID' => $episode->getUniqID()]
+                        )
+                    );
                 } elseif ($form->get('submitAndEncode')->isClicked()) {
                     $em->persist($episode);
                     $em->flush();
                     $this->get('oktolab_media')->addEncodeEpisodeJob($episode->getUniqID());
-                    $this->get('session')->getFlashBag()->add('success', 'okto_media.success_edit_and_encode_episode');
-                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'okto_media.success_edit_and_encode_episode'
+                    );
+                    return $this->redirect(
+                        $this->generateUrl(
+                            'oktolab_episode_show',
+                            ['uniqID' => $episode->getUniqID()]
+                        )
+                    );
                 } elseif ($form->get('delete')->isClicked()) {
                     $em->remove($episode);
                     $em->flush();
-                    $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_delete_episode');
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'oktolab_media.success_delete_episode'
+                    );
                     if ($episode->getSeries()) {
-                        return $this->redirect($this->generateUrl('oktolab_series_show', ['series' => $episode->getSeries()->getUniqID()]));
+                        return $this->redirect(
+                            $this->generateUrl(
+                                'oktolab_series_show',
+                                ['series' => $episode->getSeries()->getUniqID()]
+                            )
+                        );
                     } else {
-                        return $this->redirect($this->generateUrl('oktolab_series'));
+                        return $this->redirect(
+                            $this->generateUrl('oktolab_series')
+                        );
                     }
                 } else { //???
-                    $this->get('session')->getFlashBag()->add('success', 'oktolab_media.info_edit_episode_unknown_button');
-                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'oktolab_media.info_edit_episode_unknown_button'
+                    );
+                    return $this->redirect(
+                        $this->generateUrl(
+                            'oktolab_episode_show',
+                            ['uniqID' => $episode->getUniqID()]
+                        )
+                    );
                 }
             }
-            $this->get('session')->getFlashBag()->add('error', 'oktolab_media.error_edit_episode');
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                'oktolab_media.error_edit_episode'
+            );
         }
 
         return ['form' => $form->createView()];
@@ -81,8 +139,22 @@ class EpisodeController extends BaseController
     {
         $episode = $this->get('oktolab_media')->createEpisode();
         $form = $this->createForm(EpisodeType::class, $episode);
-        $form->add('submit', SubmitType::class, ['label' => 'oktolab_media.create_episode_button', 'attr' => ['class' => 'btn btn-primary']]);
-        $form->add('submitAndEncode', SubmitType::class, ['label' => 'okto_media.create_episode_submitAndEncode_button', 'attr' => ['class' => 'btn btn-default']]);
+        $form->add(
+            'submit',
+            SubmitType::class,
+            [
+                'label' => 'oktolab_media.create_episode_button',
+                'attr' => ['class' => 'btn btn-primary']
+            ]
+        );
+        $form->add(
+            'submitAndEncode',
+            SubmitType::class,
+            [
+                'label' => 'okto_media.create_episode_submitAndEncode_button',
+                'attr' => ['class' => 'btn btn-default']
+            ]
+        );
 
         if ($request->getMethod() == "POST") { //sends form
             $form->handleRequest($request);
@@ -91,25 +163,57 @@ class EpisodeController extends BaseController
                 if ($form->get('submit')->isClicked()) { //save me
                     $em->persist($episode);
                     $em->flush();
-                    $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_edit_episode');
-                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'oktolab_media.success_edit_episode'
+                    );
+                    return $this->redirect(
+                        $this->generateUrl(
+                            'oktolab_episode_show',
+                            ['uniqID' => $episode->getUniqID()]
+                        )
+                    );
                 } elseif ($form->get('submitAndEncode')->isClicked()) {
                     $em->persist($episode);
                     $em->flush();
-                    $this->get('oktolab_media')->addEncodeEpisodeJob($episode->getUniqID());
-                    $this->get('session')->getFlashBag()->add('success', 'okto_media.success_create_and_encode_episode');
-                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                    $this->get('oktolab_media')->addEncodeEpisodeJob(
+                        $episode->getUniqID()
+                    );
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'okto_media.success_create_and_encode_episode'
+                    );
+                    return $this->redirect(
+                        $this->generateUrl(
+                            'oktolab_episode_show',
+                            ['uniqID' => $episode->getUniqID()]
+                        )
+                    );
                 } elseif ($form->get('delete')->isClicked()) {
                     $em->remove($episode);
                     $em->flush();
-                    $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_delete_episode');
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'oktolab_media.success_delete_episode'
+                    );
                     return $this->redirect($this->generateUrl('backend'));
                 } else { //???
-                    $this->get('session')->getFlashBag()->add('success', 'oktothek.info_edit_episode_unknown_button');
-                    return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $episode->getUniqID()]));
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'oktothek.info_edit_episode_unknown_button'
+                    );
+                    return $this->redirect(
+                        $this->generateUrl(
+                            'oktolab_episode_show',
+                            ['uniqID' => $episode->getUniqID()]
+                        )
+                    );
                 }
             }
-            $this->get('session')->getFlashBag()->add('error', 'oktothek.error_edit_episode');
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                'oktothek.error_edit_episode'
+            );
         }
 
         return ['form' => $form->createView()];
@@ -121,8 +225,19 @@ class EpisodeController extends BaseController
      */
     public function extractPosterframeAction(Request $request, $uniqID)
     {
-        $this->get('okto_media')->addExtractPosterfameJob($uniqID, $request->query->get('position', 0));
-        $this->get('session')->getFlashBag()->add('success', 'oktolab_media.success_extractPosterframe_job');
-        return $this->redirect($this->generateUrl('oktolab_episode_show', ['uniqID' => $uniqID]));
+        $this->get('okto_media')->addExtractPosterfameJob(
+            $uniqID,
+            $request->query->get('position', 0)
+        );
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            'okto_media.success_extractPosterframe_job'
+        );
+        return $this->redirect(
+            $this->generateUrl(
+                'oktolab_episode_show',
+                ['uniqID' => $uniqID]
+            )
+        );
     }
 }

@@ -74,6 +74,8 @@ okto_media.success_edit_and_encode_episode:     "Änderungen gespeichert und zur
 okto_media.episode_edit_series_label:           "Sendereihe"
 okto_media.episode_edit_tags_label:             "Schlagwörter"
 
+okto_media.success_extractPosterframe_job:      "Posterframe Auftrag wurde erfolgreich eingereiht"
+
 # Okto/MediaBundle/Resources/views/Keychain/showSeries.html.twig
 okto_media.keychain_import_series_episodes_header:      "Episoden"
 okto_media.keychain_import_series_episode:              '<span class="glyphicon glyphicon-import" aria-hidden="true"></span> Importieren'
