@@ -19,7 +19,9 @@ services:
 
     okto_media.episode.type:
         class: Okto\MediaBundle\Form\EpisodeType
-        arguments: [ "%oktolab_media.series_class%", "%oktolab_media.episode_class%"]
+        arguments:
+            - "%oktolab_media.series_class%"
+            - "%oktolab_media.episode_class%"
         tags:
             - { name: form.type }
 
@@ -31,11 +33,11 @@ services:
     okto_media.user_repo:
         class: Doctrine\ORM\EntityRepository
         factory: [ "@doctrine.orm.entity_manager", getRepository ]
-        arguments: [ "%okto_media.user_class%"]
+        arguments: [ "%okto_media.user_class%" ]
 
     okto_media_tag:
         class: Okto\MediaBundle\Model\TagService
-        arguments: [ "@doctrine.orm.entity_manager", "%okto_media.tag_class%"]
+        arguments: [ "@doctrine.orm.entity_manager", "%okto_media.tag_class%" ]
         public: true
 
     gedmo.listener.sluggable:
@@ -48,13 +50,13 @@ services:
     # forms
     okto_media.series_user.type:
         class: Okto\MediaBundle\Form\SeriesUserType
-        arguments:  [ "@okto_media.user_repo", "%oktolab_media.series_class%"]
+        arguments:  [ "@okto_media.user_repo", "%oktolab_media.series_class%" ]
         tags:
             - { name: form.type }
 
     okto_media.series_tag.type:
         class: Okto\MediaBundle\Form\SeriesTagType
-        arguments:  ["%oktolab_media.series_class%"]
+        arguments:  [ "%oktolab_media.series_class%" ]
         tags:
             - { name: form.type }
 
@@ -72,7 +74,12 @@ services:
 
     okto_media:
         class: Okto\MediaBundle\Model\MediaService
-        arguments:  [ "@oktolab_media", "@oktolab_media_helper", "@doctrine.orm.entity_manager", "@bprs_jobservice", "%okto_media.defaut_queue%"]
+        arguments:
+            - "@oktolab_media"
+            - "@oktolab_media_helper"
+            - "@doctrine.orm.entity_manager"
+            - "@bprs_jobservice"
+            - "%okto_media.defaut_queue%"
         public: true
 
     okto_media_reachme.type:
