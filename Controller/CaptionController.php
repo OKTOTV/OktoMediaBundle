@@ -22,7 +22,7 @@ class CaptionController extends BaseController
 {
 
     /**
-     * @Route("/captionEditor/{uniqID}", name="oktolab_capiton_editor")
+     * @Route("/edit/{uniqID}", name="oktolab_capiton_editor")
      * @Template()
      */
     public function captionEditorAction(Request $request, Caption $caption)
